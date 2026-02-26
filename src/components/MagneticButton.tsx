@@ -6,9 +6,11 @@ import { motion } from 'framer-motion';
 export default function MagneticButton({
     children,
     className = '',
+    type = 'button',
 }: {
     children: React.ReactNode;
     className?: string;
+    type?: 'button' | 'submit' | 'reset';
 }) {
     const ref = useRef<HTMLButtonElement>(null);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -27,6 +29,7 @@ export default function MagneticButton({
 
     return (
         <motion.button
+            type={type}
             ref={ref}
             onMouseMove={handleMouse}
             onMouseLeave={reset}

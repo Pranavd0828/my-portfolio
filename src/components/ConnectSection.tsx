@@ -55,11 +55,9 @@ export default function ConnectSection() {
                         className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors resize-none mb-8"
                     />
 
-                    <button type="submit" className="group outline-none border-none bg-transparent p-0 m-0">
-                        <MagneticButton className="px-12 py-4 bg-white text-background hover:bg-white/90 font-medium">
-                            Send Message
-                        </MagneticButton>
-                    </button>
+                    <MagneticButton type="submit" className="px-12 py-4 bg-white text-background hover:bg-white/90 font-medium">
+                        Send Message
+                    </MagneticButton>
                 </form>
 
                 <div className="flex gap-8 mt-32 text-xs font-mono uppercase tracking-widest text-muted">
