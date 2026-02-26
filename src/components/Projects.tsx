@@ -28,6 +28,20 @@ const projects = [
         description: 'End-to-end prototype injecting hyper-local, regional voice-over capabilities directly into WhatsApp using generative AI models.',
         github: 'https://github.com/Pranavd0828/Whatsapp-Regional-Voice-Over-AI',
         demo: 'https://pranavd0828.github.io/Whatsapp-Regional-Voice-Over-AI/'
+    },
+    {
+        title: 'Read with your Crew in Kindle',
+        category: 'Social Ideation',
+        description: 'A conceptual prototype exploring synchronous, shared-reading experiences and social margin-notes tailored specifically for the Kindle ecosystem.',
+        github: 'https://github.com/Pranavd0828/Read-with-your-Crew-in-Kindle',
+        demo: 'https://pranavd0828.github.io/Read-with-your-Crew-in-Kindle/'
+    },
+    {
+        title: 'Food Delivery: Post-Cancellation Rescue',
+        category: 'Marketplace Optimization',
+        description: 'An algorithmic approach to salvaging canceled food delivery orders by dynamically mapping and discounting them to nearby users in real-time.',
+        github: 'https://github.com/Pranavd0828/Food-Delivery---Post-Cancellation-Rescue-Offers',
+        demo: 'https://pranavd0828.github.io/Food-Delivery---Post-Cancellation-Rescue-Offers/'
     }
 ];
 
