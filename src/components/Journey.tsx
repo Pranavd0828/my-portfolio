@@ -29,10 +29,10 @@ const caseStudies = [
         roles: [
             {
                 id: '03',
-                title: 'Advertiser Entity Engine',
+                title: 'Revenue Operations Engine',
                 role: 'Product Manager',
                 year: 'Aug 2020 - May 2021',
-                description: 'Spearheaded an entity engine optimizing onboarding workflows to map fragmented hierarchical structures into unified account models.',
+                description: 'Spearheaded an entity routing engine optimizing B2B onboarding workflows to map fragmented hierarchical structures into unified revenue account models.',
             }
         ]
     },

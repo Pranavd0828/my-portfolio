@@ -1,8 +1,20 @@
 'use client';
 
+import { useState } from 'react';
 import MagneticButton from './MagneticButton';
 
 export default function ConnectSection() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        const subject = encodeURIComponent(`${name} contacted you from your Portfolio`);
+        const body = encodeURIComponent(`From: ${name} (${email})\n\n${message}`);
+        window.location.href = `mailto:deopranav2808.work@gmail.com?subject=${subject}&body=${body}`;
+    };
+
     return (
         <section className="w-full min-h-screen py-32 px-6 flex flex-col items-center justify-center relative overflow-hidden">
 
@@ -15,28 +27,39 @@ export default function ConnectSection() {
                     Whether you have a strategic product vision or a complex engineering challenge, my inbox is always open.
                 </p>
 
-                <form className="w-full flex flex-col gap-6 items-center" onSubmit={(e) => e.preventDefault()}>
+                <form className="w-full flex flex-col gap-6 items-center" onSubmit={handleSubmit}>
                     <div className="w-full flex flex-col md:flex-row gap-6">
                         <input
                             type="text"
+                            required
                             placeholder="Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors"
                         />
                         <input
                             type="email"
+                            required
                             placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors"
                         />
                     </div>
                     <textarea
                         placeholder="Message"
                         rows={4}
+                        required
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
                         className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors resize-none mb-8"
                     />
 
-                    <MagneticButton className="px-12 py-4 bg-white text-background hover:bg-white/90 font-medium">
-                        Send Message
-                    </MagneticButton>
+                    <button type="submit" className="group outline-none border-none bg-transparent p-0 m-0">
+                        <MagneticButton className="px-12 py-4 bg-white text-background hover:bg-white/90 font-medium">
+                            Send Message
+                        </MagneticButton>
+                    </button>
                 </form>
 
                 <div className="flex gap-8 mt-32 text-xs font-mono uppercase tracking-widest text-muted">
