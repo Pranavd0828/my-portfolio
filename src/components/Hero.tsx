@@ -42,25 +42,26 @@ export default function Hero() {
                     Campaigns <br />
                     <span className="italic text-muted">&amp;</span> Brand Tech
                 </motion.h1>
+            </motion.div>
 
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
-                    className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-                >
-                    <span className="text-xs uppercase tracking-widest text-muted">Scroll to explore</span>
-                    <div className="w-[1px] h-12 bg-muted/50 overflow-hidden relative">
-                        <motion.div
-                            className="w-full h-full bg-accent origin-top"
-                            animate={{
-                                scaleY: [0, 1, 0],
-                                translateY: ['-100%', '0%', '100%']
-                            }}
-                            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                        />
-                    </div>
-                </motion.div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1 }}
+                style={{ opacity }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+            >
+                <span className="text-xs uppercase tracking-widest text-muted">Scroll to explore</span>
+                <div className="w-[1px] h-12 bg-muted/50 overflow-hidden relative">
+                    <motion.div
+                        className="w-full h-full bg-accent origin-top"
+                        animate={{
+                            scaleY: [0, 1, 0],
+                            translateY: ['-100%', '0%', '100%']
+                        }}
+                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                </div>
             </motion.div>
 
             {/* Subtle radial gradient to separate text from background */}
