@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import Image from 'next/image';
 
 type Year = '2026' | '2025' | '2024';
@@ -61,9 +60,6 @@ export default function ReadingList() {
     return (
         <section className="w-full max-w-6xl mx-auto py-32 px-6">
             <div className="flex flex-col mb-16">
-                <Link href="/" className="text-xs font-mono uppercase tracking-widest text-muted hover:text-accent mb-8 transition-colors">
-                    &larr; Back to Portfolio
-                </Link>
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>
                         <h2 className="font-serif text-5xl md:text-7xl text-accent">Literature</h2>
