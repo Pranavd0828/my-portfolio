@@ -97,7 +97,7 @@ export default function ReadingList() {
                             <div className="mb-12 pb-6 border-b border-white/5">
                                 <p className="font-sans text-sm md:text-base text-accent max-w-3xl leading-relaxed">
                                     <span className="font-medium">03 Books Completed (Current Year)</span> - A strategic mix of biological endurance analysis, behavioral psychology, and foundational science fiction. <br />
-                                    <span className="text-muted italic mt-2 block">* Including a 3rd distinct read-through of Bill Bryson's 'The Body'.</span>
+                                    <span className="text-muted mt-2 block">* Including a 3rd distinct read-through of Bill Bryson's 'The Body'.</span>
                                 </p>
                             </div>
                         )}
