@@ -39,8 +39,8 @@ export default function Hero() {
                     className="font-serif text-5xl md:text-8xl lg:text-9xl tracking-tight text-accent leading-none max-w-5xl"
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
                 >
-                    Campaigns <br />
-                    <span className="italic text-muted">&amp;</span> Brand Tech
+                    Ads Platform <br />
+                    <span className="italic text-muted">&amp;</span> GenAI
                 </motion.h1>
             </motion.div>
 
