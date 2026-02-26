@@ -69,16 +69,16 @@ export default function Journey() {
             </div>
 
             <div className="relative z-10 max-w-6xl w-full mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24">
                     <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl text-accent">Professional<br />Journey</h2>
-                    <p className="font-sans text-sm md:text-base text-muted max-w-sm mt-6 md:mt-0">
+                    <p className="font-sans text-sm md:text-base text-muted max-w-sm mt-6 md:mt-0 md:text-right">
                         A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
                     </p>
                 </div>
 
                 <div className="flex flex-col border-t border-white/10">
                     {caseStudies.map((companyBlock, idx) => (
-                        <div key={idx} className="flex flex-col py-16 border-b border-white/5 relative group">
+                        <div key={idx} className="flex flex-col py-16 md:py-24 border-b border-white/5 relative group">
                             {/* Company Header */}
                             <div className="flex items-baseline justify-between mb-12">
                                 <h3 className="font-serif text-4xl text-accent">{companyBlock.company}</h3>

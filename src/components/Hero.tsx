@@ -11,13 +11,13 @@ export default function Hero() {
         offset: ["start start", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+    const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
     return (
         <section
             ref={containerRef}
-            className="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden px-6"
+            className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden px-6"
         >
             <motion.div
                 style={{ y, opacity }}
