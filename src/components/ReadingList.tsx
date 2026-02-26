@@ -63,7 +63,9 @@ export default function ReadingList() {
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>
                         <h2 className="font-serif text-5xl md:text-7xl text-accent">Literature</h2>
-                        <h3 className="font-serif text-3xl md:text-4xl text-muted mt-2 italic">&amp; Study</h3>
+                        <p className="font-sans text-sm md:text-base text-muted uppercase tracking-[0.2em] mt-6">
+                            Index &amp; Study
+                        </p>
                     </div>
                     <div className="flex gap-6">
                         {years.map((year) => (
