@@ -27,9 +27,9 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-sans text-sm md:text-base uppercase tracking-[0.3em] text-muted mb-6"
+                    className="font-sans text-base md:text-lg uppercase tracking-[0.2em] text-muted mb-8"
                 >
-                    Pranav Deo &bull; Technical Product Manager
+                    <span className="text-white font-medium">Pranav Deo</span> <span className="mx-2 opacity-50">&bull;</span> Technical Product Manager
                 </motion.p>
 
                 <motion.h1
