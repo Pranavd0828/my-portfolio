@@ -58,11 +58,11 @@ export default function ReadingList() {
     const years: Year[] = ['2026', '2025', '2024'];
 
     return (
-        <section className="w-full max-w-6xl mx-auto py-32 px-6">
+        <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
             <div className="flex flex-col mb-16">
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>
-                        <h2 className="font-serif text-5xl md:text-7xl text-accent">Literature</h2>
+                        <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl text-accent">Literature</h2>
                         <p className="font-sans text-sm md:text-base text-muted uppercase tracking-[0.2em] mt-6">
                             Index &amp; Study
                         </p>
@@ -119,7 +119,7 @@ export default function ReadingList() {
                         {/* Data Grid */}
                         <div className="flex flex-col">
                             {/* Grid Header */}
-                            <div className="grid grid-cols-[1fr_auto] gap-8 pb-4 border-b border-white/10 text-xs font-mono uppercase tracking-widest text-muted/50">
+                            <div className="hidden md:grid grid-cols-[1fr_auto] gap-8 pb-4 border-b border-white/10 text-xs font-mono uppercase tracking-widest text-muted/50">
                                 <span>Title</span>
                                 <span className="text-right">Author</span>
                             </div>
@@ -128,16 +128,18 @@ export default function ReadingList() {
                             {readingData[activeYear].map((book, idx) => (
                                 <div
                                     key={idx}
-                                    className="relative flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 border-b border-white/5 group hover:border-white/20 transition-colors"
+                                    className="relative flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-4 py-6 border-b border-white/5 group hover:border-white/20 transition-colors active:bg-white/[0.02] md:active:bg-transparent"
                                 >
-                                    <div className="flex items-center gap-6 z-10">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300" />
-                                        <h4 className="font-serif text-xl md:text-2xl text-accent group-hover:text-white transition-colors duration-300">
-                                            {book.title}
-                                        </h4>
-                                    </div>
-                                    <div className="md:text-right text-sm md:text-base font-sans text-muted group-hover:text-accent transition-colors duration-300 z-10 pl-7 md:pl-0">
-                                        {book.author}
+                                    <div className="flex items-start md:items-center gap-4 md:gap-6 z-10 w-full">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300 mt-2.5 md:mt-0 flex-shrink-0" />
+                                        <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-1 md:gap-8">
+                                            <h4 className="font-serif text-xl md:text-2xl text-accent group-hover:text-white transition-colors duration-300">
+                                                {book.title}
+                                            </h4>
+                                            <div className="text-sm md:text-base font-sans text-muted md:text-right group-hover:text-accent transition-colors duration-300">
+                                                {book.author}
+                                            </div>
+                                        </div>
                                     </div>
 
                                     {/* Optional Hover Cover Art Overlay */}

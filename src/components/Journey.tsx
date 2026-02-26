@@ -53,7 +53,7 @@ const caseStudies = [
 
 export default function Journey() {
     return (
-        <section className="relative w-full min-h-screen py-32 px-6 flex flex-col justify-center">
+        <section className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
 
             {/* Unified Cinematic Background - Replacing the jarring image swaps */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
@@ -69,9 +69,9 @@ export default function Journey() {
             </div>
 
             <div className="relative z-10 max-w-6xl w-full mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-24">
-                    <h2 className="font-serif text-5xl md:text-7xl text-accent">Professional<br />Journey</h2>
-                    <p className="font-sans text-muted max-w-sm mt-6 md:mt-0">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24">
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl text-accent">Professional<br />Journey</h2>
+                    <p className="font-sans text-sm md:text-base text-muted max-w-sm mt-6 md:mt-0">
                         A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
                     </p>
                 </div>

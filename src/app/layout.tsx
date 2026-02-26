@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${playfair.variable} antialiased bg-background text-foreground`}>
+    <html lang="en" className="overflow-x-hidden">
+      <body className={`${inter.variable} ${playfair.variable} antialiased bg-background text-foreground overflow-x-hidden`}>
         <CanvasBackground />
         <SmoothScroll>
           {children}

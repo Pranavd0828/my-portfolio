@@ -47,9 +47,9 @@ const projects = [
 
 export default function Projects() {
     return (
-        <section className="w-full max-w-6xl mx-auto py-32 px-6">
+        <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
             <div className="flex flex-col mb-16">
-                <h2 className="font-serif text-5xl md:text-6xl text-accent">Notable Prototypes</h2>
+                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-accent">Notable Prototypes</h2>
                 <p className="font-sans text-muted mt-6 max-w-md text-sm md:text-base">
                     A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
                 </p>

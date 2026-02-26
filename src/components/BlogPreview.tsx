@@ -18,7 +18,7 @@ const posts = [
 
 export default function BlogPreview() {
     return (
-        <section className="w-full max-w-5xl mx-auto py-32 px-6 border-t border-white/5">
+        <section className="w-full max-w-5xl mx-auto py-16 md:py-32 px-6 border-t border-white/5">
             <div className="flex flex-col md:flex-row justify-between items-baseline mb-16">
                 <h2 className="font-serif text-4xl md:text-5xl text-accent">Editorial</h2>
                 <MagneticButton className="mt-6 md:mt-0 text-xs border-white/20 text-muted hover:text-accent hover:border-white/50">
