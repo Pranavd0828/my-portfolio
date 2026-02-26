@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Year = '2026' | '2025' | '2024';
 
@@ -10,18 +11,19 @@ interface Book {
     title: string;
     author: string;
     status: 'Read' | 'Reading' | 'Planned';
+    coverUrl?: string;
 }
 
 const readingData: Record<Year, Book[]> = {
     '2026': [
-        { title: 'Nexus', author: 'Yuval Noah Harari', status: 'Read' },
-        { title: 'The Three-Body Problem', author: 'Cixin Liu', status: 'Read' },
+        { title: 'Nexus', author: 'Yuval Noah Harari', status: 'Read', coverUrl: '/covers/nexus.jpg' },
+        { title: 'The Three-Body Problem', author: 'Cixin Liu', status: 'Read', coverUrl: '/covers/three_body.jpg' },
         { title: 'Dune Messiah', author: 'Frank Herbert', status: 'Read' },
         { title: 'Supercommunicators', author: 'Charles Duhigg', status: 'Read' },
         { title: 'Children of Dune', author: 'Frank Herbert', status: 'Read' },
         { title: 'Hooked', author: 'Nir Eyal', status: 'Read' },
         { title: 'Outlive', author: 'Peter Attia, MD', status: 'Read' },
-        { title: 'The Body', author: 'Bill Bryson', status: 'Read' } // Note: 3rd Read-through
+        { title: 'The Body', author: 'Bill Bryson', status: 'Read', coverUrl: '/covers/the_body.jpg' } // Note: 3rd Read-through
     ],
     '2025': [
         { title: 'The Dark Forest', author: 'Cixin Liu', status: 'Read' },
@@ -103,7 +105,7 @@ export default function ReadingList() {
                         {activeYear === '2026' && (
                             <div className="mb-12 pb-6 border-b border-white/5">
                                 <p className="font-sans text-sm md:text-base text-accent max-w-3xl leading-relaxed">
-                                    <span className="font-medium">07 Books Completed (Current Year)</span> &mdash; A strategic mix of biological endurance analysis, behavioral psychology, and foundational science fiction. <br />
+                                    <span className="font-medium">07 Books Completed (Current Year)</span> - A strategic mix of biological endurance analysis, behavioral psychology, and foundational science fiction. <br />
                                     <span className="text-muted italic mt-2 block">* Including a 3rd distinct read-through of Bill Bryson's 'The Body'.</span>
                                 </p>
                             </div>
@@ -135,17 +137,31 @@ export default function ReadingList() {
                             {readingData[activeYear].map((book, idx) => (
                                 <div
                                     key={idx}
-                                    className="grid grid-cols-[1fr_auto] items-center gap-8 py-6 border-b border-white/5 group hover:border-white/20 transition-colors"
+                                    className="relative flex flex-col md:flex-row md:items-center justify-between gap-4 py-6 border-b border-white/5 group hover:border-white/20 transition-colors"
                                 >
-                                    <div className="flex items-center gap-6">
+                                    <div className="flex items-center gap-6 z-10">
                                         <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)] transition-all duration-300" />
                                         <h4 className="font-serif text-xl md:text-2xl text-accent group-hover:text-white transition-colors duration-300">
                                             {book.title}
                                         </h4>
                                     </div>
-                                    <div className="text-right text-sm md:text-base font-sans text-muted group-hover:text-accent transition-colors duration-300">
+                                    <div className="md:text-right text-sm md:text-base font-sans text-muted group-hover:text-accent transition-colors duration-300 z-10 pl-7 md:pl-0">
                                         {book.author}
                                     </div>
+
+                                    {/* Optional Hover Cover Art Overlay */}
+                                    {book.coverUrl && (
+                                        <div className="pointer-events-none fixed top-1/2 left-3/4 -translate-y-1/2 -translate-x-1/2 z-0 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-[0.22,1,0.36,1] scale-90 group-hover:scale-110 rotate-3 group-hover:-rotate-3 mix-blend-screen hidden lg:block">
+                                            <div className="relative w-48 aspect-[2/3] rounded-lg overflow-hidden shadow-2xl opacity-40">
+                                                <Image
+                                                    src={book.coverUrl}
+                                                    alt={book.title}
+                                                    fill
+                                                    className="object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             ))}
                         </div>
