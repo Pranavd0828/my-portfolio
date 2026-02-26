@@ -29,7 +29,7 @@ export default function Hero() {
                     transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="font-sans text-sm md:text-base uppercase tracking-[0.3em] text-muted mb-6"
                 >
-                    Senior Product Manager
+                    Pranav Deo &bull; Technical Product Manager
                 </motion.p>
 
                 <motion.h1
@@ -39,8 +39,8 @@ export default function Hero() {
                     className="font-serif text-5xl md:text-8xl lg:text-9xl tracking-tight text-accent leading-none max-w-5xl"
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
                 >
-                    Bridging AI <br />
-                    <span className="italic text-muted">&amp;</span> AdTech
+                    Campaigns <br />
+                    <span className="italic text-muted">&amp;</span> Brand Tech
                 </motion.h1>
 
                 <motion.div

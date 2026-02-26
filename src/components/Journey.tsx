@@ -6,27 +6,35 @@ import { motion, AnimatePresence } from 'framer-motion';
 const caseStudies = [
     {
         id: '01',
-        title: 'AI Personalization Engine',
-        role: 'Lead Product Manager',
-        year: '2024 - Present',
-        description: 'Spearheaded the development of a real-time AI recommendation system that increased user retention by 45%.',
-        media: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop', // Abstract tech
+        title: 'Unified Campaign Command Center',
+        role: 'Senior Product Manager @ Rakuten',
+        year: '2022 - Present',
+        description: 'Architected the backend logic to centralize advertiser inputs, reducing booking time by 25%. Built AI agents via LangChain for brand safety compliance.',
+        media: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1000&auto=format&fit=crop', // Data dashboard
     },
     {
         id: '02',
-        title: 'AdTech Bidding Platform',
-        role: 'Senior PM',
-        year: '2022 - 2024',
-        description: 'Architected a programmatic ad bidding ecosystem processing over 10B requests daily with sub-10ms latency.',
+        title: 'Premium Ad Formats & Inventory',
+        role: 'Product Manager @ Rakuten',
+        year: '2021 - 2022',
+        description: 'Optimized rendering logic for high-impact display placements, validating a 32% engagement lift. Leveraged journey signals to drive a 19% CPM increase.',
         media: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop', // Data abstract
     },
     {
         id: '03',
-        title: 'Identity Resolution Graph',
-        role: 'Product Manager',
-        year: '2020 - 2022',
-        description: 'Built a privacy-first identity graph unifying fragmented user profiles across mobile and web platforms.',
+        title: 'Advertiser Entity Engine',
+        role: 'Product Manager @ LeanData',
+        year: '2020 - 2021',
+        description: 'Spearheaded an entity engine optimizing onboarding workflows to map fragmented hierarchical structures into unified account models.',
         media: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop', // Abstract nodes
+    },
+    {
+        id: '04',
+        title: 'Display/Video Yield Strategy',
+        role: 'Product Analyst @ Media.net',
+        year: '2017 - 2019',
+        description: 'Analyzed brand campaign workflows across video and display, translating complex AdTech specifications (VAST/VPAID) into scalable engineering requirements.',
+        media: 'https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop', // Abstract tech
     }
 ];
 
