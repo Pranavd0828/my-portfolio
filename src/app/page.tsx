@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import Journey from "@/components/Journey";
 import Projects from "@/components/Projects";
 import Education from "@/components/Education";
+import AboutMe from "@/components/AboutMe";
 import ConnectSection from "@/components/ConnectSection";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <Projects />
       <Education />
       {/* Blog section hidden per feature flag requested */}
+      <AboutMe />
       <ConnectSection />
     </main>
   );
