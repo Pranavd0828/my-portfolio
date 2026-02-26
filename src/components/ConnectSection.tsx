@@ -10,7 +10,7 @@ export default function ConnectSection() {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`${name} contacted you from your Portfolio`);
+        const subject = encodeURIComponent(`[${name}] contacted you`);
         const body = encodeURIComponent(`From: ${name} (${email})\n\n${message}`);
         window.location.href = `mailto:deopranav2808.work@gmail.com?subject=${subject}&body=${body}`;
     };
