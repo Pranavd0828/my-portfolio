@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio | Cinematic Calm",
+  title: "Pranav Deo | Portfolio",
   description: "Senior Product Manager specializing in AI and AdTech.",
 };
 
