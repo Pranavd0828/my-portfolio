@@ -2,6 +2,8 @@ import CanvasBackground from "@/components/CanvasBackground";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
 import { LoadingProvider } from "@/components/LoadingContext";
+import CustomCursor from "@/components/CustomCursor";
+import { CursorProvider } from "@/components/CursorContext";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -29,13 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <body className={`${inter.variable} ${playfair.variable} antialiased bg-background text-foreground overflow-x-hidden`}>
-        <LoadingProvider>
-          <Preloader />
-          <CanvasBackground />
-          <SmoothScroll>
-            {children}
-          </SmoothScroll>
-        </LoadingProvider>
+        <CursorProvider>
+          <LoadingProvider>
+            <CustomCursor />
+            <Preloader />
+            <CanvasBackground />
+            <SmoothScroll>
+              {children}
+            </SmoothScroll>
+          </LoadingProvider>
+        </CursorProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import MagneticButton from './MagneticButton';
+import CursorHover from './CursorHover';
 
 const posts = [
     {
@@ -28,23 +29,24 @@ export default function BlogPreview() {
 
             <div className="flex flex-col">
                 {posts.map((post) => (
-                    <Link
-                        key={post.slug}
-                        href={`/blog/${post.slug}`}
-                        className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-b border-white/5 hover:border-white/20 transition-colors"
-                    >
-                        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
-                            <span className="text-xs font-mono text-muted uppercase tracking-widest min-w-[120px]">
-                                {post.date}
+                    <CursorHover key={post.slug} className="block w-full border-b border-white/5 hover:border-white/20 transition-colors group">
+                        <Link
+                            href={`/blog/${post.slug}`}
+                            className="flex flex-col md:flex-row md:items-center justify-between py-8"
+                        >
+                            <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+                                <span className="text-xs font-mono text-muted uppercase tracking-widest min-w-[120px]">
+                                    {post.date}
+                                </span>
+                                <h3 className="font-sans text-xl md:text-2xl text-accent group-hover:text-white transition-colors">
+                                    {post.title}
+                                </h3>
+                            </div>
+                            <span className="text-xs mt-4 md:mt-0 uppercase tracking-widest text-muted group-hover:text-accent transition-colors">
+                                {post.category}
                             </span>
-                            <h3 className="font-sans text-xl md:text-2xl text-accent group-hover:text-white transition-colors">
-                                {post.title}
-                            </h3>
-                        </div>
-                        <span className="text-xs mt-4 md:mt-0 uppercase tracking-widest text-muted group-hover:text-accent transition-colors">
-                            {post.category}
-                        </span>
-                    </Link>
+                        </Link>
+                    </CursorHover>
                 ))}
             </div>
         </section>

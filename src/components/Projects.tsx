@@ -1,6 +1,6 @@
 import Link from 'next/link';
-
-const projects = [
+import CursorHover from './CursorHover';
+import TiltCard from './TiltCard'; const projects = [
     {
         title: 'Google Maps Meet Mode',
         category: 'Product Strategy & Prototype',
@@ -57,9 +57,9 @@ export default function Projects() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {projects.map((project, idx) => (
-                    <div
+                    <TiltCard
                         key={idx}
-                        className="group flex flex-col p-6 md:p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-500 rounded-lg relative overflow-hidden"
+                        className="flex flex-col p-6 md:p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-500 rounded-lg overflow-hidden"
                     >
                         {/* Subtle glow effect on hover */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
@@ -74,24 +74,28 @@ export default function Projects() {
                             </div>
 
                             <div className="flex items-center gap-8 mt-4">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors">
-                                    <span>View Code</span>
-                                    <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-
-                                {project.demo && (
-                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors">
-                                        <span>Try Yourself</span>
+                                <CursorHover>
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors">
+                                        <span>View Code</span>
                                         <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                         </svg>
                                     </a>
+                                </CursorHover>
+
+                                {project.demo && (
+                                    <CursorHover>
+                                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors">
+                                            <span>Try Yourself</span>
+                                            <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                        </a>
+                                    </CursorHover>
                                 )}
                             </div>
                         </div>
-                    </div>
+                    </TiltCard>
                 ))}
             </div>
         </section>

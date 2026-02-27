@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import MagneticButton from './MagneticButton';
+import CursorHover from './CursorHover';
 
 export default function ConnectSection() {
     const [name, setName] = useState('');
@@ -61,9 +62,15 @@ export default function ConnectSection() {
                 </form>
 
                 <div className="flex gap-8 mt-32 text-xs font-mono uppercase tracking-widest text-muted">
-                    <a href="https://linkedin.com/in/pranav-deo" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LinkedIn</a>
-                    <a href="mailto:deopranav2808.work@gmail.com" className="hover:text-accent transition-colors">Email</a>
-                    <a href="https://github.com/Pranavd0828" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a>
+                    <CursorHover>
+                        <a href="https://linkedin.com/in/pranav-deo" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LinkedIn</a>
+                    </CursorHover>
+                    <CursorHover>
+                        <a href="mailto:deopranav2808.work@gmail.com" className="hover:text-accent transition-colors">Email</a>
+                    </CursorHover>
+                    <CursorHover>
+                        <a href="https://github.com/Pranavd0828" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a>
+                    </CursorHover>
                 </div>
             </div>
         </section>
