@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import CursorHover from './CursorHover';
 
 type Year = '2026' | '2025' | '2024';
 
@@ -137,58 +136,57 @@ export default function ReadingList() {
                             {readingData[activeYear].map((book, idx) => {
                                 const bookId = `${activeYear}-${idx}`;
                                 return (
-                                    <CursorHover key={idx} variant="hover" className="block w-full">
-                                        <div
-                                            onClick={(e) => handleBookTap(bookId, e)}
-                                            className="relative flex flex-col pt-6 pb-6 border-b border-white/5 group hover:border-white/20 transition-colors active:bg-white/[0.02] md:active:bg-transparent cursor-pointer lg:cursor-default"
-                                        >
-                                            <div className="flex items-start md:items-center justify-between gap-4 md:gap-6 z-10 w-full md:flex-row flex-col">
+                                    <div
+                                        key={idx}
+                                        onClick={(e) => handleBookTap(bookId, e)}
+                                        className="relative flex flex-col pt-6 pb-6 border-b border-white/5 group hover:border-white/20 transition-colors active:bg-white/[0.02] md:active:bg-transparent cursor-pointer lg:cursor-default w-full"
+                                    >
+                                        <div className="flex items-start md:items-center justify-between gap-4 md:gap-6 z-10 w-full md:flex-row flex-col">
 
-                                                <div className="flex items-start md:items-center gap-4 md:gap-6 w-full">
-                                                    <div className={`w-1.5 h-1.5 rounded-full mt-2.5 md:mt-0 flex-shrink-0 transition-all duration-300 ${expandedBookId === bookId ? 'bg-accent shadow-[0_0_10px_rgba(255,255,255,0.8)]' : 'bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)]'}`} />
-                                                    <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-1 md:gap-8">
-                                                        <h4 className={`font-serif text-xl md:text-2xl transition-colors duration-300 ${expandedBookId === bookId ? 'text-white' : 'text-accent group-hover:text-white'}`}>
-                                                            {book.title}
-                                                        </h4>
-                                                        <div className={`text-sm md:text-base font-sans md:text-right transition-colors duration-300 ${expandedBookId === bookId ? 'text-accent' : 'text-muted group-hover:text-accent'}`}>
-                                                            {book.author}
-                                                        </div>
+                                            <div className="flex items-start md:items-center gap-4 md:gap-6 w-full">
+                                                <div className={`w-1.5 h-1.5 rounded-full mt-2.5 md:mt-0 flex-shrink-0 transition-all duration-300 ${expandedBookId === bookId ? 'bg-accent shadow-[0_0_10px_rgba(255,255,255,0.8)]' : 'bg-white/20 group-hover:bg-accent group-hover:shadow-[0_0_10px_rgba(255,255,255,0.8)]'}`} />
+                                                <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-1 md:gap-8">
+                                                    <h4 className={`font-serif text-xl md:text-2xl transition-colors duration-300 ${expandedBookId === bookId ? 'text-white' : 'text-accent group-hover:text-white'}`}>
+                                                        {book.title}
+                                                    </h4>
+                                                    <div className={`text-sm md:text-base font-sans md:text-right transition-colors duration-300 ${expandedBookId === bookId ? 'text-accent' : 'text-muted group-hover:text-accent'}`}>
+                                                        {book.author}
                                                     </div>
                                                 </div>
-
                                             </div>
 
-                                            {/* Mobile/Inline Cover Art - Tap to reveal */}
-                                            <AnimatePresence>
-                                                {book.coverUrl && expandedBookId === bookId && (
-                                                    <motion.div
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
-                                                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                                                        className="w-full lg:hidden overflow-hidden pl-5 md:pl-7"
-                                                    >
-                                                        <div className="relative w-28 aspect-[2/3] rounded-lg shadow-lg overflow-hidden border border-white/10">
-                                                            <Image src={book.coverUrl} alt={book.title} fill className="object-cover" />
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-
-                                            {/* Optional Hover Cover Art Overlay */}
-                                            {book.coverUrl && (
-                                                <div className="pointer-events-none fixed top-1/2 left-3/4 -translate-y-1/2 -translate-x-1/2 z-0 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-[0.22,1,0.36,1] scale-90 group-hover:scale-110 rotate-3 group-hover:-rotate-3 mix-blend-screen hidden lg:block">
-                                                    <div className="relative w-48 aspect-[2/3] rounded-lg overflow-hidden shadow-2xl opacity-40">
-                                                        <Image
-                                                            src={book.coverUrl}
-                                                            alt={book.title}
-                                                            fill
-                                                            className="object-cover"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )}
                                         </div>
-                                    </CursorHover>
+
+                                        {/* Mobile/Inline Cover Art - Tap to reveal */}
+                                        <AnimatePresence>
+                                            {book.coverUrl && expandedBookId === bookId && (
+                                                <motion.div
+                                                    initial={{ height: 0, opacity: 0 }}
+                                                    animate={{ height: 'auto', opacity: 1, marginTop: 16 }}
+                                                    exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                                                    className="w-full lg:hidden overflow-hidden pl-5 md:pl-7"
+                                                >
+                                                    <div className="relative w-28 aspect-[2/3] rounded-lg shadow-lg overflow-hidden border border-white/10">
+                                                        <Image src={book.coverUrl} alt={book.title} fill className="object-cover" />
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+
+                                        {/* Optional Hover Cover Art Overlay */}
+                                        {book.coverUrl && (
+                                            <div className="pointer-events-none fixed top-1/2 left-3/4 -translate-y-1/2 -translate-x-1/2 z-0 opacity-0 group-hover:opacity-100 transition-all duration-700 ease-[0.22,1,0.36,1] scale-90 group-hover:scale-110 rotate-3 group-hover:-rotate-3 mix-blend-screen hidden lg:block">
+                                                <div className="relative w-48 aspect-[2/3] rounded-lg overflow-hidden shadow-2xl opacity-40">
+                                                    <Image
+                                                        src={book.coverUrl}
+                                                        alt={book.title}
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
                                 );
                             })}
                         </div>

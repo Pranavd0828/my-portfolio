@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import MagneticButton from './MagneticButton';
-import CursorHover from './CursorHover';
 
 const posts = [
     {
@@ -22,14 +20,14 @@ export default function BlogPreview() {
         <section className="w-full max-w-5xl mx-auto py-16 md:py-32 px-6 border-t border-white/5">
             <div className="flex flex-col md:flex-row justify-between items-baseline mb-16">
                 <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-none text-accent">Editorial</h2>
-                <MagneticButton className="mt-6 md:mt-0 text-xs border-white/20 text-muted hover:text-accent hover:border-white/50">
+                <button className="mt-6 md:mt-0 px-6 py-3 text-xs border rounded-full font-medium transition-all duration-300 active:scale-[0.98] border-white/20 text-muted hover:text-accent hover:border-white/50">
                     View All Writings
-                </MagneticButton>
+                </button>
             </div>
 
             <div className="flex flex-col">
                 {posts.map((post) => (
-                    <CursorHover key={post.slug} className="block w-full border-b border-white/5 hover:border-white/20 transition-colors group">
+                    <div key={post.slug} className="block w-full border-b border-white/5 hover:border-white/20 transition-colors group">
                         <Link
                             href={`/blog/${post.slug}`}
                             className="flex flex-col md:flex-row md:items-center justify-between py-8"
@@ -46,7 +44,7 @@ export default function BlogPreview() {
                                 {post.category}
                             </span>
                         </Link>
-                    </CursorHover>
+                    </div>
                 ))}
             </div>
         </section>
