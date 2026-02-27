@@ -70,7 +70,7 @@ export default function Journey() {
 
             <div className="relative z-10 max-w-6xl w-full mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24">
-                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent">Professional<br className="hidden md:block" />Journey</h2>
+                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent">Professional<br className="hidden md:block" /><span className="md:hidden"> </span>Journey</h2>
                     <p className="font-sans text-sm md:text-base text-muted max-w-sm mt-6 md:mt-0 md:text-right">
                         A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
                     </p>
@@ -86,26 +86,28 @@ export default function Journey() {
                             </div>
 
                             {/* Roles inside Company */}
-                            <div className="flex flex-col gap-10 md:gap-12 pl-5 md:pl-16 relative">
+                            <div className="flex flex-col gap-10 md:gap-12 pl-7 md:pl-16 relative">
                                 {/* Vertical connection line for multiple roles */}
                                 {companyBlock.roles.length > 1 && (
-                                    <div className="absolute left-[3px] md:left-[15px] top-6 bottom-6 w-[1px] bg-white/10" />
+                                    <div className="absolute left-[11px] md:left-[15px] top-8 bottom-8 w-[1px] bg-white/10" />
                                 )}
 
                                 {companyBlock.roles.map((role, roleIdx) => (
                                     <div key={role.id} className="flex flex-col md:flex-row justify-between group/role relative">
                                         {companyBlock.roles.length > 1 && (
-                                            <div className="absolute left-[-20px] md:left-[-45px] top-4 md:top-4 w-2 h-2 rounded-full bg-white/20 group-hover/role:bg-accent transition-colors" />
+                                            <div className="absolute left-[-20px] md:left-[-52px] top-[10px] md:top-[12px] w-[7px] h-[7px] rounded-full bg-white/20 group-hover/role:bg-accent transition-colors" />
                                         )}
 
                                         <div className="flex-1 md:pr-12">
-                                            <div className="flex items-center gap-4 mb-3">
-                                                <span className="text-xs font-mono text-muted">{role.id}</span>
-                                                <span className="text-xs uppercase tracking-widest px-3 py-1 border border-white/10 rounded-full text-accent bg-white/5 group-hover/role:bg-white/10 group-hover/role:border-white/30 transition-all">
+                                            <div className="flex items-center gap-4 mb-2">
+                                                <span className="text-xs font-mono text-muted/60">{role.id}</span>
+                                                <h4 className="font-sans text-xl md:text-2xl font-medium tracking-tight text-accent group-hover/role:text-white transition-colors">
                                                     {role.role}
-                                                </span>
+                                                </h4>
                                             </div>
-                                            <h4 className="font-serif text-2xl md:text-3xl text-accent group-hover/role:text-white transition-colors">{role.title}</h4>
+                                            <div className="font-serif text-lg md:text-xl text-muted group-hover/role:text-accent/90 transition-colors">
+                                                {role.title}
+                                            </div>
                                         </div>
 
                                         <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-end md:text-right">
