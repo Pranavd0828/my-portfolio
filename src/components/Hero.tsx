@@ -2,9 +2,11 @@
 
 import { useRef } from 'react';
 import { useScroll, useTransform, motion } from 'framer-motion';
+import { useLoading } from './LoadingContext';
 
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
+    const { isLoaded } = useLoading();
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
@@ -25,7 +27,7 @@ export default function Hero() {
             >
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                     className="font-sans text-base md:text-lg uppercase tracking-[0.2em] text-muted mb-8"
                 >
@@ -34,7 +36,7 @@ export default function Hero() {
 
                 <motion.h1
                     initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                     className="font-serif text-4xl leading-tight md:text-8xl lg:text-9xl tracking-tight text-accent md:leading-none max-w-5xl"
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
@@ -46,7 +48,7 @@ export default function Hero() {
 
             <motion.div
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+                animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 1, delay: 1 }}
                 style={{ opacity }}
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
