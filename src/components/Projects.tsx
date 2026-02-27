@@ -16,11 +16,11 @@ const projects = [
         demo: 'https://pranavd0828.github.io/flappy-eagle/'
     },
     {
-        title: 'Recall Mode: Anti-Spoiler Context Engine',
-        category: 'AI Pipeline',
-        description: 'An AI engine designed to process real-time contextual awareness without spoiling narrative events for viewers.',
-        github: 'https://github.com/Pranavd0828/Recall-Mode-The-Anti-Spoiler-Context-Engine',
-        demo: 'https://pranavd0828.github.io/Recall-Mode-The-Anti-Spoiler-Context-Engine/'
+        title: 'LinkedIn Messaging Formatting',
+        category: 'UI/UX Extension',
+        description: 'A browser extension prototype that injects rich text formatting capabilities—like bold, italics, and lists—directly into LinkedIn\'s native messaging interface.',
+        github: 'https://github.com/Pranavd0828/LinkedIn-Messaging-with-Formatting-Option',
+        demo: 'https://pranavd0828.github.io/LinkedIn-Messaging-with-Formatting-Option/'
     },
     {
         title: 'WhatsApp Regional Voice-Over AI',

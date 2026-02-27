@@ -18,7 +18,7 @@ export default function Education() {
 
                 <div className="flex flex-col items-center">
                     <span className="text-sm font-mono text-muted uppercase tracking-widest mb-4">2013 - 2017</span>
-                    <h3 className="font-serif text-2xl text-accent mb-2">Bachelor of Engineering, CS</h3>
+                    <h3 className="font-serif text-2xl text-accent mb-2">Bachelor of Engineering, Computer Science</h3>
                     <p className="font-sans text-muted">University of Mumbai, India</p>
                     <div className="mt-4 px-4 py-1 border border-white/10 rounded-full text-xs text-muted">
                         GPA: 3.93
