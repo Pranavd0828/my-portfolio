@@ -63,16 +63,19 @@ export default function WeatherEngine({ children }: WeatherEngineProps) {
         !['rain', 'thunderstorm'].includes(activeCondition);
 
     return (
-        <div className={`relative w-full min-h-screen overflow-hidden transition-colors duration-[2000ms] ${isLightMode ? 'light-mode' : 'dark-mode'}`}
-            style={{
-                '--background': getBackground(activeCondition, isLightMode),
-                '--foreground': isLightMode ? '#111111' : '#F4F4F5',
-                '--accent': isLightMode ? '#000000' : '#EAEAEB',
-                '--muted': isLightMode ? '#6b7280' : '#4F5565',
-                backgroundColor: 'var(--background)',
-                color: 'var(--foreground)'
-            } as React.CSSProperties}
-        >
+        <div className={`relative w-full min-h-screen overflow-hidden transition-colors duration-[2000ms] ${isLightMode ? 'light-mode' : 'dark-mode'}`}>
+            {/* Global CSS Override Engine */}
+            <style dangerouslySetInnerHTML={{
+                __html: `
+                :root {
+                    --background: ${getBackground(activeCondition, isLightMode)};
+                    --foreground: ${isLightMode ? '#111111' : '#F4F4F5'};
+                    --accent: ${isLightMode ? '#000000' : '#EAEAEB'};
+                    --muted: ${isLightMode ? '#6b7280' : '#4F5565'};
+                }
+                `
+            }} />
+
             {/* Atmospheric Environment Elements (Sun/Gradients) */}
             {isLightMode && activeCondition === 'clear' && (
                 <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-amber-400/10 blur-[100px] rounded-full mix-blend-multiply pointer-events-none" />
