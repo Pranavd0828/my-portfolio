@@ -34,7 +34,7 @@ export default function Preloader() {
             // Non-linear ease-out curve mathematically
             const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
 
-            setCounter(Math.floor(easeOutExpo * 100));
+            setCounter(Math.floor(easeOutExpo * 30));
 
             if (progress < 1) {
                 window.requestAnimationFrame(step);
@@ -46,7 +46,7 @@ export default function Preloader() {
                     // Unlock scroll and notify global app state
                     document.body.style.overflow = '';
                     setIsLoaded(true);
-                }, 400); // Hold at 100 for a split second
+                }, 400); // Hold at 30 for a split second
             }
         };
 
@@ -65,14 +65,14 @@ export default function Preloader() {
                     initial={{ y: 0 }}
                     exit={{ y: '-100dvh' }}
                     transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-                    className="fixed inset-0 z-[9999] bg-[#000000] flex items-end justify-end p-8 md:p-12 text-foreground font-serif pointer-events-none"
+                    className="fixed inset-0 z-[9999] bg-[#000000] flex items-end justify-end p-6 md:p-8 text-foreground font-mono pointer-events-none"
                 >
                     <motion.div
-                        exit={{ opacity: 0, y: -20 }}
+                        exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.5, ease: 'easeOut' }}
-                        className="text-[12vw] md:text-[8vw] leading-none tracking-tighter"
+                        className="text-xs md:text-sm tracking-widest text-[#EAEAEB]/50 uppercase"
                     >
-                        {counter.toString().padStart(2, '0')}
+                        Loading [{counter.toString().padStart(2, '0')}/30]
                     </motion.div>
                 </motion.div>
             )}

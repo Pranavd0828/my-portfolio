@@ -56,14 +56,16 @@ export default function CustomCursor() {
 
     const variants = {
         default: {
-            height: 12,
-            width: 12,
+            opacity: 0,
+            height: 0,
+            width: 0,
             x: '-50%',
             y: '-50%',
             backgroundColor: 'rgba(234, 234, 235, 1)', // accent
             mixBlendMode: 'normal' as const,
         },
         hover: {
+            opacity: 1,
             height: 48,
             width: 48,
             x: '-50%',
