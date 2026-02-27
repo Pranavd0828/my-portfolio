@@ -1,9 +1,9 @@
 export default function Education() {
     return (
         <section className="w-full max-w-5xl mx-auto py-16 md:py-24 px-6 border-t border-white/5 flex flex-col items-center text-center">
-            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-accent mb-16">Academic Foundation</h2>
+            <h2 className="font-serif text-3xl leading-tight md:text-4xl lg:text-5xl md:leading-tight text-accent mb-12 md:mb-16">Academic Foundation</h2>
 
-            <div className="flex flex-col md:flex-row gap-16 md:gap-32 w-full justify-center">
+            <div className="flex flex-col md:flex-row gap-12 md:gap-32 w-full justify-center">
 
                 <div className="flex flex-col items-center">
                     <span className="text-sm font-mono text-muted uppercase tracking-widest mb-4">2019 - 2020</span>

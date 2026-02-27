@@ -22,7 +22,7 @@ export default function ConnectSection() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-3xl w-full z-10 text-center flex flex-col items-center">
-                <h2 className="font-serif text-6xl md:text-8xl text-accent mb-6">Let&apos;s talk</h2>
+                <h2 className="font-serif text-5xl leading-tight md:text-8xl md:leading-none text-accent mb-6">Let&apos;s talk</h2>
                 <p className="font-sans text-muted mb-16 max-w-lg">
                     Whether you have a strategic product vision or a complex engineering challenge, my inbox is always open.
                 </p>

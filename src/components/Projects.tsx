@@ -49,17 +49,17 @@ export default function Projects() {
     return (
         <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
             <div className="flex flex-col mb-16">
-                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl text-accent">Notable Prototypes</h2>
+                <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent">Notable Prototypes</h2>
                 <p className="font-sans text-muted mt-6 max-w-md text-sm md:text-base">
                     A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {projects.map((project, idx) => (
                     <div
                         key={idx}
-                        className="group flex flex-col p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-500 rounded-lg relative overflow-hidden"
+                        className="group flex flex-col p-6 md:p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-500 rounded-lg relative overflow-hidden"
                     >
                         {/* Subtle glow effect on hover */}
                         <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />

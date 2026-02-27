@@ -36,7 +36,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-serif text-5xl md:text-8xl lg:text-9xl tracking-tight text-accent leading-none max-w-5xl"
+                    className="font-serif text-4xl leading-tight md:text-8xl lg:text-9xl tracking-tight text-accent md:leading-none max-w-5xl"
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
                 >
                     Ads Platform <br className="hidden md:block" />

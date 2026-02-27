@@ -70,7 +70,7 @@ export default function ReadingList() {
             <div className="flex flex-col mb-16">
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>
-                        <h2 className="font-serif text-4xl md:text-5xl lg:text-7xl text-accent">Literature</h2>
+                        <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent">Literature</h2>
                         <p className="font-sans text-sm md:text-base text-muted uppercase tracking-[0.2em] mt-6">
                             Index &amp; Study
                         </p>
