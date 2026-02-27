@@ -1,6 +1,7 @@
 import CanvasBackground from "@/components/CanvasBackground";
 import SmoothScroll from "@/components/SmoothScroll";
 import Preloader from "@/components/Preloader";
+import PageTransitionProvider from "@/components/PageTransitionProvider";
 import { LoadingProvider } from "@/components/LoadingContext";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
@@ -33,7 +34,9 @@ export default function RootLayout({
           <Preloader />
           <CanvasBackground />
           <SmoothScroll>
-            {children}
+            <PageTransitionProvider>
+              {children}
+            </PageTransitionProvider>
           </SmoothScroll>
         </LoadingProvider>
       </body>
