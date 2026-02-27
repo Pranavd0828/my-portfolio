@@ -10,8 +10,13 @@ const ACCELERATION = 0.0005;
 const MAX_SPEED = 10;
 const SPAWN_MIN_RATE = 90; // Frames
 const SPAWN_MAX_RATE = 200;
-const GROUND_HEIGHT = 100;
 const OBSTACLE_WIDTH = 30;
+
+const getGroundY = (canvas: HTMLCanvasElement) => {
+    // On mobile screens, elevate the ground line to roughly 60% of the viewport height
+    // so the game action sits squarely in the middle of the phone screen.
+    return window.innerWidth < 768 ? canvas.height * 0.6 : canvas.height - 100;
+};
 
 interface Entity {
     x: number;
@@ -48,7 +53,7 @@ export default function EscapeGame() {
         gameState.current = {
             player: {
                 x: 100,
-                y: canvas.height - GROUND_HEIGHT - 24,
+                y: getGroundY(canvas) - 24,
                 width: 24,
                 height: 24,
                 velocity: 0
@@ -115,7 +120,7 @@ export default function EscapeGame() {
             canvas.height = window.innerHeight;
             if (!isPlaying && !gameOver) {
                 // Initial draw position
-                gameState.current.player.y = canvas.height - GROUND_HEIGHT - 24;
+                gameState.current.player.y = getGroundY(canvas) - 24;
                 draw();
             }
         };
@@ -131,9 +136,10 @@ export default function EscapeGame() {
             // Ground Line (Hairline Museum Aesthetic)
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
             ctx.lineWidth = 0.5;
+            const groundY = getGroundY(canvas);
             ctx.beginPath();
-            ctx.moveTo(0, canvas.height - GROUND_HEIGHT);
-            ctx.lineTo(canvas.width, canvas.height - GROUND_HEIGHT);
+            ctx.moveTo(0, groundY);
+            ctx.lineTo(canvas.width, groundY);
             ctx.stroke();
 
             // Draw Obstacles (Brutalist Pillars)
@@ -242,7 +248,7 @@ export default function EscapeGame() {
             state.player.y += state.player.velocity;
 
             // Ground Collision
-            const floor = canvas.height - GROUND_HEIGHT - state.player.height;
+            const floor = getGroundY(canvas) - state.player.height;
             if (state.player.y > floor) {
                 state.player.y = floor;
                 state.player.velocity = 0;
@@ -272,9 +278,10 @@ export default function EscapeGame() {
 
             if (timeSinceLastSpawn > currentSpawnTarget) {
                 const height = 30 + Math.random() * 50;
+                const groundY = getGroundY(canvas);
                 state.obstacles.push({
                     x: canvas.width,
-                    y: canvas.height - GROUND_HEIGHT - height,
+                    y: groundY - height,
                     width: OBSTACLE_WIDTH,
                     height: height,
                     velocity: 0
