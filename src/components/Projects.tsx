@@ -47,33 +47,30 @@ import TiltCard from './TiltCard'; const projects = [
 export default function Projects() {
     return (
         <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
-            <div className="flex flex-col mb-16">
-                <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent">Notable Prototypes</h2>
-                <p className="font-sans text-muted mt-6 max-w-md text-sm md:text-base">
+            <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
+                <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent mb-6">Notable Prototypes</h2>
+                <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
                     A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2">
                 {projects.map((project, idx) => (
-                    <TiltCard
+                    <div
                         key={idx}
-                        className="flex flex-col p-6 md:p-8 border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/20 transition-all duration-500 rounded-lg overflow-hidden"
+                        className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"
                     >
-                        {/* Subtle glow effect on hover */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                        <div className="relative z-10 flex flex-col h-full justify-between">
+                        <div className="relative z-10 flex flex-col h-full justify-between opacity-80 hover:opacity-100 transition-opacity duration-1000">
                             <div>
                                 <span className="text-xs font-mono uppercase tracking-widest text-muted">{project.category}</span>
-                                <h3 className="font-serif text-2xl text-accent mt-4 mb-4 group-hover:text-white transition-colors">{project.title}</h3>
-                                <p className="text-sm text-muted/80 leading-relaxed mb-8 group-hover:text-accent transition-colors">
+                                <h3 className="font-serif text-2xl text-accent mt-6 mb-6">{project.title}</h3>
+                                <p className="text-sm text-muted/80 leading-relaxed mb-12">
                                     {project.description}
                                 </p>
                             </div>
 
-                            <div className="flex items-center gap-8 mt-4">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors">
+                            <div className="flex items-center gap-8 mt-4 pt-8 border-t-[0.5px] border-white/10">
+                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors duration-700">
                                     <span>View Code</span>
                                     <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
@@ -81,7 +78,7 @@ export default function Projects() {
                                 </a>
 
                                 {project.demo && (
-                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors">
+                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors duration-700">
                                         <span>Try Yourself</span>
                                         <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -90,7 +87,7 @@ export default function Projects() {
                                 )}
                             </div>
                         </div>
-                    </TiltCard>
+                    </div>
                 ))}
             </div>
         </section>

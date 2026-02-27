@@ -69,9 +69,9 @@ export default function Journey() {
             </div>
 
             <div className="relative z-10 max-w-6xl w-full mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24">
-                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent">Professional<br className="hidden md:block" /><span className="md:hidden"> </span>Journey</h2>
-                    <p className="font-sans text-sm md:text-base text-muted max-w-sm mt-6 md:mt-0 md:text-right">
+                <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
+                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent mb-6">Professional Journey</h2>
+                    <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
                         A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
                     </p>
                 </div>
