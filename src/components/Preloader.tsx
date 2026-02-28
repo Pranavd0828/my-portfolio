@@ -34,7 +34,7 @@ export default function Preloader() {
             // Non-linear ease-out curve mathematically
             const easeOutExpo = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
 
-            setCounter(Math.floor(easeOutExpo * 30));
+            setCounter(Math.floor(easeOutExpo * 100));
 
             if (progress < 1) {
                 window.requestAnimationFrame(step);
@@ -46,7 +46,7 @@ export default function Preloader() {
                     // Unlock scroll and notify global app state
                     document.body.style.overflow = '';
                     setIsLoaded(true);
-                }, 400); // Hold at 30 for a split second
+                }, 400); // Hold at 100 for a split second
             }
         };
 
@@ -72,7 +72,7 @@ export default function Preloader() {
                         transition={{ duration: 0.5, ease: 'easeOut' }}
                         className="text-xs md:text-sm tracking-widest text-[#EAEAEB]/50 uppercase"
                     >
-                        Loading [{counter.toString().padStart(2, '0')}/30]
+                        Loading [{counter.toString().padStart(3, '0')}/100]
                     </motion.div>
                 </motion.div>
             )}

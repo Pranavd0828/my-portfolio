@@ -12,10 +12,20 @@ const SPAWN_MIN_RATE = 90; // Frames
 const SPAWN_MAX_RATE = 200;
 const OBSTACLE_WIDTH = 30;
 
+const DEATH_QUOTES = [
+    "The master has failed more times than the beginner has even tried. But wow, you failed fast.",
+    "Every setback is a setup for a comeback. Unless you hit another geometric box.",
+    "Shoot for the moon. Even if you miss... wait, no, you just crashed.",
+    "Success is not final, failure is not fatal. It is the courage to press Spacebar that counts.",
+    "Fall seven times, stand up eight. Though your cube is looking pretty bruised.",
+    "They say what doesn't kill you makes you stronger. This definitely killed you.",
+    "Only those who dare to fail greatly can ever achieve greatly. Congrats on the great failure."
+];
+
 const getGroundY = (canvas: HTMLCanvasElement) => {
-    // On mobile screens, elevate the ground line to roughly 60% of the viewport height
-    // so the game action sits squarely in the middle of the phone screen.
-    return window.innerWidth < 768 ? canvas.height * 0.6 : canvas.height - 100;
+    // Elevate the ground line on all screens to better center the action.
+    // 60% on mobile, 75% on desktop.
+    return window.innerWidth < 768 ? canvas.height * 0.6 : canvas.height * 0.75;
 };
 
 interface Entity {
@@ -32,6 +42,13 @@ export default function EscapeGame() {
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
+    const [currentQuote, setCurrentQuote] = useState(DEATH_QUOTES[0]);
+
+    // Detect touch device on mount
+    useEffect(() => {
+        setIsTouchDevice(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+    }, []);
 
     // Game State Refs mapping to 60fps mutability
     const gameState = useRef({
@@ -268,7 +285,7 @@ export default function EscapeGame() {
             // Remove off-screen obstacles & increment score
             if (state.obstacles.length > 0 && state.obstacles[0].x + state.obstacles[0].width < 0) {
                 state.obstacles.shift();
-                state.score += 10;
+                state.score += 100;
                 setScore(Math.floor(state.score));
             }
 
@@ -294,6 +311,7 @@ export default function EscapeGame() {
                 setGameOver(true);
                 setIsPlaying(false);
                 setHighScore(prev => Math.max(prev, Math.floor(state.score)));
+                setCurrentQuote(DEATH_QUOTES[Math.floor(Math.random() * DEATH_QUOTES.length)]);
                 draw(); // Draw final frame
                 return;
             }
@@ -330,32 +348,71 @@ export default function EscapeGame() {
                 className="block w-full h-full"
             />
 
+            {/* Highly Visible HUD: Return to Index Link */}
+            <button
+                onClick={(e) => {
+                    e.stopPropagation();
+                    window.location.href = '/';
+                }}
+                onPointerDown={(e) => e.stopPropagation()}
+                className="absolute top-6 left-6 md:top-8 md:left-12 px-4 py-2 bg-white/5 border border-white/20 hover:bg-white/10 text-xs font-mono uppercase tracking-[0.2em] text-white/90 transition-all duration-300 z-50 rounded-sm inline-flex items-center gap-2 backdrop-blur-md"
+            >
+                <span className="text-accent">←</span> <span>ABORT_TO_INDEX</span>
+            </button>
+
             {/* UI Overlay */}
-            <div className="absolute top-8 right-12 font-mono text-sm tracking-widest text-muted/50 select-none pointer-events-none flex flex-col items-end gap-1">
+            <div className="absolute top-6 right-6 md:top-8 md:right-12 font-mono text-sm tracking-widest text-muted/50 select-none pointer-events-none flex flex-col items-end gap-1">
                 <span>HI {highScore.toString().padStart(5, '0')}</span>
                 <span className="text-accent">{score.toString().padStart(5, '0')}</span>
             </div>
 
-            {/* Start / Game Over Screen */}
+            {/* Start Screen */}
             {(!isPlaying && !gameOver) && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mix-blend-difference">
                     <span className="font-serif text-4xl md:text-6xl text-white tracking-widest animate-pulse">ESCAPE</span>
-                    <span className="font-mono text-xs text-muted/70 uppercase tracking-widest mt-6">Press Space to Initiate</span>
+                    <span className="font-mono text-xs text-muted/70 uppercase tracking-widest mt-6">
+                        {isTouchDevice ? 'TAP SCREEN TO INITIATE' : 'PRESS SPACE TO INITIATE'}
+                    </span>
                 </div>
             )}
 
+            {/* Game Over Screen */}
             {gameOver && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/80 backdrop-blur-sm pointer-events-none">
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/80 backdrop-blur-md pointer-events-auto z-40">
                     <span className="font-serif text-4xl md:text-6xl text-white tracking-widest">SIGNAL LOST</span>
-                    <span className="font-mono text-xs text-white/50 uppercase tracking-[0.3em] mt-8 mb-4">Final Score: {score}</span>
-                    <span className="font-mono text-xs text-accent uppercase animate-pulse tracking-widest">Press Space to Restart</span>
+
+                    <span className="font-sans text-sm md:text-base font-medium text-white/90 text-center max-w-[85vw] md:max-w-md mt-8 mb-4">
+                        "{currentQuote}"
+                    </span>
+
+                    <span className="font-mono text-xs text-accent uppercase tracking-[0.3em] mt-2 mb-10">
+                        Final Score: {score}
+                    </span>
+
+                    <div className="flex flex-col md:flex-row gap-4 items-center">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                resetGame();
+                            }}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            className="px-6 py-4 md:py-3 border border-white/20 bg-white/5 hover:bg-white/10 font-mono text-xs text-white tracking-[0.2em] transition-all duration-300 rounded-sm"
+                        >
+                            [ RESTART_SIMULATION ]
+                        </button>
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                window.location.href = '/';
+                            }}
+                            onPointerDown={(e) => e.stopPropagation()}
+                            className="px-6 py-4 md:py-3 font-mono text-xs text-muted/60 hover:text-white tracking-[0.2em] transition-all duration-300 rounded-sm"
+                        >
+                            [ ABORT_TO_HOMEPAGE ]
+                        </button>
+                    </div>
                 </div>
             )}
-
-            {/* Minimalist Watermark/Return Link to maintain ecosystem connection without harsh navbars */}
-            <a href="/" className="absolute bottom-8 left-8 text-xs font-mono uppercase tracking-widest text-muted/30 hover:text-white transition-colors duration-500 z-50">
-                ← Return to Index
-            </a>
         </div>
     );
 }

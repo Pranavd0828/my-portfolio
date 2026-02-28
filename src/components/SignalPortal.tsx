@@ -58,7 +58,7 @@ export default function SignalPortal() {
                         <motion.div
                             animate={{
                                 scale: isHovered ? [1, 1.2, 1] : [1, 1.1, 1],
-                                opacity: isHovered ? 1 : [0.3, 0.8, 0.3],
+                                opacity: isHovered ? 1 : [0.5, 0.9, 0.5],
                             }}
                             transition={{
                                 duration: isHovered ? 1 : 4,
@@ -70,7 +70,7 @@ export default function SignalPortal() {
                         />
                         {/* Static microscopic container for precise layout */}
                         <div
-                            className="absolute inset-0 bg-white/20 w-9 h-9 -left-[2px] -top-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                            className={`absolute inset-0 bg-white/20 w-9 h-9 -left-[2px] -top-[2px] transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-30'}`}
                             style={{ clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)" }}
                         />
                     </div>
