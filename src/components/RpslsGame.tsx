@@ -313,20 +313,9 @@ export default function RpslsGame() {
                                             left: '50%',
                                             transform: (() => {
                                                 const isTop = ['ROCK', 'PAPER', 'SPOCK'].includes(choice);
-                                                const offset = isMobile ? 52 : 75;
+                                                const offset = isMobile ? 54 : 76;
                                                 const yOffset = isTop ? -offset : offset;
-                                                // For PAPER and SPOCK, we want them slightly shifted horizontally to avoid overlap if needed, 
-                                                // but the user asked for "on top", so we'll prioritize verticality.
-                                                // We'll still keep a tiny bit of radial tilt to keep the pentagon feel but mostly vertical.
-                                                const angleRad = coords.angle;
-                                                const cos = Math.cos(angleRad) * (isMobile ? 55 : 80);
-                                                const sin = Math.sin(angleRad) * (isMobile ? 55 : 80);
-
-                                                // If choice is ROCK, purely top.
-                                                if (choice === 'ROCK') return `translate(calc(-50% + ${cos}px), calc(-50% + ${sin}px))`;
-
-                                                // For others, use the user's top/bottom rule
-                                                return `translate(calc(-50% + ${cos}px), calc(-50% + ${yOffset}px))`;
+                                                return `translate(-50%, calc(-50% + ${yOffset}px))`;
                                             })()
                                         }}
                                     >
