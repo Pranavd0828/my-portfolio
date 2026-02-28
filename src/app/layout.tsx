@@ -20,8 +20,29 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Pranav Deo | Portfolio",
-  description: "Senior Product Manager specializing in AI and AdTech.",
+  metadataBase: new URL("https://www.deopranav.com"),
+  title: {
+    default: "Pranav Deo | Senior Product Manager",
+    template: "%s | Pranav Deo",
+  },
+  description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+  openGraph: {
+    title: "Pranav Deo | Senior Product Manager",
+    description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+    url: "https://www.deopranav.com",
+    siteName: "Pranav Deo Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pranav Deo | Senior Product Manager",
+    description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
