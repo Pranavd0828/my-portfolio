@@ -197,7 +197,7 @@ export default function RpslsGame() {
                             transition={{ duration: 1, delay: 0.2 }}
                             className="max-w-3xl w-full flex flex-col items-center justify-center min-h-[100dvh]"
                         >
-                            <div className="font-mono text-[10px] md:text-xs text-muted/60 uppercase tracking-[0.2em] mb-12 flex flex-col items-center gap-1">
+                            <div className="font-mono text-[10px] md:text-xs text-white/50 uppercase tracking-[0.2em] mb-12 flex flex-col items-center gap-1">
                                 <span>SYS.DUEL.V1</span>
                                 <span>AWAITING AUTHORIZATION</span>
                             </div>
@@ -211,9 +211,9 @@ export default function RpslsGame() {
 
                             <motion.button
                                 onClick={() => setHasStarted(true)}
-                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)" }}
+                                whileHover={{ scale: 1.02, backgroundColor: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,1)" }}
                                 whileTap={{ scale: 0.98 }}
-                                className="px-8 py-4 border border-white/20 hover:border-white/60 text-white/90 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-sm"
+                                className="px-8 py-4 border border-white/20 hover:border-white/60 text-white/50 font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-sm"
                             >
                                 [ {entryPhrase} ]
                             </motion.button>
@@ -238,7 +238,7 @@ export default function RpslsGame() {
             <div className="relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center h-full flex-1 justify-center">
 
                 {/* Return to Index Header */}
-                <div className="absolute top-6 left-6 right-6 flex justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-muted/60 z-20">
+                <div className="absolute top-6 left-6 right-6 flex justify-between items-center text-[10px] md:text-xs font-mono uppercase tracking-[0.2em] text-white/50 z-20">
                     <button
                         onClick={() => window.location.href = '/'}
                         className="hover:text-white transition-colors duration-300 relative z-20"
@@ -263,7 +263,7 @@ export default function RpslsGame() {
                                 className="absolute flex flex-col items-center justify-center pointer-events-none"
                             >
                                 <span className="font-mono text-xl md:text-4xl tracking-widest text-white mb-2 md:mb-3 uppercase">INITIATE</span>
-                                <span className="font-mono text-[9px] md:text-xs tracking-[0.4em] uppercase text-white/70">AWAITING INPUT</span>
+                                <span className="font-mono text-[9px] md:text-xs tracking-[0.4em] uppercase text-white/50">AWAITING INPUT</span>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -311,7 +311,23 @@ export default function RpslsGame() {
                                         style={{
                                             top: '50%',
                                             left: '50%',
-                                            transform: `translate(calc(-50% + ${Math.cos(coords.angle) * (isMobile ? 65 : 90)}px), calc(-50% + ${Math.sin(coords.angle) * (isMobile ? 65 : 90)}px))`
+                                            transform: (() => {
+                                                const isTop = ['ROCK', 'PAPER', 'SPOCK'].includes(choice);
+                                                const offset = isMobile ? 52 : 75;
+                                                const yOffset = isTop ? -offset : offset;
+                                                // For PAPER and SPOCK, we want them slightly shifted horizontally to avoid overlap if needed, 
+                                                // but the user asked for "on top", so we'll prioritize verticality.
+                                                // We'll still keep a tiny bit of radial tilt to keep the pentagon feel but mostly vertical.
+                                                const angleRad = coords.angle;
+                                                const cos = Math.cos(angleRad) * (isMobile ? 55 : 80);
+                                                const sin = Math.sin(angleRad) * (isMobile ? 55 : 80);
+
+                                                // If choice is ROCK, purely top.
+                                                if (choice === 'ROCK') return `translate(calc(-50% + ${cos}px), calc(-50% + ${sin}px))`;
+
+                                                // For others, use the user's top/bottom rule
+                                                return `translate(calc(-50% + ${cos}px), calc(-50% + ${yOffset}px))`;
+                                            })()
                                         }}
                                     >
                                         {choice}
@@ -363,7 +379,7 @@ export default function RpslsGame() {
                                 className="absolute flex flex-col items-center justify-center w-[80vw] md:w-[400px] z-10"
                             >
                                 <div className="flex flex-col items-center justify-center p-8 bg-background/40 backdrop-blur-xl border border-white/5 rounded-2xl w-full shadow-2xl">
-                                    <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] text-muted/80 uppercase mb-4 text-center whitespace-nowrap">
+                                    <span className="font-mono text-[10px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] text-white/50 uppercase mb-4 text-center whitespace-nowrap">
                                         {playerChoice} {getVerb()} {houseChoice}
                                     </span>
                                     <motion.div
@@ -376,7 +392,7 @@ export default function RpslsGame() {
                                         </h2>
                                     </motion.div>    <button
                                         onClick={resetGame}
-                                        className="px-6 py-3 border border-white/20 hover:border-white/60 hover:text-white bg-white/5 hover:bg-white/10 font-mono text-[10px] md:text-xs text-muted uppercase tracking-[0.3em] transition-all duration-300 active:scale-95 rounded-sm"
+                                        className="px-6 py-3 border border-white/20 hover:border-white/60 hover:text-white bg-white/5 hover:bg-white/10 font-mono text-[10px] md:text-xs text-white/50 uppercase tracking-[0.3em] transition-all duration-300 active:scale-95 rounded-sm"
                                     >
                                         [ REINITIALIZE ]
                                     </button>
