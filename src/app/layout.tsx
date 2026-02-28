@@ -4,6 +4,7 @@ import PageTransitionProvider from "@/components/PageTransitionProvider";
 import { LoadingProvider } from "@/components/LoadingContext";
 import CanvasBackground from "@/components/CanvasBackground";
 import SignalPortal from "@/components/SignalPortal";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -41,6 +42,7 @@ export default function RootLayout({
             </PageTransitionProvider>
           </SmoothScroll>
         </LoadingProvider>
+        <Analytics />
       </body>
     </html>
   );
