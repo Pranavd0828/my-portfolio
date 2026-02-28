@@ -65,12 +65,12 @@ export default function Preloader() {
                     initial={{ y: 0 }}
                     exit={{ y: '-100dvh' }}
                     transition={{ duration: 1, ease: [0.76, 0, 0.24, 1] }}
-                    className="fixed inset-0 z-[9999] bg-[#000000] flex items-end justify-end p-6 md:p-8 text-foreground font-mono pointer-events-none"
+                    className="fixed inset-0 z-[9999] bg-[#0B0C10] flex items-end justify-end p-6 md:p-8 text-foreground font-mono pointer-events-none"
                 >
                     <motion.div
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.5, ease: 'easeOut' }}
-                        className="text-xs md:text-sm tracking-widest text-[#EAEAEB]/50 uppercase"
+                        className="text-[10px] md:text-sm tracking-[0.4em] text-white/30 uppercase"
                     >
                         Loading [{counter.toString().padStart(3, '0')}/100]
                     </motion.div>

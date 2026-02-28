@@ -29,20 +29,20 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-sans text-base md:text-lg uppercase tracking-[0.2em] text-muted mb-8"
+                    className="font-mono text-[10px] md:text-sm uppercase tracking-[0.3em] text-white/50 mb-8"
                 >
-                    <span className="text-white font-medium">Pranav Deo</span> <span className="mx-2 opacity-50">&bull;</span> Technical Product Manager
+                    <span className="text-white">Pranav Deo</span> <span className="mx-2 opacity-30">&bull;</span> Technical Product Manager
                 </motion.p>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
                     transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-serif text-4xl leading-tight md:text-8xl lg:text-9xl tracking-tight text-accent md:leading-none max-w-5xl"
+                    className="font-serif text-4xl leading-tight md:text-8xl lg:text-9xl tracking-tight text-white md:leading-none max-w-5xl"
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
                 >
                     Ads Platform <br className="hidden md:block" />
-                    <span className="text-muted">&amp;</span> GenAI
+                    <span className="text-white/30">&amp;</span> GenAI
                 </motion.h1>
             </motion.div>
 

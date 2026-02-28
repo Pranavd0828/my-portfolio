@@ -180,7 +180,7 @@ export default function RpslsGame() {
     const getHousePos = () => isMobile ? { x: 0, y: 220, scale: 1.2, opacity: 1 } : { x: 300, y: 0, scale: 1.5, opacity: 1 };
 
     return (
-        <section className="relative w-full min-h-[100dvh] h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-background text-foreground px-4 md:px-6">
+        <section className="relative w-full min-h-[100dvh] h-[100dvh] flex flex-col items-center justify-center overflow-hidden bg-background/40 backdrop-blur-[8px] text-foreground px-4 md:px-6">
 
             {/* Cinematic Initialization Overlay */}
             <AnimatePresence>
@@ -189,7 +189,7 @@ export default function RpslsGame() {
                         initial={{ opacity: 1, pointerEvents: 'auto' }}
                         exit={{ opacity: 0, scale: 1.05, pointerEvents: 'none' }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
-                        className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-background px-4 md:px-6"
+                        className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-background/98 backdrop-blur-xl px-4"
                     >
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -224,7 +224,7 @@ export default function RpslsGame() {
 
             {/* Cinematic Background */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
-                <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
+                <div className="absolute inset-0 bg-background/20 backdrop-blur-[4px] z-10" />
                 <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-10"
                     animate={{
@@ -242,6 +242,7 @@ export default function RpslsGame() {
                     <button
                         onClick={() => window.location.href = '/'}
                         className="hover:text-white transition-colors duration-300 relative z-20"
+                        aria-label="Abort duel and return to index"
                     >
                         [ ABORT_TO_INDEX ]
                     </button>
