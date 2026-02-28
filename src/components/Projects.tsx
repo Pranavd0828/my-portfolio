@@ -1,5 +1,10 @@
+'use client';
+
 import Link from 'next/link';
-import TiltCard from './TiltCard'; const projects = [
+import { motion } from 'framer-motion';
+import TiltCard from './TiltCard';
+
+const projects = [
     {
         title: 'Google Maps Meet Mode',
         category: 'Product Strategy & Prototype',
@@ -46,15 +51,28 @@ import TiltCard from './TiltCard'; const projects = [
 
 export default function Projects() {
     return (
-        <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
-            <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
+        <section className="relative w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
+            {/* Unified Cinematic Background to match Journey.tsx */}
+            <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
+                <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
+                <motion.div
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-20"
+                    animate={{
+                        scale: [1, 1.1, 1],
+                        background: ['radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)', 'radial-gradient(circle, rgba(150,150,150,0.5) 0%, rgba(0,0,0,0) 80%)', 'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)']
+                    }}
+                    transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+                />
+            </div>
+
+            <div className="relative z-10 flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent mb-6">Notable Prototypes</h2>
                 <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
                     A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
                 </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
                 {projects.map((project, idx) => (
                     <div
                         key={idx}

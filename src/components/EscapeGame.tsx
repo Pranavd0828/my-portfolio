@@ -47,7 +47,16 @@ export default function EscapeGame() {
 
     // Detect touch device on mount
     useEffect(() => {
-        setIsTouchDevice(window.matchMedia('(hover: none) and (pointer: coarse)').matches);
+        const checkTouch = () => {
+            if (typeof window === 'undefined') return false;
+            return (
+                'ontouchstart' in window ||
+                navigator.maxTouchPoints > 0 ||
+                // @ts-ignore
+                (navigator.msMaxTouchPoints && navigator.msMaxTouchPoints > 0)
+            );
+        };
+        setIsTouchDevice(checkTouch());
     }, []);
 
     // Game State Refs mapping to 60fps mutability

@@ -80,7 +80,7 @@ export default function Journey() {
                     {caseStudies.map((companyBlock, idx) => (
                         <div key={idx} className="flex flex-col py-16 md:py-24 border-b border-white/5 relative group">
                             {/* Company Header */}
-                            <div className="flex items-baseline justify-between mb-12">
+                            <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-12 gap-2 md:gap-0">
                                 <h3 className="font-serif text-4xl text-accent">{companyBlock.company}</h3>
                                 <span className="font-mono text-xs text-muted tracking-widest uppercase">{companyBlock.timeframe}</span>
                             </div>

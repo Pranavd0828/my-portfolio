@@ -3,7 +3,7 @@ export default function AboutMe() {
         <section className="w-full max-w-4xl mx-auto py-16 md:py-32 px-6">
             <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-tight text-accent mb-12 text-center">Beyond the Code</h2>
 
-            <div className="flex flex-col gap-8 font-sans text-muted md:text-lg leading-relaxed text-justify md:text-left">
+            <div className="flex flex-col gap-8 font-sans text-muted md:text-lg leading-relaxed text-left">
                 <p>
                     I am Pranav Deo, a Product Manager specializing in Advertising Technology and Artificial Intelligence. My professional career centers on a relentless pursuit of innovation within the digital advertising sector. I currently lead teams at Rakuten to architect advanced campaign systems and optimize user engagement through machine learning technologies.
                 </p>
