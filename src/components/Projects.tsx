@@ -51,7 +51,7 @@ const projects = [
 
 export default function Projects() {
     return (
-        <section className="relative w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
+        <section className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
             {/* Unified Cinematic Background to match Journey.tsx */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
@@ -65,48 +65,50 @@ export default function Projects() {
                 />
             </div>
 
-            <div className="relative z-10 flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
-                <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent mb-6">Notable Prototypes</h2>
-                <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
-                    A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
-                </p>
-            </div>
+            <div className="relative z-10 max-w-6xl w-full mx-auto">
+                <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
+                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-accent mb-6">Notable Prototypes</h2>
+                    <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
+                        A collection of experimental engineering projects, AI concept wrappers, and functional prototypes bridging the gap between product vision and technical feasibility.
+                    </p>
+                </div>
 
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
-                {projects.map((project, idx) => (
-                    <div
-                        key={idx}
-                        className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"
-                    >
-                        <div className="relative z-10 flex flex-col h-full justify-between opacity-80 hover:opacity-100 transition-opacity duration-1000">
-                            <div>
-                                <span className="text-xs font-mono uppercase tracking-widest text-muted">{project.category}</span>
-                                <h3 className="font-serif text-2xl text-accent mt-6 mb-6">{project.title}</h3>
-                                <p className="text-sm text-muted/80 leading-relaxed mb-12">
-                                    {project.description}
-                                </p>
-                            </div>
+                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
+                    {projects.map((project, idx) => (
+                        <div
+                            key={idx}
+                            className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"
+                        >
+                            <div className="relative z-10 flex flex-col h-full justify-between opacity-80 hover:opacity-100 transition-opacity duration-1000">
+                                <div>
+                                    <span className="text-xs font-mono uppercase tracking-widest text-muted">{project.category}</span>
+                                    <h3 className="font-serif text-2xl text-accent mt-6 mb-6">{project.title}</h3>
+                                    <p className="text-sm text-muted/80 leading-relaxed mb-12">
+                                        {project.description}
+                                    </p>
+                                </div>
 
-                            <div className="flex items-center gap-8 mt-4 pt-8 border-t-[0.5px] border-white/10">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors duration-700">
-                                    <span>View Code</span>
-                                    <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-
-                                {project.demo && (
-                                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors duration-700">
-                                        <span>Try Yourself</span>
+                                <div className="flex items-center gap-8 mt-4 pt-8 border-t-[0.5px] border-white/10">
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-muted hover:text-white transition-colors duration-700">
+                                        <span>View Code</span>
                                         <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                         </svg>
                                     </a>
-                                )}
+
+                                    {project.demo && (
+                                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-xs font-mono uppercase tracking-widest text-accent hover:text-white transition-colors duration-700">
+                                            <span>Try Yourself</span>
+                                            <svg className="w-4 h-4 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                        </a>
+                                    )}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );
