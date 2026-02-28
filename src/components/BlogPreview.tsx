@@ -19,9 +19,9 @@ export default function BlogPreview() {
     return (
         <section className="w-full max-w-5xl mx-auto py-16 md:py-32 px-6 border-t border-white/5">
             <div className="flex flex-col md:flex-row justify-between items-baseline mb-16">
-                <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-none text-accent">Editorial</h2>
-                <button className="mt-6 md:mt-0 px-6 py-3 text-xs border rounded-full font-medium transition-all duration-300 active:scale-[0.98] border-white/20 text-muted hover:text-accent hover:border-white/50">
-                    View All Writings
+                <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-none text-white">Editorial</h2>
+                <button className="mt-6 md:mt-0 px-6 py-3 border border-white/20 hover:border-white/60 text-white/50 font-mono text-[10px] uppercase tracking-[0.3em] transition-all duration-300 rounded-sm">
+                    [ VIEW_ALL_WRITINGS ]
                 </button>
             </div>
 
@@ -36,7 +36,7 @@ export default function BlogPreview() {
                                 <span className="text-xs font-mono text-muted uppercase tracking-widest min-w-[120px]">
                                     {post.date}
                                 </span>
-                                <h3 className="font-sans text-xl md:text-2xl text-accent group-hover:text-white transition-colors">
+                                <h3 className="font-serif text-xl md:text-2xl text-white/70 group-hover:text-white transition-colors">
                                     {post.title}
                                 </h3>
                             </div>

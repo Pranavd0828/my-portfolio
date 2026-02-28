@@ -71,8 +71,8 @@ export default function ReadingList() {
             <div className="flex flex-col mb-16">
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>
-                        <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent">Literature</h2>
-                        <p className="font-sans text-sm md:text-base text-muted uppercase tracking-[0.2em] mt-6">
+                        <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-white">Literature</h2>
+                        <p className="font-sans text-sm md:text-base text-white/50 uppercase tracking-[0.2em] mt-6">
                             Index &amp; Study
                         </p>
                     </div>
@@ -81,7 +81,7 @@ export default function ReadingList() {
                             <button
                                 key={year}
                                 onClick={() => setActiveYear(year)}
-                                className={`text-2xl font-serif transition-colors duration-500 ease-out ${activeYear === year ? 'text-accent' : 'text-muted/30 hover:text-muted/70'
+                                className={`text-2xl font-serif transition-colors duration-500 ease-out ${activeYear === year ? 'text-white' : 'text-white/20 hover:text-white/50'
                                     }`}
                             >
                                 {year}
@@ -120,9 +120,12 @@ export default function ReadingList() {
                         )}
                         {activeYear === '2024' && (
                             <div className="mb-12 pb-6 border-b border-white/5">
-                                <p className="font-sans text-sm md:text-base text-muted max-w-3xl leading-relaxed">
-                                    <span className="font-medium text-accent">15 Books Completed</span>; A foundation built on psychological thrillers and business philosophy, framing the transition toward advanced AI systems and immersive product strategies.
-                                </p>
+                                <div className="max-w-2xl mb-12">
+                                    <p className="font-serif text-white/50 text-sm md:text-base leading-relaxed">
+                                        <span className="font-mono text-white/80 mr-2">15</span>
+                                        Books Completed; A foundation built on psychological thrillers and business philosophy, framing the transition toward advanced AI systems and immersive product strategies.
+                                    </p>
+                                </div>
                             </div>
                         )}
 
@@ -145,13 +148,13 @@ export default function ReadingList() {
                                     >
                                         <div className="flex items-start md:items-center justify-between gap-4 md:gap-6 z-10 w-full md:flex-row flex-col">
 
-                                            <div className="flex items-start md:items-center gap-4 md:gap-6 w-full opacity-80 hover:opacity-100 transition-opacity duration-1000">
+                                            <div className="flex items-start md:items-center gap-4 md:gap-6 w-full opacity-70 group-hover:opacity-100 transition-opacity duration-500">
                                                 <div className={`w-1 h-1 rounded-full mt-2.5 md:mt-0 flex-shrink-0 bg-white/20`} />
                                                 <div className="flex flex-col md:flex-row md:items-center justify-between w-full gap-1 md:gap-8">
-                                                    <h4 className={`font-serif text-xl md:text-2xl text-accent`}>
+                                                    <h4 className={`font-serif text-xl md:text-2xl text-white`}>
                                                         {book.title}
                                                     </h4>
-                                                    <div className={`text-sm md:text-base font-sans md:text-right text-muted`}>
+                                                    <div className={`font-serif text-sm md:text-base md:text-right text-white/30 italic`}>
                                                         {book.author}
                                                     </div>
                                                 </div>

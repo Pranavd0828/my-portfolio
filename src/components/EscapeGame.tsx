@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 // GAME CONSTANTS
 const GRAVITY = 0.5;
@@ -155,10 +156,10 @@ export default function EscapeGame() {
             if (!ctx || !canvas) return;
             const state = gameState.current;
 
-            // Clear Background (Deep Space / Minimalist)
-            ctx.fillStyle = '#0a0a0a';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // Clear Background (Transparent to allow global CanvasBackground to show through)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+            // Optional: very light tint to match the rpsls depth if needed, but clearRect is cleanest
             // Ground Line (Hairline Museum Aesthetic)
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
             ctx.lineWidth = 0.5;
@@ -349,12 +350,24 @@ export default function EscapeGame() {
 
     return (
         <div
-            className="relative w-full h-full overflow-hidden cursor-pointer touch-none"
+            className="relative w-full h-[100dvh] overflow-hidden cursor-pointer touch-none bg-background/40 backdrop-blur-[8px]"
             onPointerDown={handleJump}
         >
+            {/* Cinematic Background Layer (Unified with RPSLS) */}
+            <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
+                <motion.div
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-10"
+                    animate={{
+                        scale: [1, 1.05, 1],
+                        background: ['radial-gradient(circle, rgba(200,200,200,0.8) 0%, transparent 80%)', 'radial-gradient(circle, rgba(100,100,100,0.5) 0%, transparent 80%)', 'radial-gradient(circle, rgba(200,200,200,0.8) 0%, transparent 80%)']
+                    }}
+                    transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                />
+            </div>
+
             <canvas
                 ref={canvasRef}
-                className="block w-full h-full"
+                className="relative z-10 block w-full h-full"
             />
 
             {/* Highly Visible HUD: Return to Index Link */}
@@ -365,6 +378,7 @@ export default function EscapeGame() {
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
                 className="absolute top-6 left-6 md:top-8 md:left-12 px-4 py-2 bg-white/5 border border-white/20 hover:bg-white/10 text-xs font-mono uppercase tracking-[0.2em] text-white/90 transition-all duration-300 z-50 rounded-sm inline-flex items-center gap-2 backdrop-blur-md"
+                aria-label="Abort and return to index"
             >
                 <span className="text-accent">←</span> <span>ABORT_TO_INDEX</span>
             </button>
@@ -378,7 +392,7 @@ export default function EscapeGame() {
             {/* Start Screen */}
             {(!isPlaying && !gameOver) && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none mix-blend-difference">
-                    <span className="font-serif text-4xl md:text-6xl text-white tracking-widest animate-pulse">ESCAPE</span>
+                    <span className="font-mono text-4xl md:text-6xl text-white tracking-[0.2em] animate-pulse uppercase">ESCAPE</span>
                     <span className="font-mono text-xs text-muted/70 uppercase tracking-widest mt-6">
                         {isTouchDevice ? 'TAP SCREEN TO INITIATE' : 'PRESS SPACE TO INITIATE'}
                     </span>
@@ -387,8 +401,8 @@ export default function EscapeGame() {
 
             {/* Game Over Screen */}
             {gameOver && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/80 backdrop-blur-md pointer-events-auto z-40">
-                    <span className="font-serif text-4xl md:text-6xl text-white tracking-widest">SIGNAL LOST</span>
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-background backdrop-blur-md pointer-events-auto z-40">
+                    <span className="font-mono text-4xl md:text-6xl text-white tracking-[0.2em] uppercase">SIGNAL LOST</span>
 
                     <span className="font-sans text-sm md:text-base font-medium text-white/90 text-center max-w-[85vw] md:max-w-md mt-8 mb-4">
                         "{currentQuote}"

@@ -70,8 +70,8 @@ export default function Journey() {
 
             <div className="relative z-10 max-w-6xl w-full mx-auto">
                 <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
-                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent mb-6">Professional Journey</h2>
-                    <p className="font-sans text-sm md:text-base text-muted/80 leading-relaxed">
+                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-white mb-6">Professional Journey</h2>
+                    <p className="font-sans text-sm md:text-base text-white/50 leading-relaxed">
                         A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
                     </p>
                 </div>
@@ -81,8 +81,8 @@ export default function Journey() {
                         <div key={idx} className="flex flex-col py-16 md:py-24 border-b border-white/5 relative group">
                             {/* Company Header */}
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-12 gap-2 md:gap-0">
-                                <h3 className="font-serif text-4xl text-accent">{companyBlock.company}</h3>
-                                <span className="font-mono text-xs text-muted tracking-widest uppercase">{companyBlock.timeframe}</span>
+                                <h3 className="font-serif text-4xl text-white">{companyBlock.company}</h3>
+                                <span className="font-mono text-[10px] md:text-xs text-white/30 tracking-widest uppercase">{companyBlock.timeframe}</span>
                             </div>
 
                             {/* Roles inside Company */}
@@ -105,16 +105,16 @@ export default function Journey() {
                                                     {role.role}
                                                 </h4>
                                             </div>
-                                            <div className="font-serif text-lg md:text-xl text-muted group-hover/role:text-accent/90 transition-colors">
+                                            <div className="font-serif text-lg md:text-xl text-white/40 group-hover/role:text-white/70 transition-colors">
                                                 {role.title}
                                             </div>
                                         </div>
 
                                         <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-end md:text-right">
-                                            <p className="text-muted text-sm md:text-base max-w-md group-hover/role:text-accent/90 transition-colors">
+                                            <p className="font-serif text-white/50 text-sm md:text-base max-w-md group-hover/role:text-white/90 transition-colors">
                                                 {role.description}
                                             </p>
-                                            <span className="text-xs font-sans text-muted/50 mt-3">{role.year}</span>
+                                            <span className="font-serif text-[10px] text-white/20 mt-3 uppercase tracking-widest">{role.year}</span>
                                         </div>
                                     </div>
                                 ))}

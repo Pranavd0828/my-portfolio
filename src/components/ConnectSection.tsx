@@ -21,8 +21,8 @@ export default function ConnectSection() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-3xl w-full z-10 text-center flex flex-col items-center">
-                <h2 className="font-serif text-5xl leading-tight md:text-8xl md:leading-none text-accent mb-6">Let&apos;s talk</h2>
-                <p className="font-sans text-muted mb-16 max-w-lg">
+                <h2 className="font-serif text-5xl leading-tight md:text-8xl md:leading-none text-white mb-6">Let&apos;s talk</h2>
+                <p className="font-serif text-white/70 mb-16 max-w-lg text-lg">
                     Whether you have a strategic product vision or a complex engineering challenge, my inbox is always open.
                 </p>
 
@@ -31,38 +31,42 @@ export default function ConnectSection() {
                         <input
                             type="text"
                             required
-                            placeholder="Name"
+                            placeholder="NAME"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors"
+                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20"
                         />
                         <input
                             type="email"
                             required
-                            placeholder="Email"
+                            placeholder="EMAIL"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors"
+                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20"
                         />
                     </div>
                     <textarea
-                        placeholder="Message"
+                        placeholder="MESSAGE"
                         rows={4}
                         required
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-accent focus:outline-none focus:border-white/50 transition-colors resize-none mb-8"
+                        className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors resize-none mb-8 placeholder:text-white/20"
                     />
 
-                    <button type="submit" className="relative inline-flex items-center justify-center px-12 py-4 bg-white text-background hover:bg-white/90 font-medium overflow-hidden border rounded-full group transition-all duration-300 active:scale-[0.98]">
-                        Send Message
+                    <button
+                        type="submit"
+                        className="group relative px-12 py-4 border border-white/20 hover:border-white/60 text-white/50 hover:text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-sm bg-white/5 hover:bg-white/10 overflow-hidden"
+                    >
+                        <span className="relative z-10">[ SEND_MESSAGE ]</span>
+                        <div className="absolute inset-0 translate-y-[101%] group-hover:translate-y-0 bg-white/5 transition-transform duration-500 ease-out" />
                     </button>
                 </form>
 
-                <div className="flex flex-wrap justify-center gap-8 mt-32 text-xs font-mono uppercase tracking-widest text-muted">
-                    <a href="https://linkedin.com/in/pranav-deo" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">LinkedIn</a>
-                    <a href="mailto:deopranav2808.work@gmail.com" className="hover:text-accent transition-colors">Email</a>
-                    <a href="https://github.com/Pranavd0828" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">GitHub</a>
+                <div className="flex flex-wrap justify-center gap-8 mt-32 text-[10px] font-mono uppercase tracking-widest text-white/30">
+                    <a href="https://linkedin.com/in/pranav-deo" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
+                    <a href="mailto:deopranav2808.work@gmail.com" className="hover:text-white transition-colors">Email</a>
+                    <a href="https://github.com/Pranavd0828" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a>
                 </div>
             </div>
         </section>
