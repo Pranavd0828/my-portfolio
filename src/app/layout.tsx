@@ -5,6 +5,7 @@ import { LoadingProvider } from "@/components/LoadingContext";
 import CanvasBackground from "@/components/CanvasBackground";
 import SignalPortal from "@/components/SignalPortal";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -64,6 +65,7 @@ export default function RootLayout({
           </SmoothScroll>
         </LoadingProvider>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
