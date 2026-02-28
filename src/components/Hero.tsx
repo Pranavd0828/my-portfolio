@@ -42,7 +42,7 @@ export default function Hero() {
                     style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
                 >
                     Ads Platform <br className="hidden md:block" />
-                    <span className="italic text-muted">&amp;</span> GenAI
+                    <span className="text-muted">&amp;</span> GenAI
                 </motion.h1>
             </motion.div>
 

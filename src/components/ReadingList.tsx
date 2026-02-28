@@ -105,23 +105,23 @@ export default function ReadingList() {
                         {activeYear === '2026' && (
                             <div className="mb-12 pb-6 border-b border-white/5">
                                 <p className="font-sans text-sm md:text-base text-accent max-w-3xl leading-relaxed">
-                                    <span className="font-medium">03 Books Completed (Current Year)</span> - A strategic mix of biological endurance analysis, behavioral psychology, and foundational science fiction. <br />
+                                    <span className="font-medium">03 Books Completed (Current Year)</span>; A strategic mix of biological endurance analysis, behavioral psychology, and foundational science fiction. <br />
                                     <span className="text-muted mt-2 block">* Including a 3rd distinct read-through of Bill Bryson's 'The Body'.</span>
-                                    <span className="text-muted mt-1 block">* Hitchhiker's Guide to the Galaxy - finally got to it after 3 years, and this was my 4th time reading it. Always a great escape and fun read!</span>
+                                    <span className="text-muted mt-1 block">* Hitchhiker's Guide to the Galaxy; finally got to it after 3 years, and this was my 4th time reading it. Always a great escape and fun read!</span>
                                 </p>
                             </div>
                         )}
                         {activeYear === '2025' && (
                             <div className="mb-12 pb-6 border-b border-white/5">
                                 <p className="font-sans text-sm md:text-base text-muted max-w-3xl leading-relaxed">
-                                    <span className="font-medium text-accent">14 Books Completed</span> - A high-volume year exploring immense sci-fi scope (<span className="italic">The Remembrance of Earth's Past</span> trilogy) and heavily anchored in Product Management fundamentals.
+                                    <span className="font-medium text-accent">14 Books Completed</span>; A high-volume year exploring immense sci-fi scope (<span className="italic">The Remembrance of Earth's Past</span> trilogy) and heavily anchored in Product Management fundamentals.
                                 </p>
                             </div>
                         )}
                         {activeYear === '2024' && (
                             <div className="mb-12 pb-6 border-b border-white/5">
                                 <p className="font-sans text-sm md:text-base text-muted max-w-3xl leading-relaxed">
-                                    <span className="font-medium text-accent">15 Books Completed</span> - A foundation built on psychological thrillers and business philosophy, framing the transition toward advanced AI systems and immersive product strategies.
+                                    <span className="font-medium text-accent">15 Books Completed</span>; A foundation built on psychological thrillers and business philosophy, framing the transition toward advanced AI systems and immersive product strategies.
                                 </p>
                             </div>
                         )}

@@ -17,7 +17,7 @@ import TiltCard from './TiltCard'; const projects = [
     {
         title: 'LinkedIn Messaging Formatting',
         category: 'UI/UX Extension',
-        description: 'A browser extension prototype that injects rich text formatting capabilities—like bold, italics, and lists—directly into LinkedIn\'s native messaging interface.',
+        description: 'A browser extension prototype that injects rich text formatting capabilities; like bold, italics, and lists; directly into LinkedIn\'s native messaging interface.',
         github: 'https://github.com/Pranavd0828/LinkedIn-Messaging-with-Formatting-Option',
         demo: 'https://pranavd0828.github.io/LinkedIn-Messaging-with-Formatting-Option/'
     },
