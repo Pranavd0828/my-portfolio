@@ -231,8 +231,6 @@ export default function EscapeGame() {
 
             ctx.strokeStyle = '#ffffff';
             ctx.lineWidth = 1; // Crisp hairline
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = 'rgba(255, 255, 255, 0.5)';
             ctx.beginPath();
 
             edges.forEach(edge => {
@@ -243,7 +241,6 @@ export default function EscapeGame() {
             });
 
             ctx.stroke();
-            ctx.shadowBlur = 0; // Reset
         };
 
         const checkCollision = () => {
@@ -350,18 +347,13 @@ export default function EscapeGame() {
 
     return (
         <div
-            className="relative w-full h-[100dvh] overflow-hidden cursor-pointer touch-none bg-background/40 backdrop-blur-[8px]"
+            className="relative w-full h-[100dvh] overflow-hidden cursor-pointer touch-none bg-background/90"
             onPointerDown={handleJump}
         >
             {/* Cinematic Background Layer (Unified with RPSLS) */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
-                <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-10"
-                    animate={{
-                        scale: [1, 1.05, 1],
-                        background: ['radial-gradient(circle, rgba(200,200,200,0.8) 0%, transparent 80%)', 'radial-gradient(circle, rgba(100,100,100,0.5) 0%, transparent 80%)', 'radial-gradient(circle, rgba(200,200,200,0.8) 0%, transparent 80%)']
-                    }}
-                    transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                <div
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[120px] opacity-[0.03] bg-white pointer-events-none"
                 />
             </div>
 
