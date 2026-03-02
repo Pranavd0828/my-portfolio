@@ -23,10 +23,10 @@ const DEATH_QUOTES = [
     "Only those who dare to fail greatly can ever achieve greatly. Congrats on the great failure."
 ];
 
-const getGroundY = (canvas: HTMLCanvasElement) => {
+const getGroundY = (width: number, height: number) => {
     // Elevate the ground line on all screens to better center the action.
     // 60% on mobile, 75% on desktop.
-    return window.innerWidth < 768 ? canvas.height * 0.6 : canvas.height * 0.75;
+    return width < 768 ? height * 0.6 : height * 0.75;
 };
 
 interface Entity {
@@ -69,7 +69,10 @@ export default function EscapeGame() {
         score: 0,
         lastSpawnAt: 0,
         isJumping: false,
-        rotation: 0 // Track 3D rotation
+        rotation: 0, // Track 3D rotation
+        groundY: 0,
+        canvasWidth: 0,
+        canvasHeight: 0
     });
 
     const animationRef = useRef<number | null>(null);
@@ -80,7 +83,7 @@ export default function EscapeGame() {
         gameState.current = {
             player: {
                 x: 100,
-                y: getGroundY(canvas) - 24,
+                y: getGroundY(canvas.width, canvas.height) - 24,
                 width: 24,
                 height: 24,
                 velocity: 0
@@ -91,7 +94,10 @@ export default function EscapeGame() {
             score: 0,
             lastSpawnAt: 0,
             isJumping: false,
-            rotation: gameState.current.rotation
+            rotation: gameState.current.rotation,
+            groundY: getGroundY(canvas.width, canvas.height),
+            canvasWidth: canvas.width,
+            canvasHeight: canvas.height
         };
         setScore(0);
         setGameOver(false);
@@ -145,9 +151,15 @@ export default function EscapeGame() {
         const updateSize = () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+
+            // Cache layout values to avoid window.innerWidth access in the loop
+            gameState.current.groundY = getGroundY(canvas.width, canvas.height);
+            gameState.current.canvasWidth = canvas.width;
+            gameState.current.canvasHeight = canvas.height;
+
             if (!isPlaying && !gameOver) {
                 // Initial draw position
-                gameState.current.player.y = getGroundY(canvas) - 24;
+                gameState.current.player.y = gameState.current.groundY - 24;
                 draw();
             }
         };
@@ -163,7 +175,7 @@ export default function EscapeGame() {
             // Ground Line (Hairline Museum Aesthetic)
             ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
             ctx.lineWidth = 0.5;
-            const groundY = getGroundY(canvas);
+            const groundY = state.groundY;
             ctx.beginPath();
             ctx.moveTo(0, groundY);
             ctx.lineTo(canvas.width, groundY);
@@ -272,7 +284,7 @@ export default function EscapeGame() {
             state.player.y += state.player.velocity;
 
             // Ground Collision
-            const floor = getGroundY(canvas) - state.player.height;
+            const floor = state.groundY - state.player.height;
             if (state.player.y > floor) {
                 state.player.y = floor;
                 state.player.velocity = 0;
@@ -302,9 +314,9 @@ export default function EscapeGame() {
 
             if (timeSinceLastSpawn > currentSpawnTarget) {
                 const height = 30 + Math.random() * 50;
-                const groundY = getGroundY(canvas);
+                const groundY = state.groundY;
                 state.obstacles.push({
-                    x: canvas.width,
+                    x: state.canvasWidth,
                     y: groundY - height,
                     width: OBSTACLE_WIDTH,
                     height: height,
@@ -353,7 +365,10 @@ export default function EscapeGame() {
             {/* Cinematic Background Layer (Unified with RPSLS) */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
                 <div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[120px] opacity-[0.03] bg-white pointer-events-none"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] md:w-[70vw] md:h-[70vw] opacity-[0.05] pointer-events-none"
+                    style={{
+                        background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, transparent 70%)'
+                    }}
                 />
             </div>
 
