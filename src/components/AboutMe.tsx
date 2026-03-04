@@ -5,7 +5,7 @@ export default function AboutMe() {
 
             <div className="flex flex-col gap-8 font-serif text-white/50 md:text-lg leading-relaxed text-left">
                 <p>
-                    I am Pranav Deo, a Product Manager specializing in Advertising Technology and Artificial Intelligence. My professional career centers on a relentless pursuit of innovation within the digital advertising sector. I currently lead teams at Rakuten to architect advanced campaign systems and optimize user engagement through machine learning technologies.
+                    I believe that transformative products are built through a balance of structural rigor and mental clarity. Currently leading teams at Rakuten, I architect advanced campaign systems that bridge the gap between machine learning and human intuition.
                 </p>
                 <p>
                     Beyond the technical architecture, I am an avid reader and fitness enthusiast, consistently exploring the intersection of human psychology and strategic operations. I believe the most transformative products are built at the nexus of data-driven precision and intuitive human experience.
