@@ -37,7 +37,7 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         if (isLoaded && lenisInstance && window.location.hash) {
             // Delay slightly to wait for RevealFocus and Preloader teardown layout shifts
             setTimeout(() => {
-                const target = document.querySelector(window.location.hash);
+                const target = document.querySelector(window.location.hash) as HTMLElement;
                 if (target) {
                     lenisInstance.scrollTo(target, { immediate: true });
                 }
