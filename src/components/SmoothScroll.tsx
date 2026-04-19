@@ -35,13 +35,20 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
 
     useEffect(() => {
         if (isLoaded && lenisInstance && window.location.hash) {
-            // Delay slightly to wait for RevealFocus and Preloader teardown layout shifts
+            // Delay to wait for RevealFocus and Preloader teardown layout shifts
             setTimeout(() => {
                 const target = document.querySelector(window.location.hash) as HTMLElement;
                 if (target) {
+                    // Force Lenis to recalculate height map now that body overflow is restored
+                    lenisInstance.resize();
+                    // Tell Lenis to jump there
                     lenisInstance.scrollTo(target, { immediate: true });
+                    // Fallback to Native DOM API scroll immediately after, in case Lenis was blocked
+                    requestAnimationFrame(() => {
+                        target.scrollIntoView(true);
+                    });
                 }
-            }, 100);
+            }, 300);
         }
     }, [isLoaded, lenisInstance]);
 
