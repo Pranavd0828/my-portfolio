@@ -67,7 +67,7 @@ export default function ReadingList() {
     };
 
     return (
-        <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
+        <section id="reading" className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
             <div className="flex flex-col mb-16">
                 <div className="flex flex-col md:flex-row justify-between md:items-end gap-8">
                     <div>

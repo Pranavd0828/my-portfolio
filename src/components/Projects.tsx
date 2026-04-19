@@ -51,7 +51,7 @@ const projects = [
 
 export default function Projects() {
     return (
-        <section className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
+        <section id="prototypes" className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
             {/* Unified Cinematic Background to match Journey.tsx */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
                 <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />

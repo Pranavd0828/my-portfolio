@@ -15,7 +15,7 @@ export default function ConnectSection() {
     };
 
     return (
-        <section className="w-full min-h-screen py-16 md:py-32 px-6 flex flex-col items-center justify-center relative overflow-hidden">
+        <section id="connect" className="w-full min-h-screen py-16 md:py-32 px-6 flex flex-col items-center justify-center relative overflow-hidden">
 
             {/* Soft glowing ambient light for connect section */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />

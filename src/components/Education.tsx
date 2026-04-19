@@ -1,6 +1,6 @@
 export default function Education() {
     return (
-        <section className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
+        <section id="education" className="w-full max-w-6xl mx-auto py-16 md:py-32 px-6">
             <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
                 <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-accent mb-6">Academic Foundation</h2>
                 <p className="font-serif text-sm md:text-base text-white/50 leading-relaxed">

@@ -53,7 +53,7 @@ const caseStudies = [
 
 export default function Journey() {
     return (
-        <section className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
+        <section id="journey" className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
 
             {/* Unified Cinematic Background - Replacing the jarring image swaps */}
             <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
