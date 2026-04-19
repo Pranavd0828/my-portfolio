@@ -6,6 +6,7 @@ import AboutMe from "@/components/AboutMe";
 import ReadingList from "@/components/ReadingList";
 import ConnectSection from "@/components/ConnectSection";
 import RevealFocus from "@/components/RevealFocus";
+import BackToTop from "@/components/BackToTop";
 
 export default function Home() {
   return (
@@ -30,6 +31,8 @@ export default function Home() {
       <RevealFocus>
         <ConnectSection />
       </RevealFocus>
+      
+      <BackToTop />
     </main>
   );
 }
