@@ -7,7 +7,7 @@ export default function RevealFocus({ children, className = "" }: { children: Re
     const ref = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: ref,
-        offset: ["0 1", "0.3 1"], // Start when top hits bottom of screen, finish when it's 30% up the screen (faster emerge)
+        offset: ["0 1", "0.3 1"], // Start when top hits bottom of screen, finish when the element reaches 30% up the screen (faster emerge)
     });
 
     const scale = useTransform(scrollYProgress, [0, 1], [0.98, 1.0]);

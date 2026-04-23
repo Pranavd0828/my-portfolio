@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+    title: 'Experimental Playground',
+    description:
+        'An isolated sandbox for prototyping components, interactions, and aesthetic tests inside the Cinematic Calm design system before they reach the main site.',
+};
 
 export default function Playground() {
     return (

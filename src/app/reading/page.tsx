@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import ReadingList from '@/components/ReadingList';
+
+export const metadata: Metadata = {
+    title: 'Reading List',
+    description:
+        'Books completed, currently being read, and queued. A living shelf for the ideas shaping the work.',
+};
 
 export default function ReadingPage() {
     return (

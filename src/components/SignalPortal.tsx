@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 // --- 3D Wireframe Component ---
 
@@ -109,6 +109,7 @@ export default function SignalPortal() {
     const [hoveredPortal, setHoveredPortal] = useState<'escape' | 'duel' | null>(null);
     const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(() => {
         setMounted(true);
@@ -130,7 +131,7 @@ export default function SignalPortal() {
             id: 'duel',
             label: '[ INITIATE_DUEL ]',
             href: '/rpsls',
-            position: pathname === '/escape' ? 'top-6 right-36 md:top-8 md:right-48' : 'top-6 right-6 md:top-12 md:right-12',
+            position: pathname === '/escape' ? 'top-24 right-36 md:top-28 md:right-48' : 'top-24 right-6 md:top-28 md:right-12',
             nodes: PENT_NODES,
             edges: PENT_EDGES,
             visible: pathname !== '/rpsls'
@@ -150,7 +151,7 @@ export default function SignalPortal() {
                     onMouseLeave={() => setHoveredPortal(null)}
                 >
                     <button
-                        onClick={() => window.location.href = portal.href}
+                        onClick={() => router.push(portal.href)}
                         className="group relative flex items-center justify-center p-6 -m-6 cursor-pointer focus:outline-none"
                         aria-label={portal.label.replace('[ ', '').replace(' ]', '').toLowerCase()}
                     >

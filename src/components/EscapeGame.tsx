@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
 
 // GAME CONSTANTS
 const GRAVITY = 0.5;
@@ -19,7 +18,7 @@ const DEATH_QUOTES = [
     "Shoot for the moon. Even if you miss... wait, no, you just crashed.",
     "Success is not final, failure is not fatal. It is the courage to press Spacebar that counts.",
     "Fall seven times, stand up eight. Though your cube is looking pretty bruised.",
-    "They say what doesn't kill you makes you stronger. This definitely killed you.",
+    "They say what does not kill you makes you stronger. This definitely killed you.",
     "Only those who dare to fail greatly can ever achieve greatly. Congrats on the great failure."
 ];
 

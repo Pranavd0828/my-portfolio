@@ -1,24 +1,20 @@
 export default function AboutMe() {
     return (
         <section id="about" className="w-full max-w-4xl mx-auto py-16 md:py-32 px-6">
-            <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-tight text-white mb-12 text-center">Beyond the Code</h2>
+            <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-tight text-white mb-12 text-center">About</h2>
 
-            <div className="flex flex-col gap-8 font-serif text-white/50 md:text-lg leading-relaxed text-left">
+            <div className="flex flex-col gap-8 font-serif text-white/60 md:text-lg leading-relaxed text-left">
                 <p>
-                    I believe that transformative products are built through a balance of structural rigor and mental clarity. Currently leading teams at Rakuten, I architect advanced campaign systems that bridge the gap between machine learning and human intuition.
+                    Seven years of product work across three domains: programmatic advertising, B2B workflow automation, and AI-powered platform systems. The through-line across all three is a preference for platform thinking over feature thinking, and a habit of building the thing rather than just writing the spec.
                 </p>
                 <p>
-                    Beyond the technical architecture, I am an avid reader and fitness enthusiast, consistently exploring the intersection of human psychology and strategic operations. I believe the most transformative products are built at the nexus of data-driven precision and intuitive human experience.
+                    The career started on the data side at Media.net in Mumbai, analyzing yield and monetization gaps across programmatic, video, and display inventory. That foundation led to a graduate degree in Statistics at the University of Maryland, which shifted the work from reporting on systems to designing them.
                 </p>
                 <p>
-                    My portfolio highlights not only my professional contributions but also my personal projects—prototypes and experimental codebases that serve as a playground for new technologies and product concepts.
+                    At LeanData in Santa Clara, that meant shipping a routing and entity intelligence engine for B2B revenue operations: a problem at the intersection of fragmented real-world data and business-critical workflow. At Rakuten in San Mateo, it has meant leading platform strategy for a unified campaign system and, more recently, defining the roadmap for a LangChain-based agentic AI tool that automates review and pre-launch workflows at scale, cutting rejection rates by 30% and launch delays by 30%.
                 </p>
                 <p>
-                    I consider physical fitness to be a fundamental component of my daily routine. Rigorous training builds the mental clarity and resilience required to navigate complex technical challenges in the boardroom. My academic foundation in Statistics and Computer Science anchors my approach to building intelligent systems, whether I am optimizing programmatic ad placements or designing new conceptual engineering prototypes.
-                </p>
-
-                <p>
-                    This digital space serves as a reflection of my structural achievements and my creative passions. It chronicles my ongoing journey through technology, my adventures in literature and fitness, and my unwavering commitment to design excellence. Welcome, and I hope you discover something here that inspires your own work.
+                    The prototypes on this site are built alongside the day job. Each one starts from a real product gap, gets framed from a PM lens, and gets built far enough to pressure-test the core assumption against a current GenAI model. That practice is what keeps the product intuition honest.
                 </p>
             </div>
         </section>

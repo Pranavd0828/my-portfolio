@@ -21,10 +21,21 @@ export default function ConnectSection() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-3xl w-full z-10 text-center flex flex-col items-center">
-                <h2 className="font-serif text-5xl leading-tight md:text-8xl md:leading-none text-white mb-6">Let&apos;s talk</h2>
-                <p className="font-serif text-white/70 mb-16 max-w-lg text-lg">
-                    Whether you have a strategic product vision or a complex engineering challenge, my inbox is always open.
+                <h2 className="font-serif text-5xl leading-tight md:text-8xl md:leading-none text-white mb-6">Get in touch</h2>
+                <p className="font-serif text-white/70 mb-4 max-w-lg text-lg">
+                    Open to senior PM roles at the intersection of AI, platform, and data. Also happy to talk prototypes, product strategy, or anything in between.
                 </p>
+                <div className="flex flex-col gap-1 mb-12">
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/30">
+                        Based in Sunnyvale, CA
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/30">
+                        Open to remote and hybrid
+                    </p>
+                    <p className="font-mono text-[10px] uppercase tracking-widest text-white/30">
+                        Open to relocation
+                    </p>
+                </div>
 
                 <form className="w-full flex flex-col gap-6 items-center" onSubmit={handleSubmit}>
                     <div className="w-full flex flex-col md:flex-row gap-6">

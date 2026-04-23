@@ -21,7 +21,6 @@ export default function Home() {
       <RevealFocus>
         <Education />
       </RevealFocus>
-      {/* Blog section hidden per feature flag requested */}
       <RevealFocus>
         <AboutMe />
       </RevealFocus>

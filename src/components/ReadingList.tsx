@@ -59,7 +59,7 @@ export default function ReadingList() {
     const [expandedBookId, setExpandedBookId] = useState<string | null>(null);
     const years: Year[] = ['2026', '2025', '2024'];
 
-    const handleBookTap = (id: string, e: React.MouseEvent) => {
+    const handleBookTap = (id: string) => {
         // Toggle if on touch device / small screen
         if (window.innerWidth < 1024) {
             setExpandedBookId(expandedBookId === id ? null : id);
@@ -143,7 +143,7 @@ export default function ReadingList() {
                                 return (
                                     <div
                                         key={idx}
-                                        onClick={(e) => handleBookTap(bookId, e)}
+                                        onClick={() => handleBookTap(bookId)}
                                         className="relative flex flex-col pt-6 pb-6 border-b-[0.5px] border-white/10 cursor-pointer lg:cursor-default w-full group"
                                     >
                                         <div className="flex items-start md:items-center justify-between gap-4 md:gap-6 z-10 w-full md:flex-row flex-col">
@@ -154,7 +154,7 @@ export default function ReadingList() {
                                                     <h4 className={`font-serif text-xl md:text-2xl text-white`}>
                                                         {book.title}
                                                     </h4>
-                                                    <div className={`font-serif text-sm md:text-base md:text-right text-white/30 italic`}>
+                                                    <div className={`font-serif text-sm md:text-base md:text-right text-white/60 italic`}>
                                                         {book.author}
                                                     </div>
                                                 </div>
