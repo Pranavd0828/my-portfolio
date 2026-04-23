@@ -70,7 +70,7 @@ export default function Preloader() {
                     <motion.div
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.5, ease: 'easeOut' }}
-                        className="text-[10px] md:text-sm tracking-[0.4em] text-white/30 uppercase"
+                        className="text-[10px] md:text-sm tracking-[0.4em] text-white/60 uppercase"
                     >
                         Loading [{counter.toString().padStart(3, '0')}/100]
                     </motion.div>

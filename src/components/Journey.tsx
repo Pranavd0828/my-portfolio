@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 const caseStudies = [
     {
@@ -52,6 +52,18 @@ const caseStudies = [
 ];
 
 export default function Journey() {
+    const prefersReducedMotion = useReducedMotion();
+    const glowAnimate = prefersReducedMotion
+        ? undefined
+        : {
+              scale: [1, 1.1, 1],
+              background: [
+                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
+                  'radial-gradient(circle, rgba(150,150,150,0.5) 0%, rgba(0,0,0,0) 80%)',
+                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
+              ],
+          };
+
     return (
         <section id="journey" className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
 
@@ -60,10 +72,7 @@ export default function Journey() {
                 <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
                 <motion.div
                     className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-20"
-                    animate={{
-                        scale: [1, 1.1, 1],
-                        background: ['radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)', 'radial-gradient(circle, rgba(150,150,150,0.5) 0%, rgba(0,0,0,0) 80%)', 'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)']
-                    }}
+                    animate={glowAnimate}
                     transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
                 />
             </div>
@@ -92,7 +101,7 @@ export default function Journey() {
                                     <div className="absolute left-[11px] md:left-[15px] top-8 bottom-8 w-[1px] bg-white/10" />
                                 )}
 
-                                {companyBlock.roles.map((role, roleIdx) => (
+                                {companyBlock.roles.map((role) => (
                                     <div key={role.id} className="flex flex-col md:flex-row justify-between group/role relative">
                                         {companyBlock.roles.length > 1 && (
                                             <div className="absolute left-[-20px] md:left-[-52px] top-[10px] md:top-[12px] w-[7px] h-[7px] rounded-full bg-white/20 group-hover/role:bg-accent transition-colors" />

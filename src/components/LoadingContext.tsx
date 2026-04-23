@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 interface LoadingContextType {
     isLoaded: boolean;
@@ -17,9 +17,9 @@ export const useLoading = () => useContext(LoadingContext);
 export function LoadingProvider({ children }: { children: React.ReactNode }) {
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Provide an escape hatch: if the component doesn't mount for some reason, ensure the site eventually loads.
+    // Provide an escape hatch: if the component does not mount for some reason, ensure the site eventually loads.
     // Or, we handle this strictly in the Preloader logic.
-    // Let's rely on the Preloader component to call setIsLoaded.
+    // Rely on the Preloader component to call setIsLoaded.
 
     return (
         <LoadingContext.Provider value={{ isLoaded, setIsLoaded }}>
