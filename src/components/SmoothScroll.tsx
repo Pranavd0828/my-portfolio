@@ -74,20 +74,51 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
         return () => window.removeEventListener('popstate', handler);
     }, []);
 
-    // --- Save scroll position for current path on every scroll tick ---
+    // --- Save scroll position for current path, throttled to avoid per-tick sessionStorage writes ---
+    // Lenis fires at 60 to 120 Hz; writing storage that often causes micro-stutter and GC pressure on mobile.
+    // Strategy: remember the latest scroll value on every tick, flush at most once per 150ms, and flush on
+    // pagehide so the final position is never lost when the user navigates away.
     useEffect(() => {
         if (!lenisInstance) return;
 
-        const handler = ({ scroll }: { scroll: number }) => {
+        let latestScroll = 0;
+        let scheduled = false;
+        let lastFlushAt = 0;
+        const FLUSH_INTERVAL_MS = 150;
+
+        const flush = () => {
+            scheduled = false;
+            lastFlushAt = Date.now();
             try {
-                sessionStorage.setItem(`scroll:${pathname}`, String(Math.round(scroll)));
+                sessionStorage.setItem(`scroll:${pathname}`, String(Math.round(latestScroll)));
             } catch {
                 // sessionStorage unavailable in some private browsing contexts
             }
         };
 
+        const handler = ({ scroll }: { scroll: number }) => {
+            latestScroll = scroll;
+            if (scheduled) return;
+            const elapsed = Date.now() - lastFlushAt;
+            const delay = Math.max(0, FLUSH_INTERVAL_MS - elapsed);
+            scheduled = true;
+            setTimeout(flush, delay);
+        };
+
+        const flushOnHide = () => {
+            if (scheduled) flush();
+        };
+
         lenisInstance.on('scroll', handler);
-        return () => lenisInstance.off('scroll', handler);
+        window.addEventListener('pagehide', flushOnHide);
+        document.addEventListener('visibilitychange', flushOnHide);
+
+        return () => {
+            lenisInstance.off('scroll', handler);
+            window.removeEventListener('pagehide', flushOnHide);
+            document.removeEventListener('visibilitychange', flushOnHide);
+            if (scheduled) flush();
+        };
     }, [lenisInstance, pathname]);
 
     // --- On route change: restore (back/forward) or scroll to top (Link click) ---
