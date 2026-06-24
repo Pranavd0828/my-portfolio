@@ -91,7 +91,7 @@ export default function Journey() {
                             {/* Company Header */}
                             <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-12 gap-2 md:gap-0">
                                 <h3 className="font-serif text-4xl text-white">{companyBlock.company}</h3>
-                                <span className="font-mono text-[10px] md:text-xs text-white/30 tracking-widest uppercase">{companyBlock.timeframe}</span>
+                                <span className="font-mono text-xs md:text-sm text-white/55 tracking-[0.22em] uppercase">{companyBlock.timeframe}</span>
                             </div>
 
                             {/* Roles inside Company */}
@@ -114,16 +114,16 @@ export default function Journey() {
                                                     {role.role}
                                                 </h4>
                                             </div>
+                                            <span className="block font-mono text-[10px] md:text-xs text-white/30 mb-3 uppercase tracking-widest">{role.year}</span>
                                             <div className="font-serif text-lg md:text-xl text-white/40 group-hover/role:text-white/70 transition-colors">
                                                 {role.title}
                                             </div>
                                         </div>
 
-                                        <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-end md:text-right">
-                                            <p className="font-serif text-white/50 text-sm md:text-base max-w-md group-hover/role:text-white/90 transition-colors">
+                                        <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-start md:text-left">
+                                            <p className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors">
                                                 {role.description}
                                             </p>
-                                            <span className="font-serif text-[10px] text-white/20 mt-3 uppercase tracking-widest">{role.year}</span>
                                         </div>
                                     </div>
                                 ))}

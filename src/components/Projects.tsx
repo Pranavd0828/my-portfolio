@@ -5,6 +5,14 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 const projects = [
     {
+        title: 'Gmail Commitment Radar',
+        category: 'AI Workflow Intelligence',
+        description: 'A high-fidelity Gmail layer that detects commitments, deadlines, asks, and follow-ups inside email threads, then surfaces triage actions across inbox, thread, radar, and dashboard views.',
+        github: 'https://github.com/Pranavd0828/Gmail-Commitment-Radar',
+        demo: 'https://pranavd0828.github.io/Gmail-Commitment-Radar/',
+        caseStudy: '/work/gmail-commitment-radar'
+    },
+    {
         title: 'Google Maps Meet Mode',
         category: 'Product Strategy & Prototype',
         description: 'Conceptualization and prototype of an experiential "Meet Mode" feature designed for Google Maps, streamlining impromptu social coordination.',

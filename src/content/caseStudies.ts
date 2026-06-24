@@ -17,6 +17,73 @@ export type CaseStudy = {
 
 export const caseStudies: CaseStudy[] = [
   {
+    slug: 'gmail-commitment-radar',
+    title: 'Gmail Commitment Radar',
+    tagline:
+      'An AI-assisted Gmail layer that detects promises, asks, deadlines, and unresolved follow-ups hidden inside email threads, then turns them into a triageable commitment workflow.',
+    category: 'AI Workflow Intelligence / Productivity',
+    role: 'Product Manager and builder: workflow framing, Gmail shell recreation, state model, and prototype build.',
+    timeframe: 'June 2026',
+    stack: [
+      'Vite with React 19 and TypeScript',
+      'Tailwind CSS v4 for a Gmail-native interface shell',
+      'Zustand with localStorage persistence for commitment state',
+      'Lucide React for interface icons',
+      'Date-fns for deadline and follow-up metadata',
+    ],
+    demo: 'https://pranavd0828.github.io/Gmail-Commitment-Radar/',
+    github: 'https://github.com/Pranavd0828/Gmail-Commitment-Radar',
+    sections: [
+      {
+        heading: 'Why Now',
+        body: [
+          'Email remains the system of record for professional commitments, but the commitments themselves are buried in prose: a promised deck, a follow-up by Friday, an ask that never became a task. Existing inbox tooling sorts messages, not obligations.',
+          'The product timing is strong because modern language models can identify commitment-like language well enough to support a review workflow. The opportunity is not to auto-complete work blindly, but to expose the hidden work users already agreed to do.',
+        ],
+      },
+      {
+        heading: 'The Problem',
+        body: [
+          'Professionals miss commitments because the inbox is optimized around recency and sender, not accountability. A thread can leave the visible inbox while an ask inside that thread remains open.',
+          'For Gmail, this is a workflow depth problem. Calendar, Tasks, and email are adjacent, but the moment of commitment detection still depends on the user manually noticing and translating language into action.',
+        ],
+      },
+      {
+        heading: 'Product Bet',
+        body: [
+          'The bet is that commitment tracking should feel native to the inbox, not like a separate task manager. If the assistant explains the exact source phrase and lets the user triage in place, trust increases and context switching drops.',
+          'The prototype treats AI as a detection and explanation layer. The user remains in control of whether a commitment is marked done, snoozed, or turned into a draft reply.',
+        ],
+      },
+      {
+        heading: 'What I Built',
+        body: [
+          'A high-fidelity Gmail shell with inbox badges, a thread view, a radar side panel, a dashboard, settings, and a global draft composer. Commitments persist across views, so marking one done in the panel updates the dashboard and thread state.',
+          'The thread view highlights the exact source phrase that caused a commitment to be flagged. That detail matters because the assistant has to earn trust before it can ask the user to act.',
+        ],
+      },
+      {
+        heading: 'Tradeoffs',
+        body: [
+          'I kept the AI layer simulated inside the prototype rather than connecting live Gmail data. That keeps the UX test focused on interaction design, trust, and triage mechanics without adding OAuth and privacy scope.',
+          'I chose Gmail fidelity over visual novelty. The product question is whether the layer belongs inside email, so the prototype needed to feel like Gmail first and like an AI product second.',
+        ],
+      },
+      {
+        heading: 'Business Read',
+        body: [
+          'A commitment layer is a retention feature for productivity suites because it increases the value of existing email data without asking users to adopt a new destination.',
+          'The strongest expansion path is across Calendar, Tasks, and CRM surfaces: the same detected commitment can become a reminder, a draft, a task, or an account follow-up depending on context.',
+        ],
+      },
+    ],
+    outcomes: [
+      'A full Gmail-native prototype with inbox, thread, radar panel, dashboard, settings, and composer surfaces wired together through persistent state.',
+      'Source phrase highlighting included to make AI detection explainable rather than opaque.',
+      'A clear product path identified: detect commitments in email first, then route them into calendar, task, draft, or CRM workflows.',
+    ],
+  },
+  {
     slug: 'whatsapp-regional-voice',
     title: 'WhatsApp Regional Voice Over AI',
     tagline:
