@@ -6,12 +6,37 @@ export default function ConnectSection() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`[${name}] contacted you`);
-        const body = encodeURIComponent(`From: ${name} (${email})\n\n${message}`);
-        window.location.href = `mailto:deopranav2808.work@gmail.com?subject=${subject}&body=${body}`;
+        setStatus('submitting');
+
+        try {
+            // Submit to the actual Formspree endpoint
+            const response = await fetch('https://formspree.io/f/mzdlepvr', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message })
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                setName('');
+                setEmail('');
+                setMessage('');
+                // Reset back to idle after a few seconds
+                setTimeout(() => setStatus('idle'), 5000);
+            } else {
+                setStatus('error');
+                setTimeout(() => setStatus('idle'), 5000);
+            }
+        } catch (error) {
+            setStatus('error');
+            setTimeout(() => setStatus('idle'), 5000);
+        }
     };
 
     return (
@@ -45,7 +70,8 @@ export default function ConnectSection() {
                             placeholder="NAME"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20"
+                            disabled={status === 'submitting'}
+                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20 disabled:opacity-50"
                         />
                         <input
                             type="email"
@@ -53,7 +79,8 @@ export default function ConnectSection() {
                             placeholder="EMAIL"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20"
+                            disabled={status === 'submitting'}
+                            className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors placeholder:text-white/20 disabled:opacity-50"
                         />
                     </div>
                     <textarea
@@ -62,14 +89,21 @@ export default function ConnectSection() {
                         required
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors resize-none mb-8 placeholder:text-white/20"
+                        disabled={status === 'submitting'}
+                        className="w-full bg-transparent border-b border-white/10 py-4 px-2 text-white font-mono text-[10px] md:text-xs uppercase tracking-widest focus:outline-none focus:border-white/50 transition-colors resize-none mb-8 placeholder:text-white/20 disabled:opacity-50"
                     />
 
                     <button
                         type="submit"
-                        className="group relative px-12 py-4 border border-white/20 hover:border-white/60 text-white/50 hover:text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-sm bg-white/5 hover:bg-white/10 overflow-hidden"
+                        disabled={status === 'submitting' || status === 'success'}
+                        className="group relative px-12 py-4 border border-white/20 hover:border-white/60 text-white/50 hover:text-white font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] transition-all duration-300 rounded-sm bg-white/5 hover:bg-white/10 overflow-hidden disabled:pointer-events-none"
                     >
-                        <span className="relative z-10">[ SEND_MESSAGE ]</span>
+                        <span className="relative z-10">
+                            {status === 'idle' && '[ SEND_MESSAGE ]'}
+                            {status === 'submitting' && '[ SENDING... ]'}
+                            {status === 'success' && '[ MESSAGE_SENT! ]'}
+                            {status === 'error' && '[ ERROR_TRY_AGAIN ]'}
+                        </span>
                         <div className="absolute inset-0 translate-y-[101%] group-hover:translate-y-0 bg-white/5 transition-transform duration-500 ease-out" />
                     </button>
                 </form>

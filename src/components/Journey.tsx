@@ -9,16 +9,26 @@ const caseStudies = [
         roles: [
             {
                 id: '01',
-                title: 'Unified Campaign Command Center',
-                role: 'Senior Product Manager',
-                year: 'Feb 2022 - Present',
-                description: 'Architected the backend logic to centralize advertiser inputs, reducing booking time by 25%. Built AI agents via LangChain for brand safety compliance.',
+                title: 'Ads Recommendation & Optimization',
+                role: 'Staff Product Manager',
+                year: 'Jun 2026 - Present',
+                description: [
+                    'Lead the end-to-end roadmap for recommendation and optimization systems across programmatic surfaces, connecting ranking logic, pacing signals, and marketplace outcomes.',
+                    'Own the B2B platform track for advertiser workflows, translating sales, operations, and partner needs into scalable self-serve systems.'
+                ],
             },
             {
                 id: '02',
+                title: 'Unified Campaign Command Center',
+                role: 'Senior Product Manager',
+                year: 'Jul 2022 - Jun 2026',
+                description: 'Architected the backend logic to centralize advertiser inputs, reducing booking time by 25%. Built AI agents via LangChain for brand safety compliance.',
+            },
+            {
+                id: '03',
                 title: 'Premium Ad Formats & Inventory',
                 role: 'Product Manager',
-                year: 'May 2021 - Feb 2022',
+                year: 'May 2021 - Jul 2022',
                 description: 'Optimized rendering logic for high-impact display placements, validating a 32% engagement lift. Leveraged journey signals to drive a 19% CPM increase.',
             }
         ]
@@ -28,7 +38,7 @@ const caseStudies = [
         timeframe: 'August 2020 - May 2021',
         roles: [
             {
-                id: '03',
+                id: '04',
                 title: 'Revenue Operations Engine',
                 role: 'Product Manager',
                 year: 'Aug 2020 - May 2021',
@@ -41,7 +51,7 @@ const caseStudies = [
         timeframe: 'August 2017 - July 2019',
         roles: [
             {
-                id: '04',
+                id: '05',
                 title: 'Display/Video Yield Strategy',
                 role: 'Product Analyst',
                 year: 'Aug 2017 - Jul 2019',
@@ -121,9 +131,19 @@ export default function Journey() {
                                         </div>
 
                                         <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-start md:text-left">
-                                            <p className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors">
-                                                {role.description}
-                                            </p>
+                                            {Array.isArray(role.description) ? (
+                                                <ul className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors space-y-4">
+                                                    {role.description.map((point) => (
+                                                        <li key={point}>
+                                                            {point}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors">
+                                                    {role.description}
+                                                </p>
+                                            )}
                                         </div>
                                     </div>
                                 ))}

@@ -31,17 +31,16 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                     transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-mono text-[10px] md:text-sm uppercase tracking-[0.3em] text-white/50 mb-8"
+                    className="font-mono text-xs md:text-base uppercase tracking-[0.3em] text-white/50 mb-8"
                 >
                     {/* Mobile: stacked on three lines */}
                     <span className="flex flex-col items-center gap-1.5 md:hidden">
                         <span className="text-white">Pranav Deo</span>
-                        <span>Product Manager</span>
-                        <span>Hands-on with GenAI</span>
+                        <span>Staff Product Manager</span>
                     </span>
                     {/* Desktop: single inline line */}
                     <span className="hidden md:inline">
-                        <span className="text-white">Pranav Deo</span> <span className="mx-2 opacity-30">&bull;</span> Product Manager · Hands-on with GenAI
+                        <span className="text-white">Pranav Deo</span> <span className="mx-2 opacity-30">&bull;</span> Staff Product Manager
                     </span>
                 </motion.div>
 

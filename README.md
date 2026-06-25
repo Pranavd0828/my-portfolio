@@ -8,6 +8,7 @@ The `/work` route contains deep dives structured from a product lens: **Why Now 
 
 | Case study | One-line pitch |
 | --- | --- |
+| [Gmail Commitment Radar](/work/gmail-commitment-radar) | An AI-assisted Gmail layer that detects promises, asks, deadlines, and unresolved follow-ups hidden inside email threads, then turns them into a triageable commitment workflow. |
 | [WhatsApp Regional Voice Over AI](/work/whatsapp-regional-voice) | Smart audio playback that renders chat messages in the sender's native regional dialect, using Gemini for dialect detection and ElevenLabs for voice. |
 | [Google Maps: Meet Halfway Mode](/work/maps-meet-mode) | A Group Fairness Engine that picks a real, land-locked venue for any number of friends, weighted by commute pain and inequality. |
 | [Rescue Radar: Food Delivery Post-Cancellation](/work/rescue-offers) | Map-first, time-pressured rescue of canceled orders, gamified through a CO2-saved leaderboard. |

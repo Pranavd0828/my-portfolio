@@ -27,10 +27,10 @@ export const metadata: Metadata = {
     default: "Pranav Deo | Portfolio",
     template: "%s | Pranav Deo",
   },
-  description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+  description: "Staff Product Manager specializing in AI, Data Strategy, and AdTech.",
   openGraph: {
     title: "Pranav Deo | Portfolio",
-    description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+    description: "Staff Product Manager specializing in AI, Data Strategy, and AdTech.",
     url: "https://www.deopranav.com",
     siteName: "Pranav Deo Portfolio",
     locale: "en_US",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Pranav Deo | Portfolio",
-    description: "Senior Product Manager specializing in AI, Data Strategy, and AdTech.",
+    description: "Staff Product Manager specializing in AI, Data Strategy, and AdTech.",
     images: ["/favicon.jpg"],
   },
   robots: {

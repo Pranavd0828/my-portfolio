@@ -154,7 +154,7 @@ export default function ReadingList() {
                                                     <h4 className={`font-serif text-xl md:text-2xl text-white`}>
                                                         {book.title}
                                                     </h4>
-                                                    <div className={`font-serif text-sm md:text-base md:text-right text-white/60 italic`}>
+                                                    <div className={`font-serif text-sm md:text-base md:text-right text-white/60`}>
                                                         {book.author}
                                                     </div>
                                                 </div>

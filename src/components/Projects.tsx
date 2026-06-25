@@ -3,65 +3,7 @@
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 
-const projects = [
-    {
-        title: 'Gmail Commitment Radar',
-        category: 'AI Workflow Intelligence',
-        description: 'A high-fidelity Gmail layer that detects commitments, deadlines, asks, and follow-ups inside email threads, then surfaces triage actions across inbox, thread, radar, and dashboard views.',
-        github: 'https://github.com/Pranavd0828/Gmail-Commitment-Radar',
-        demo: 'https://pranavd0828.github.io/Gmail-Commitment-Radar/',
-        caseStudy: '/work/gmail-commitment-radar'
-    },
-    {
-        title: 'Google Maps Meet Mode',
-        category: 'Product Strategy & Prototype',
-        description: 'Conceptualization and prototype of an experiential "Meet Mode" feature designed for Google Maps, streamlining impromptu social coordination.',
-        github: 'https://github.com/Pranavd0828/Google-Maps-Meet-Mode',
-        demo: 'https://google-maps-meet-mode.vercel.app/',
-        caseStudy: '/work/maps-meet-mode'
-    },
-    {
-        title: 'Flappy Eagle',
-        category: 'Game Engine & Physics',
-        description: 'A premium, cinematic survival experience game overriding standard physics engines with heavy, deliberate micro-interactions and rigorous gravity models.',
-        github: 'https://github.com/Pranavd0828/flappy-eagle',
-        demo: 'https://pranavd0828.github.io/flappy-eagle/',
-        caseStudy: '/work/flappy-eagle'
-    },
-    {
-        title: 'LinkedIn Messaging Formatting',
-        category: 'UI/UX Extension',
-        description: 'A browser extension prototype that injects rich text formatting capabilities; like bold, italics, and lists; directly into LinkedIn\'s native messaging interface.',
-        github: 'https://github.com/Pranavd0828/LinkedIn-Messaging-with-Formatting-Option',
-        demo: 'https://pranavd0828.github.io/LinkedIn-Messaging-with-Formatting-Option/',
-        caseStudy: '/work/linkedin-messaging-formatting'
-    },
-    {
-        title: 'WhatsApp Regional Voice-Over AI',
-        category: 'LLM & Audio Synthesis',
-        description: 'End-to-end prototype injecting hyper-local, regional voice-over capabilities directly into WhatsApp using generative AI models.',
-        github: 'https://github.com/Pranavd0828/Whatsapp-Regional-Voice-Over-AI',
-        demo: 'https://pranavd0828.github.io/Whatsapp-Regional-Voice-Over-AI/',
-        caseStudy: '/work/whatsapp-regional-voice'
-    },
-    {
-        title: 'Read with your Crew in Kindle',
-        category: 'Social Ideation',
-        description: 'A conceptual prototype exploring synchronous, shared-reading experiences and social margin-notes tailored specifically for the Kindle ecosystem.',
-        github: 'https://github.com/Pranavd0828/Read-with-your-Crew-in-Kindle',
-        demo: 'https://pranavd0828.github.io/Read-with-your-Crew-in-Kindle/',
-        caseStudy: '/work/kindle-crew'
-    },
-    {
-        title: 'Food Delivery: Post-Cancellation Rescue',
-        category: 'Marketplace Optimization',
-        description: 'An algorithmic approach to salvaging canceled food delivery orders by dynamically mapping and discounting them to nearby users in real-time.',
-        github: 'https://github.com/Pranavd0828/Food-Delivery---Post-Cancellation-Rescue-Offers',
-        demo: 'https://pranavd0828.github.io/Food-Delivery---Post-Cancellation-Rescue-Offers/',
-        caseStudy: '/work/rescue-offers'
-    }
-];
-
+import { caseStudies } from '../content/caseStudies';
 export default function Projects() {
     const prefersReducedMotion = useReducedMotion();
     const glowAnimate = prefersReducedMotion
@@ -105,38 +47,40 @@ export default function Projects() {
                 </div>
 
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
-                    {projects.map((project) => (
+                    {caseStudies.slice(0, 6).map((cs) => (
                         <div
-                            key={project.title}
+                            key={cs.title}
                             className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"
                         >
                             <div className="relative z-10 flex flex-col h-full justify-between opacity-70 hover:opacity-100 transition-opacity duration-500">
                                 <div>
-                                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/30">{project.category}</span>
-                                    <h3 className="font-serif text-2xl text-white mt-6 mb-6">{project.title}</h3>
+                                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/30">{cs.category}</span>
+                                    <h3 className="font-serif text-2xl text-white mt-6 mb-6">{cs.title}</h3>
                                     <p className="font-serif text-xs md:text-sm text-white/50 leading-relaxed mb-12">
-                                        {project.description}
+                                        {cs.tagline}
                                     </p>
                                 </div>
 
                                 <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mt-4 pt-8 border-t-[0.5px] border-white/10">
-                                    {project.caseStudy && (
-                                        <Link href={project.caseStudy} className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/80 hover:text-white transition-colors duration-400">
+                                    {cs.slug && (
+                                        <Link href={`/work/${cs.slug}`} className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/80 hover:text-white transition-colors duration-400">
                                             <span>Case Study</span>
                                             <svg className="w-3 h-3 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                                             </svg>
                                         </Link>
                                     )}
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-400">
-                                        <span>View Code</span>
-                                        <svg className="w-3 h-3 ml-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                        </svg>
-                                    </a>
+                                    {cs.github && (
+                                        <a href={cs.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-400">
+                                            <span>View Code</span>
+                                            <svg className="w-3 h-3 ml-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                            </svg>
+                                        </a>
+                                    )}
 
-                                    {project.demo && (
-                                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-400">
+                                    {cs.demo && (
+                                        <a href={cs.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-400">
                                             <span>Try Yourself</span>
                                             <svg className="w-3 h-3 ml-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

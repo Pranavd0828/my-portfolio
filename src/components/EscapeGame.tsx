@@ -383,14 +383,14 @@ export default function EscapeGame() {
                     window.location.href = '/';
                 }}
                 onPointerDown={(e) => e.stopPropagation()}
-                className="absolute top-6 left-6 md:top-8 md:left-12 px-4 py-2 bg-white/5 border border-white/20 hover:bg-white/10 text-xs font-mono uppercase tracking-[0.2em] text-white/90 transition-all duration-300 z-50 rounded-sm inline-flex items-center gap-2 backdrop-blur-md"
+                className="absolute top-20 left-6 md:top-24 md:left-12 px-4 py-2 bg-white/5 border border-white/20 hover:bg-white/10 text-xs font-mono uppercase tracking-[0.2em] text-white/90 transition-all duration-300 z-50 rounded-sm inline-flex items-center gap-2 backdrop-blur-md"
                 aria-label="Abort and return to index"
             >
                 <span className="text-accent">←</span> <span>ABORT_TO_INDEX</span>
             </button>
 
             {/* UI Overlay */}
-            <div className="absolute top-6 right-6 md:top-8 md:right-12 font-mono text-sm tracking-widest text-muted/50 select-none pointer-events-none flex flex-col items-end gap-1">
+            <div className="absolute top-20 right-6 md:top-24 md:right-12 font-mono text-sm tracking-widest text-muted/50 select-none pointer-events-none flex flex-col items-end gap-1">
                 <span>HI {highScore.toString().padStart(5, '0')}</span>
                 <span className="text-accent">{score.toString().padStart(5, '0')}</span>
             </div>
