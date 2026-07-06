@@ -82,7 +82,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
         </header>
 
         {/* Prominent prototype links: visible before the reader starts the case study */}
-        {(cs.demo || cs.github) && (
+        {(cs.demo || cs.github || cs.artifacts?.length) && (
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             {cs.demo && (
               <a
@@ -102,6 +102,25 @@ export default async function CaseStudyPage({ params }: { params: Promise<Params
                 </svg>
               </a>
             )}
+            {cs.artifacts?.map((artifact) => (
+              <a
+                key={artifact.url}
+                href={artifact.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between px-6 py-5 border border-white/10 hover:border-white/30 bg-white/[0.02] hover:bg-white/[0.04] transition-all group sm:w-56"
+              >
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mb-1">Artifact</p>
+                  <p className="font-serif text-white/50 group-hover:text-white/80 transition-colors text-sm">
+                    {artifact.label}
+                  </p>
+                </div>
+                <svg className="w-4 h-4 text-white/20 group-hover:text-white/60 transition-colors flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            ))}
             {cs.github && (
               <a
                 href={cs.github}

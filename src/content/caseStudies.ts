@@ -8,6 +8,10 @@ export type CaseStudy = {
   stack: string[];
   demo?: string;
   github?: string;
+  artifacts?: {
+    label: string;
+    url: string;
+  }[];
   sections: {
     heading: string;
     body: string[];
@@ -16,6 +20,90 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: 'whatsapp-catch-up',
+    title: 'WhatsApp Catch-Up',
+    tagline:
+      'An AI Catch-Up layer for WhatsApp voice notes that turns long audio clusters into summaries, topics, decisions, open questions, action items, and editable replies inside the native chat workflow.',
+    category: 'AI Messaging / Voice Note Intelligence',
+    role: 'Product Manager and builder: problem framing, WhatsApp Web UI recreation, AI output schema design, playback state model, and prototype build.',
+    timeframe: 'July 2026',
+    stack: [
+      'Vite with React 19 and TypeScript',
+      'Tailwind CSS with WhatsApp-inspired design tokens',
+      'Lucide React for interface icons',
+      'Typed mock data layer for AI summaries, topics, decisions, questions, transcripts, and suggested replies',
+      'Centralized HTMLAudioElement playback state with visual waveform and transcript synchronization',
+      'Playwright validation for desktop, mobile, and GitHub Pages rendering',
+      'GitHub Pages deployment with a companion Product Sense Flow Map',
+    ],
+    demo: 'https://pranavd0828.github.io/WhatsApp-catch-up/',
+    github: 'https://github.com/Pranavd0828/WhatsApp-catch-up',
+    artifacts: [
+      {
+        label: 'Product Sense Flow Map',
+        url: 'https://pranavd0828.github.io/WhatsApp-catch-up/product-mind-map/',
+      },
+    ],
+    sections: [
+      {
+        heading: 'Why Now',
+        body: [
+          'Voice notes have become the lowest-friction way to send context, but they are still one of the highest-friction ways to receive it. The sender can talk for eighteen minutes. The receiver has to listen, remember, extract the ask, and decide what to do next.',
+          'The timing is right because transcription, summarization, and structured extraction are now good enough to support a review workflow. The opportunity is not to replace the conversation. It is to make long audio skimmable, traceable, and actionable without moving the user out of WhatsApp.',
+        ],
+      },
+      {
+        heading: 'The Problem',
+        body: [
+          'Long or clustered voice notes hide the actual work of the conversation. A wedding-planning update might contain a venue decision, a florist quote, an RSVP count, a payment deadline, and three direct questions, but WhatsApp still shows the user a stack of audio bubbles.',
+          'That creates a receiver-side tax. Users postpone listening, miss direct asks, forget decisions, and reply with partial context. The problem is worse in group chats because multiple senders can pile voice notes into one thread before the user returns.',
+        ],
+      },
+      {
+        heading: 'Product Bet',
+        body: [
+          'The product bet is that AI should live as a recovery layer inside the conversation. The user opens WhatsApp, selects a voice-heavy chat, taps Catch Up, reviews the summary, answers questions, inserts a draft, and sends only after review.',
+          'Trust is the constraint that shapes the whole feature. A summary is useful only if the user can see why it exists, return to the transcript or audio segment, edit any generated reply, and keep control over what gets sent.',
+        ],
+      },
+      {
+        heading: 'What I Built',
+        body: [
+          'A high-fidelity WhatsApp Web prototype with desktop and mobile shells, a realistic chat list, Ellie wedding-planning voice-note cluster, inline Catch-Up summary card, right-side detail panel, global Catch-Up inbox, transcript search, playback controls, and reply helper.',
+          'The main scenario uses seven Ellie voice notes totaling eighteen minutes. The Catch-Up layer extracts topics, decisions, questions, tone, important segments, and suggested replies. Sending a generated reply updates the answered state, so the prototype demonstrates the full loop from backlog to closure.',
+          'I also shipped a separate Product Sense Flow Map that explains user segments, pain points, jobs to be done, AI logic, privacy requirements, metrics, and tradeoffs using only rectangular boxes and directional arrows.',
+        ],
+      },
+      {
+        heading: 'AI Logic',
+        body: [
+          'The prototype models the AI output as typed structured data rather than loose strings. Catch-Up results include topic clusters, question objects, decision records, updates, tone signals, important segments, suggested replies, transcripts, confidence, and source timing.',
+          'The intended pipeline is transcription, silence skipping, topic clustering, action item extraction, question detection, and suggested reply generation. Every high-impact item should map back to a timestamped transcript segment so the user can inspect the source before trusting it.',
+        ],
+      },
+      {
+        heading: 'Tradeoffs',
+        body: [
+          'I kept the model layer mocked so the prototype could focus on interaction quality, trust, and workflow fit. Real inference would add latency, privacy, and consent questions that are important, but separate from proving whether the surface belongs inside WhatsApp.',
+          'I prioritized native WhatsApp fidelity over obvious AI branding. The feature has to feel like part of the chat, not a dashboard bolted onto a private conversation. The tradeoff is that some capability is less visually loud, but the experience is more believable.',
+          'The production version would need a privacy-first architecture: end-to-end encryption must not be weakened, on-device processing should be preferred where possible, and cloud inference would require explicit consent and clear boundaries.',
+        ],
+      },
+      {
+        heading: 'Business Read',
+        body: [
+          'At messaging-app scale, the value is not just summarization. It is reducing unresolved conversation debt. If users can return to long audio faster, answer direct asks, and close action items, WhatsApp becomes better at asynchronous coordination.',
+          'The strongest wedge is high-density coordination: weddings, family logistics, work groups, student projects, and group-chat-heavy users. These are the contexts where missed asks create real follow-up cost and where a Catch-Up queue can become a retention feature.',
+        ],
+      },
+    ],
+    outcomes: [
+      'A desktop and mobile WhatsApp Catch-Up prototype with inline summary, right panel, global inbox, transcript search, playback controls, and reply helper wired through React state.',
+      'A typed AI output schema that models topics, questions, decisions, action items, transcript segments, confidence, and suggested replies as inspectable product data.',
+      'A companion Product Sense Flow Map that makes the product logic, privacy requirements, metrics, and tradeoffs explicit for PM review.',
+    ],
+  },
   {
     slug: 'gmail-commitment-radar',
     title: 'Gmail Commitment Radar',

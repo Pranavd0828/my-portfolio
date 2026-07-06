@@ -47,7 +47,7 @@ export default function Projects() {
                 </div>
 
                 <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
-                    {caseStudies.slice(0, 6).map((cs) => (
+                    {caseStudies.slice(0, 8).map((cs) => (
                         <div
                             key={cs.title}
                             className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"

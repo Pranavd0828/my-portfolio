@@ -8,6 +8,7 @@ The `/work` route contains deep dives structured from a product lens: **Why Now 
 
 | Case study | One-line pitch |
 | --- | --- |
+| [WhatsApp Catch-Up](/work/whatsapp-catch-up) | An AI Catch-Up layer that turns long WhatsApp voice-note clusters into summaries, topics, decisions, open questions, action items, and editable replies inside the native chat workflow. |
 | [Gmail Commitment Radar](/work/gmail-commitment-radar) | An AI-assisted Gmail layer that detects promises, asks, deadlines, and unresolved follow-ups hidden inside email threads, then turns them into a triageable commitment workflow. |
 | [WhatsApp Regional Voice Over AI](/work/whatsapp-regional-voice) | Smart audio playback that renders chat messages in the sender's native regional dialect, using Gemini for dialect detection and ElevenLabs for voice. |
 | [Google Maps: Meet Halfway Mode](/work/maps-meet-mode) | A Group Fairness Engine that picks a real, land-locked venue for any number of friends, weighted by commute pain and inequality. |
@@ -57,7 +58,7 @@ Design choices baked into the bar:
 
 ### Rendering and routing
 
-* All 6 case studies prerender as SSG via `generateStaticParams` on `/work/[slug]`.
+* All case studies prerender as SSG via `generateStaticParams` on `/work/[slug]`.
 * `sitemap.ts` and per-route metadata expose every case study and interactive module to search and social previews.
 * `robots.ts` ships explicit crawler directives alongside the sitemap.
 * Branded 404 at `/work/[slug]/not-found.tsx` catches invalid slugs without breaking the aesthetic.
