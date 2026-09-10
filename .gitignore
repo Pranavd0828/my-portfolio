@@ -41,3 +41,4 @@ yarn-error.log*
 next-env.d.ts
 pranavdeo-resume.pdf
 *.pdf
+!public/Pranav-Deo-Resume.pdf

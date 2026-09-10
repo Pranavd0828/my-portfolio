@@ -1,16 +1,14 @@
-import type { Metadata } from 'next';
-import EscapeGame from '@/components/EscapeGame';
-
+import EscapeGame from "@/components/EscapeGame";
+import type { Metadata } from "next";
 export const metadata: Metadata = {
-    title: 'Escape Protocol',
-    description:
-        'A brutalist, endless-runner simulation built on high-performance requestAnimationFrame mechanics, featuring a 3D wireframe player and dynamic gravity physics.',
+  title: "Escape Protocol",
+  description: "A small runner exploring timing and physics.",
+  alternates: { canonical: "/escape" },
 };
-
 export default function EscapePage() {
-    return (
-        <main className="w-full h-screen overflow-hidden bg-background text-foreground flex items-center justify-center p-0 m-0">
-            <EscapeGame />
-        </main>
-    );
+  return (
+    <main>
+      <EscapeGame />
+    </main>
+  );
 }

@@ -3,568 +3,842 @@ export type CaseStudy = {
   title: string;
   tagline: string;
   category: string;
+  status: string;
   role: string;
   timeframe: string;
   stack: string[];
+  flow: string[];
+  sections: { heading: string; body: string[] }[];
+  outcomes: string[];
+  takeaway: string;
+  accent: string;
+  featured?: boolean;
+  metrics?: { value: string; label: string }[];
   demo?: string;
   github?: string;
-  artifacts?: {
-    label: string;
-    url: string;
+  artifacts?: { label: string; url: string }[];
+  decision?: {
+    question: string;
+    tension: string;
+    options: { label: string; detail: string; selected?: boolean }[];
+    rationale: string;
+    impact: string;
+  };
+  systemMap?: {
+    title: string;
+    description: string;
+    steps: { label: string; detail: string }[];
+    mode?: "flow" | "scope";
+    foundation?: string;
+    feedback?: string;
+  };
+  leadership?: {
+    team: string;
+    alignment: string;
   }[];
-  sections: {
-    heading: string;
-    body: string[];
+  productArtifacts?: {
+    title: string;
+    purpose: string;
+    rows: { label: string; value: string }[];
   }[];
-  outcomes: string[];
+  evidenceNote?: string;
 };
-
 export const caseStudies: CaseStudy[] = [
   {
-    slug: 'whatsapp-catch-up',
-    title: 'WhatsApp Catch-Up',
+    slug: "rakuten-programmatic-loyalty",
+    title: "Programmatic Loyalty: aligning advertiser goals and customer incentives.",
     tagline:
-      'An AI Catch-Up layer for WhatsApp voice notes that turns long audio clusters into summaries, topics, decisions, open questions, action items, and editable replies inside the native chat workflow.',
-    category: 'AI Messaging / Voice Note Intelligence',
-    role: 'Product Manager and builder: problem framing, WhatsApp Web UI recreation, AI output schema design, playback state model, and prototype build.',
-    timeframe: 'July 2026',
+      "Launching Programmatic Loyalty: a recommendation and optimization platform that translates advertiser goals into commission rates, budget pacing, and customer incentives.",
+    category: "Ads, marketplaces & recommendations",
+    status: "Professional work",
+    role: "Senior Product Manager · Rakuten",
+    timeframe: "Feb 2022 – Jun 2025",
     stack: [
-      'Vite with React 19 and TypeScript',
-      'Tailwind CSS with WhatsApp-inspired design tokens',
-      'Lucide React for interface icons',
-      'Typed mock data layer for AI summaries, topics, decisions, questions, transcripts, and suggested replies',
-      'Centralized HTMLAudioElement playback state with visual waveform and transcript synchronization',
-      'Playwright validation for desktop, mobile, and GitHub Pages rendering',
-      'GitHub Pages deployment with a companion Product Sense Flow Map',
+      "Recommendation systems",
+      "Kafka",
+      "Snowflake",
+      "Redis",
+      "Personalization",
     ],
-    demo: 'https://pranavd0828.github.io/WhatsApp-catch-up/',
-    github: 'https://github.com/Pranavd0828/WhatsApp-catch-up',
+    flow: [
+      "Advertiser spend + target ROAS",
+      "Commission, pacing + incentive decisions",
+      "Campaign and customer outcomes",
+    ],
+    sections: [
+      {
+        heading: "The problem",
+        body: [
+          "Sales and operations teams were manually configuring campaign economics across hundreds of advertisers. Spend goals, target return on ad spend, incentive allocation, and delivery pacing moved through multiple handoffs, making launches slow and the system difficult to scale.",
+        ],
+      },
+      {
+        heading: "My ownership",
+        body: [
+          "I took Programmatic Loyalty from idea to launch: validating the problem, aligning leadership on an MVP, defining the advertiser workflow and system requirements, and leading phased delivery with engineering, data science, design, sales, and revenue operations.",
+          "The product translated advertiser spend and target ROAS into recommended effective commission rates, pacing strategies, and customer incentive allocations. I also defined personalization for first-time buyers, new-to-merchant customers, and lapsed audiences.",
+        ],
+      },
+    ],
+    decision: {
+      question:
+        "Should fresh intent signals directly change live campaign decisions at launch?",
+      tension:
+        "More responsive optimization could help an underdelivering campaign recover faster. It could also blur the boundary between trusted pacing guidance and request-time behavior, making spend changes harder to explain and debug.",
+      options: [
+        {
+          label: "Put fresh intent in the live path",
+          detail:
+            "Higher responsiveness, with more request-time complexity and less predictable pacing behavior.",
+        },
+        {
+          label: "Keep the live path deterministic",
+          detail:
+            "Use precomputed pacing state online, preserve a clean system boundary, and fall back conservatively when state is stale.",
+          selected: true,
+        },
+      ],
+      rationale:
+        "I treated budget discipline and ROAS predictability as the product promise that could not move. We kept heavy settled-sales-based optimization offline and made the online layer fast, explainable, and conservative.",
+      impact:
+        "The team launched a system that could react quickly enough for campaign delivery while remaining predictable for merchants and operable for internal teams.",
+    },
+    systemMap: {
+      title: "From advertiser goal to measurable outcome",
+      description:
+        "A simplified view of the product and data loop I defined with engineering and data science.",
+      steps: [
+        {
+          label: "Advertiser intent",
+          detail: "Monthly spend, target ROAS, promotion context",
+        },
+        {
+          label: "Offline guidance",
+          detail: "Commission recommendation, pacing plan, profitability guardrails",
+        },
+        {
+          label: "Live decisioning",
+          detail: "Eligibility, ranking, incentive bucket, delivery surface",
+        },
+        {
+          label: "Customer experience",
+          detail: "Relevant offers across app, email, push, and other placements",
+        },
+        {
+          label: "Measurement",
+          detail: "Spend, ROAS, conversion, margin, pacing, and system health",
+        },
+      ],
+      foundation:
+        "Kafka ingested events · Redis served low-latency decision state · Snowflake remained the settled-sales and analytical source of truth",
+      feedback:
+        "Measured outcomes updated future recommendations and pacing guidance.",
+    },
+    leadership: [
+      {
+        team: "Engineering",
+        alignment:
+          "Defined system boundaries, failure behavior, state transitions, API requirements, and phased milestones.",
+      },
+      {
+        team: "Data science",
+        alignment:
+          "Aligned the advertiser inputs, recommended outputs, forecasting logic, and evaluation measures.",
+      },
+      {
+        team: "Design",
+        alignment:
+          "Turned complex campaign choices into a usable setup flow, then iterated from beta behavior and drop-offs.",
+      },
+      {
+        team: "Sales & revenue operations",
+        alignment:
+          "Used discovery, sandbox demos, advertiser edge cases, and role-specific dashboards to make the product useful and sellable.",
+      },
+      {
+        team: "Leadership",
+        alignment:
+          "Built the opportunity case, agreed on the MVP boundary, and used a phased pilot plus shared success metrics to earn trust.",
+      },
+    ],
+    productArtifacts: [
+      {
+        title: "MVP boundary",
+        purpose: "Ship the shortest complete path from goal to activation.",
+        rows: [
+          {
+            label: "Included",
+            value:
+              "Campaign creation, targeting, spend and ROAS input, recommendation preview, activation",
+          },
+          {
+            label: "Deferred",
+            value: "Post-launch reporting and campaign editing",
+          },
+          {
+            label: "Reason",
+            value:
+              "Validate the highest-leverage workflow before expanding the operating surface",
+          },
+        ],
+      },
+      {
+        title: "Decision scorecard",
+        purpose: "Make speed-versus-control tradeoffs explicit.",
+        rows: [
+          {
+            label: "Primary outcomes",
+            value: "ROAS attainment, budget utilization, conversion",
+          },
+          {
+            label: "Marketplace guardrails",
+            value: "Margin health, pacing deviation, overspend risk",
+          },
+          {
+            label: "System guardrails",
+            value: "Latency, fallback rate, stale-state behavior",
+          },
+        ],
+      },
+    ],
+    evidenceNote:
+      "Sanitized reconstruction from product requirements and interview materials. Proprietary interfaces, customer data, and implementation detail are omitted.",
+    outcomes: [
+      "Programmatic Loyalty scaled to $500M+ in annual revenue.",
+      "Personalization and cohort-targeting work contributed to a 20% lift in conversion.",
+      "Online optimization used low-latency state while settled financial outcomes remained the source of truth.",
+    ],
+    featured: true,
+    accent: "mint",
+    metrics: [
+      {
+        value: "$500M+",
+        label: "Platform annual revenue",
+      },
+      {
+        value: "+20%",
+        label: "Conversion lift contributed to",
+      },
+    ],
+    takeaway:
+      "Product leadership across marketplace economics, recommendations, and real-time data.",
+  },
+  {
+    slug: "rakuten-ai-platform",
+    title: "Better creative workflows. Shared decisions. Infrastructure that keeps up.",
+    tagline:
+      "At Rakuten, I lead product work across shared decisioning, multi-agent creative workflows, and the infrastructure that supports them.",
+    category: "AI platforms & infrastructure",
+    status: "Professional work",
+    role: "Staff Product Manager · Rakuten",
+    timeframe: "Jun 2025 – Present",
+    stack: [
+      "LangChain",
+      "Memory & retrieval",
+      "Model evaluation",
+      "Docker & Kubernetes",
+      "AWS & GCP",
+      "Sharded Redis",
+    ],
+    flow: [
+      "Shared campaign + marketplace signals",
+      "Recommendation, ranking + pacing",
+      "Common APIs + integration contracts",
+    ],
+    sections: [
+      {
+        heading: "The problem",
+        body: [
+          "Recommendation, ranking, and budget-pacing logic had grown across separate systems. Creative generation and review were also fragmented. As platform scale increased, product teams needed shared decisions, clear contracts, and infrastructure that could keep up.",
+        ],
+      },
+      {
+        heading: "My ownership",
+        body: [
+          "As Staff Product Manager, I led product architecture across three connected initiatives: a common decisioning layer, a multi-agent creative workflow, and the cloud and data infrastructure supporting them.",
+          "I defined shared signals, evaluation metrics, APIs, integration contracts, orchestration, memory and retrieval behavior, model evaluation, access and retention controls, and technical requirements for containerized services.",
+        ],
+      },
+    ],
+    decision: {
+      question:
+        "Should we reduce online state, or scale the live decisioning architecture?",
+      tension:
+        "Precomputing more decisions offline would reduce the number of values stored in Redis and simplify the online path. It would also narrow what the live decisioning layer could respond to as the platform grew.",
+      options: [
+        {
+          label: "Move more decisions offline",
+          detail:
+            "Precompute more of the answer and store less live state in Redis, reducing pressure on the existing architecture.",
+        },
+        {
+          label: "Shard the Redis architecture",
+          detail:
+            "Distribute decisioning state horizontally so the platform could preserve its online requirements as scale increased.",
+          selected: true,
+        },
+      ],
+      rationale:
+        "I drove the sharded architecture because the product still needed low-latency online decisions. The system constraint had to change without removing the live product capability it supported.",
+      impact:
+        "The migration improved p95 latency from 4 seconds to 300 milliseconds and reduced infrastructure costs by 30%.",
+    },
+    systemMap: {
+      title: "How the Staff PM scope fits together",
+      description:
+        "A portfolio-level view of three separate initiatives, rather than a single runtime request path.",
+      mode: "scope",
+      steps: [
+        {
+          label: "Shared decisioning",
+          detail:
+            "Common campaign and marketplace signals → recommendation, ranking, and pacing → shared APIs and evaluation metrics",
+        },
+        {
+          label: "GenAI creative workflow",
+          detail:
+            "Agent orchestration → memory and retrieval → model evaluation and review → access and retention controls",
+        },
+        {
+          label: "Infrastructure foundation",
+          detail:
+            "Containerized services across AWS and GCP → Docker and Kubernetes → sharded Redis architecture",
+        },
+      ],
+      foundation:
+        "Outcome lens · recommendation response time · product decision velocity · creative revision cycles · p95 latency · infrastructure cost",
+      feedback:
+        "Each initiative had its own success measures; the results are kept separate below.",
+    },
+    leadership: [
+      {
+        team: "Engineering",
+        alignment:
+          "Converted product needs into platform abstractions, API and integration contracts, infrastructure requirements, and migration outcomes.",
+      },
+      {
+        team: "Data science",
+        alignment:
+          "Defined shared signals and evaluation measures so ranking, recommendation, and pacing could be assessed consistently.",
+      },
+      {
+        team: "Creative workflow stakeholders",
+        alignment:
+          "Translated a fragmented generation-and-review journey into orchestration, memory, retrieval, evaluation, and governance requirements.",
+      },
+      {
+        team: "Product teams",
+        alignment:
+          "Used common interfaces to reduce repeated decision work while preserving the needs of each consuming product.",
+      },
+    ],
+    productArtifacts: [
+      {
+        title: "Shared decisioning contract",
+        purpose: "Define what each consuming product could rely on.",
+        rows: [
+          {
+            label: "Inputs",
+            value: "Common campaign and marketplace signals",
+          },
+          {
+            label: "Decisions",
+            value: "Recommendation, ranking, and budget pacing",
+          },
+          {
+            label: "Interface",
+            value: "APIs, integration contracts, and evaluation metrics",
+          },
+        ],
+      },
+      {
+        title: "GenAI workflow specification",
+        purpose: "Treat AI output as a governed product workflow.",
+        rows: [
+          {
+            label: "Orchestration",
+            value: "Agent roles, sequence, and handoffs",
+          },
+          {
+            label: "Context",
+            value: "Memory, retrieval, and data access",
+          },
+          {
+            label: "Quality & control",
+            value: "Model evaluation, review behavior, and retention rules",
+          },
+        ],
+      },
+    ],
+    evidenceNote:
+      "Sanitized reconstruction from role materials. The metrics below come from separate Staff PM initiatives and are not presented as one experiment.",
+    outcomes: [
+      "p95 infrastructure latency improved from 4s to 300ms; infrastructure costs fell 30%.",
+      "Multi-agent GenAI orchestration reduced creative revision cycles by 30%.",
+      "Shared decisioning reduced recommendation response time by 20% and increased product decision velocity by 25%.",
+    ],
+    featured: true,
+    accent: "blue",
+    metrics: [
+      {
+        value: "−20%",
+        label: "Recommendation response time",
+      },
+      {
+        value: "−30%",
+        label: "Creative revision cycles",
+      },
+    ],
+    takeaway:
+      "Connecting AI orchestration, shared platform contracts, and operational performance.",
+  },
+  {
+    slug: "whatsapp-catch-up",
+    title: "WhatsApp Catch-Up",
+    tagline:
+      "Turn a backlog of voice notes into a reviewable summary, source-linked decisions, and replies the user controls.",
+    category: "AI interaction design",
+    status: "Simulated AI prototype",
+    role: "Product framing, interaction design, AI output schema & build",
+    timeframe: "July 2026",
+    stack: [
+      "React 19 & TypeScript",
+      "Vite",
+      "Tailwind CSS",
+      "Typed mock AI data",
+      "Shared audio playback state",
+    ],
+    flow: [
+      "Voice-note cluster",
+      "Review summary + inspect sources",
+      "Edit a reply, then send",
+    ],
+    sections: [
+      {
+        heading: "The problem",
+        body: [
+          "Voice notes are easy to send and expensive to catch up on. Decisions, deadlines, and questions can be scattered across several recordings. A receiver has to listen, remember, and decide what needs a response.",
+        ],
+      },
+      {
+        heading: "The product bet",
+        body: [
+          "Make catch-up a recovery layer inside the conversation. The central interaction is a short loop: skim, verify the source, edit a reply, and send deliberately.",
+          "I prioritized source traceability and user control over autonomous replies. A summary should help the user understand the conversation before it asks them to act.",
+        ],
+      },
+      {
+        heading: "What works in the prototype",
+        body: [
+          "The main scenario contains seven voice notes totaling eighteen minutes. The build includes an inline summary, detail panel, global catch-up inbox, transcript search, playback controls, and reply helper.",
+          "Sending a reply updates the answered state. Topics, questions, decisions, confidence, and source timing are represented as typed data. A companion Product Sense Flow Map explains the feature logic and tradeoffs.",
+        ],
+      },
+      {
+        heading: "What is simulated",
+        body: [
+          "The AI outputs and conversation data are mocked. This is an interactive workflow prototype, not a live transcription or summarization service, and it does not connect to a WhatsApp account.",
+          "A production version would need a privacy architecture that preserves end-to-end encryption. On-device processing and explicit consent for any cloud inference would need evaluation.",
+        ],
+      },
+      {
+        heading: "How I would evaluate it",
+        body: [
+          "Compare time to identify the correct decisions and unanswered questions against listening to the original notes. Track missed asks, unsupported summary claims, source-verification behavior, and edits to suggested replies.",
+          "Include ambiguous commitments, conflicting dates, multiple speakers, and imperfect transcripts. Accuracy and recoverability should be checked before increasing automation. These are proposed evaluation criteria; no model-quality or user-study results are claimed.",
+        ],
+      },
+    ],
+    outcomes: [
+      "An interactive catch-up workflow from voice backlog to reviewed reply.",
+      "A typed schema for inspectable summaries, questions, decisions, and source segments.",
+      "An explicit evaluation plan and privacy considerations for moving beyond simulated AI.",
+    ],
+    featured: true,
+    accent: "amber",
+    metrics: [
+      {
+        value: "7 notes",
+        label: "Built-in demonstration scenario",
+      },
+      {
+        value: "18 minutes",
+        label: "Audio in the scenario",
+      },
+    ],
+    takeaway:
+      "Designing trust into an AI-assisted workflow before automating it.",
+    demo: "https://pranavd0828.github.io/WhatsApp-catch-up/",
+    github: "https://github.com/Pranavd0828/WhatsApp-catch-up",
     artifacts: [
       {
-        label: 'Product Sense Flow Map',
-        url: 'https://pranavd0828.github.io/WhatsApp-catch-up/product-mind-map/',
+        label: "Product Sense Flow Map",
+        url: "https://pranavd0828.github.io/WhatsApp-catch-up/product-mind-map/",
       },
-    ],
-    sections: [
-      {
-        heading: 'Why Now',
-        body: [
-          'Voice notes have become the lowest-friction way to send context, but they are still one of the highest-friction ways to receive it. The sender can talk for eighteen minutes. The receiver has to listen, remember, extract the ask, and decide what to do next.',
-          'The timing is right because transcription, summarization, and structured extraction are now good enough to support a review workflow. The opportunity is not to replace the conversation. It is to make long audio skimmable, traceable, and actionable without moving the user out of WhatsApp.',
-        ],
-      },
-      {
-        heading: 'The Problem',
-        body: [
-          'Long or clustered voice notes hide the actual work of the conversation. A wedding-planning update might contain a venue decision, a florist quote, an RSVP count, a payment deadline, and three direct questions, but WhatsApp still shows the user a stack of audio bubbles.',
-          'That creates a receiver-side tax. Users postpone listening, miss direct asks, forget decisions, and reply with partial context. The problem is worse in group chats because multiple senders can pile voice notes into one thread before the user returns.',
-        ],
-      },
-      {
-        heading: 'Product Bet',
-        body: [
-          'The product bet is that AI should live as a recovery layer inside the conversation. The user opens WhatsApp, selects a voice-heavy chat, taps Catch Up, reviews the summary, answers questions, inserts a draft, and sends only after review.',
-          'Trust is the constraint that shapes the whole feature. A summary is useful only if the user can see why it exists, return to the transcript or audio segment, edit any generated reply, and keep control over what gets sent.',
-        ],
-      },
-      {
-        heading: 'What I Built',
-        body: [
-          'A high-fidelity WhatsApp Web prototype with desktop and mobile shells, a realistic chat list, Ellie wedding-planning voice-note cluster, inline Catch-Up summary card, right-side detail panel, global Catch-Up inbox, transcript search, playback controls, and reply helper.',
-          'The main scenario uses seven Ellie voice notes totaling eighteen minutes. The Catch-Up layer extracts topics, decisions, questions, tone, important segments, and suggested replies. Sending a generated reply updates the answered state, so the prototype demonstrates the full loop from backlog to closure.',
-          'I also shipped a separate Product Sense Flow Map that explains user segments, pain points, jobs to be done, AI logic, privacy requirements, metrics, and tradeoffs using only rectangular boxes and directional arrows.',
-        ],
-      },
-      {
-        heading: 'AI Logic',
-        body: [
-          'The prototype models the AI output as typed structured data rather than loose strings. Catch-Up results include topic clusters, question objects, decision records, updates, tone signals, important segments, suggested replies, transcripts, confidence, and source timing.',
-          'The intended pipeline is transcription, silence skipping, topic clustering, action item extraction, question detection, and suggested reply generation. Every high-impact item should map back to a timestamped transcript segment so the user can inspect the source before trusting it.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I kept the model layer mocked so the prototype could focus on interaction quality, trust, and workflow fit. Real inference would add latency, privacy, and consent questions that are important, but separate from proving whether the surface belongs inside WhatsApp.',
-          'I prioritized native WhatsApp fidelity over obvious AI branding. The feature has to feel like part of the chat, not a dashboard bolted onto a private conversation. The tradeoff is that some capability is less visually loud, but the experience is more believable.',
-          'The production version would need a privacy-first architecture: end-to-end encryption must not be weakened, on-device processing should be preferred where possible, and cloud inference would require explicit consent and clear boundaries.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'At messaging-app scale, the value is not just summarization. It is reducing unresolved conversation debt. If users can return to long audio faster, answer direct asks, and close action items, WhatsApp becomes better at asynchronous coordination.',
-          'The strongest wedge is high-density coordination: weddings, family logistics, work groups, student projects, and group-chat-heavy users. These are the contexts where missed asks create real follow-up cost and where a Catch-Up queue can become a retention feature.',
-        ],
-      },
-    ],
-    outcomes: [
-      'A desktop and mobile WhatsApp Catch-Up prototype with inline summary, right panel, global inbox, transcript search, playback controls, and reply helper wired through React state.',
-      'A typed AI output schema that models topics, questions, decisions, action items, transcript segments, confidence, and suggested replies as inspectable product data.',
-      'A companion Product Sense Flow Map that makes the product logic, privacy requirements, metrics, and tradeoffs explicit for PM review.',
     ],
   },
   {
-    slug: 'gmail-commitment-radar',
-    title: 'Gmail Commitment Radar',
+    slug: "gmail-commitment-radar",
+    title: "Gmail Commitment Radar",
     tagline:
-      'An AI-assisted Gmail layer that detects promises, asks, deadlines, and unresolved follow-ups hidden inside email threads, then turns them into a triageable commitment workflow.',
-    category: 'AI Workflow Intelligence / Productivity',
-    role: 'Product Manager and builder: workflow framing, Gmail shell recreation, state model, and prototype build.',
-    timeframe: 'June 2026',
-    stack: [
-      'Vite with React 19 and TypeScript',
-      'Tailwind CSS v4 for a Gmail-native interface shell',
-      'Zustand with localStorage persistence for commitment state',
-      'Lucide React for interface icons',
-      'Date-fns for deadline and follow-up metadata',
+      "Find promises and unresolved asks in email, explain the source, and let the user decide the next action.",
+    category: "AI workflow design",
+    status: "Simulated AI prototype",
+    role: "Workflow framing, Gmail interface, persistent state & build",
+    timeframe: "June 2026",
+    stack: ["React 19 & TypeScript", "Vite", "Zustand", "localStorage"],
+    flow: [
+      "Email thread",
+      "Source-backed commitment",
+      "Done, snooze, or draft",
     ],
-    demo: 'https://pranavd0828.github.io/Gmail-Commitment-Radar/',
-    github: 'https://github.com/Pranavd0828/Gmail-Commitment-Radar',
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The problem",
         body: [
-          'Email remains the system of record for professional commitments, but the commitments themselves are buried in prose: a promised deck, a follow-up by Friday, an ask that never became a task. Existing inbox tooling sorts messages, not obligations.',
-          'The product timing is strong because modern language models can identify commitment-like language well enough to support a review workflow. The opportunity is not to auto-complete work blindly, but to expose the hidden work users already agreed to do.',
+          "An email can disappear from the visible inbox while a promise inside it remains open. Tracking commitments requires noticing an obligation and moving it into a separate workflow.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "The product decision",
         body: [
-          'Professionals miss commitments because the inbox is optimized around recency and sender, not accountability. A thread can leave the visible inbox while an ask inside that thread remains open.',
-          'For Gmail, this is a workflow depth problem. Calendar, Tasks, and email are adjacent, but the moment of commitment detection still depends on the user manually noticing and translating language into action.',
+          "Keep triage inside the inbox and highlight the exact phrase behind a detected commitment. The user can inspect the evidence before marking it done, snoozing it, or preparing a reply.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "What works",
         body: [
-          'The bet is that commitment tracking should feel native to the inbox, not like a separate task manager. If the assistant explains the exact source phrase and lets the user triage in place, trust increases and context switching drops.',
-          'The prototype treats AI as a detection and explanation layer. The user remains in control of whether a commitment is marked done, snoozed, or turned into a draft reply.',
+          "The prototype connects inbox badges, a thread view, radar panel, dashboard, settings, and draft composer. Commitment state persists locally and stays consistent across the views.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "Boundaries and next evaluation",
         body: [
-          'A high-fidelity Gmail shell with inbox badges, a thread view, a radar side panel, a dashboard, settings, and a global draft composer. Commitments persist across views, so marking one done in the panel updates the dashboard and thread state.',
-          'The thread view highlights the exact source phrase that caused a commitment to be flagged. That detail matters because the assistant has to earn trust before it can ask the user to act.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I kept the AI layer simulated inside the prototype rather than connecting live Gmail data. That keeps the UX test focused on interaction design, trust, and triage mechanics without adding OAuth and privacy scope.',
-          'I chose Gmail fidelity over visual novelty. The product question is whether the layer belongs inside email, so the prototype needed to feel like Gmail first and like an AI product second.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'A commitment layer is a retention feature for productivity suites because it increases the value of existing email data without asking users to adopt a new destination.',
-          'The strongest expansion path is across Calendar, Tasks, and CRM surfaces: the same detected commitment can become a reminder, a draft, a task, or an account follow-up depending on context.',
+          "Detection is simulated. There is no live Gmail connection or model inference. This keeps the build focused on workflow and state consistency.",
+          "A next evaluation would measure precision of commitment detection, incorrect deadlines, user corrections, and unresolved tasks recovered. Negation, quoted messages, and requests addressed to someone else are important failure cases.",
         ],
       },
     ],
     outcomes: [
-      'A full Gmail-native prototype with inbox, thread, radar panel, dashboard, settings, and composer surfaces wired together through persistent state.',
-      'Source phrase highlighting included to make AI detection explainable rather than opaque.',
-      'A clear product path identified: detect commitments in email first, then route them into calendar, task, draft, or CRM workflows.',
+      "A connected Gmail-style triage workflow with persistent local state.",
+      "Source-phrase highlighting makes each simulated detection inspectable.",
+      "The build exposes the handoff between detection and user-controlled action.",
     ],
+    accent: "blue",
+    takeaway:
+      "Source evidence and consistent state make assistant suggestions easier to inspect.",
+    demo: "https://pranavd0828.github.io/Gmail-Commitment-Radar/",
+    github: "https://github.com/Pranavd0828/Gmail-Commitment-Radar",
   },
   {
-    slug: 'whatsapp-regional-voice',
-    title: 'WhatsApp Regional Voice Over AI',
+    slug: "whatsapp-regional-voice",
+    title: "WhatsApp Regional Voice",
     tagline:
-      'A Smart Audio Playback layer for WhatsApp that renders text messages in the sender\u2019s regional dialect with an authentic accent, rather than a generic synthetic voice.',
-    category: 'GenAI Voice / Consumer Messaging',
-    role: 'Product Manager and builder: framing, model selection, full-stack prototype.',
-    timeframe: 'December 2025 to January 2026',
-    stack: [
-      'Next.js 14 frontend styled to match WhatsApp Web',
-      'FastAPI backend for AI orchestration',
-      'Google Gemini for dialect detection and script transliteration',
-      'ElevenLabs text-to-speech with pinned Voice IDs for high-fidelity regional accents (Hindi and Punjabi in the current build)',
-      'Experimental CarPlay surface at /carplay for hands-free playback',
+      "Explore regional-dialect playback through a messaging prototype and a Gemini-to-ElevenLabs voice pipeline.",
+    category: "Voice & AI integration",
+    status: "AI integration prototype",
+    role: "Problem framing, model selection, frontend & backend prototype",
+    timeframe: "Dec 2025 – Jan 2026",
+    stack: ["Next.js", "FastAPI", "Gemini", "ElevenLabs"],
+    flow: [
+      "Message text",
+      "Dialect detection + transliteration",
+      "Regional voice playback",
     ],
-    demo: 'https://pranavd0828.github.io/Whatsapp-Regional-Voice-Over-AI/',
-    github: 'https://github.com/Pranavd0828/Whatsapp-Regional-Voice-Over-AI',
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The problem",
         body: [
-          'Global text-to-speech has spent a decade optimizing the average voice and flattening everything underneath it. For any user whose primary communication carries a dialect or regional accent, the existing accessibility pipeline strips out the very thing that makes a message feel personal.',
-          'The timing bet is that hosted voice models finally cleared the fidelity bar in 2025. A pipeline that combines dialect detection with a voice model tuned to a specific accent now produces audio that a listener will accept as authentic, which was not true a year earlier.',
+          "Generic text-to-speech can flatten the regional character of a message. I explored how playback could preserve more of that character in Hindi and Punjabi, including contexts where the user cannot look at a screen.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'Two separate user pains meet on one surface. The first is accessibility: users who need or prefer audio playback receive a generic, affectless voice that erases the identity of the sender. The second is context: when messages are read in a voice that does not match the sender, the emotional register of the original message is lost.',
-          'From a product lens, this is a daily-engagement and retention surface. Audio playback raises session length, extends messaging into contexts where the screen cannot be used, and opens a wedge into in-car and wearable listening where messaging apps currently have no meaningful presence.',
+          "A WhatsApp-style interface sends text to Gemini for dialect detection and transliteration, then to ElevenLabs with a pinned voice ID for synthesis. The prototype also includes an experimental in-car playback surface.",
+          "The frontend and backend are separate so the model pipeline can change without replacing the messaging interface.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "The tradeoff",
         body: [
-          'The core bet is that fidelity, not feature count, decides adoption. Users will open a synthesized audio clip once out of curiosity. They will only open it again if the voice feels like it could belong to the person who sent the message.',
-          'The practical evaluation target for this prototype was a short preview clip. A user should be able to listen to a few seconds of synthesized audio and accept it as a plausible voice note from the sender, rather than as a machine reading a message out loud.',
+          "I chose pinned regional voice IDs rather than cloning a sender. The output represents a regional voice, not the actual speaker’s identity.",
+          "The repository includes the integration pipeline. The hosted frontend is a prototype; live synthesis depends on a configured backend and model-service credentials. It is not a WhatsApp integration or a deployed CarPlay application.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "What needs evaluation",
         body: [
-          'A WhatsApp Web clone with a play icon on every text message. Clicking the icon sends the message text through Gemini, which detects the dialect and produces the correct transliteration. The transliterated text is then sent to ElevenLabs against a pinned Voice ID chosen to match that dialect, which returns an audio clip that plays inline.',
-          'The prototype also ships a CarPlay surface. A notification banner triggers hands-free audio playback, which represents the real adoption vector for the feature. Users who cannot look at a screen are the ones who need synthesized voice most, and designing for that context first keeps the product honest.',
-          'The backend and frontend are cleanly separated, so the voice pipeline can be swapped without touching the messaging interface. This matters for a prototype because the model layer is the part most likely to change as better options ship.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I did not build on-device synthesis. On-device would have solved the long-term cost story but would have added significant scope without changing what the prototype was designed to answer. The point of this build was to validate fidelity, not to prove unit economics.',
-          'I chose pinned Voice IDs over voice cloning of the sender. Cloning is the obvious future state, but it carries a consent surface that is too heavy for a first prototype.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'At messaging-app scale, a pure API pipeline is not viable on unit economics. The productionization path would use a distilled on-device model for the highest-volume dialects, and reserve hosted inference for the long tail.',
-          'The feature is best understood as a platform wedge rather than a standalone product. Once audio playback is native to a messaging app, the same pipeline extends into in-car listening, wearables, and any context where the screen is unavailable. Those are the surfaces where messaging apps currently lose time to voice assistants and podcasts.',
+          "Before calling the voices authentic, I would compare pronunciation and dialect fidelity with native speakers, including mixed-language messages. I would also measure generation latency, failure rate, and cost per audio minute.",
+          "Consent, retention, fallback playback, and on-device feasibility belong in production planning. No benchmark or listening-study results are presented here.",
         ],
       },
     ],
     outcomes: [
-      'End-to-end prototype shipping: WhatsApp Web UI, dialect detection, regional voice synthesis, and inline playback working across a full chat.',
-      'A hands-free CarPlay surface built into the prototype, which keeps the design anchored to the use case that actually needs synthesized voice.',
-      'A clear productization path identified: distilled on-device models for the high-volume dialects, with hosted inference kept for the long tail.',
+      "An integration prototype combining dialect detection, transliteration, and synthesized audio.",
+      "A separate frontend/backend boundary for model iteration.",
+      "A defined evaluation surface around pronunciation, latency, consent, and cost.",
     ],
+    accent: "mint",
+    takeaway:
+      "Working across model boundaries while keeping identity and consent explicit.",
+    demo: "https://pranavd0828.github.io/Whatsapp-Regional-Voice-Over-AI/",
+    github: "https://github.com/Pranavd0828/Whatsapp-Regional-Voice-Over-AI",
   },
   {
-    slug: 'maps-meet-mode',
-    title: 'Google Maps: Meet Halfway Mode',
+    slug: "maps-meet-mode",
+    title: "Google Maps: Meet Halfway",
     tagline:
-      'A Group Fairness Engine for Google Maps that picks a real, land-locked venue for any number of friends, weighted by commute pain and inequality rather than by the geometric midpoint.',
-    category: 'Product Strategy / Marketplace Fairness',
-    role: 'Product Manager and builder: problem framing, fairness formula design, full-stack prototype.',
-    timeframe: 'January 2026 to February 2026',
-    stack: [
-      'React 18 with Vite',
-      'Tailwind CSS using Google design tokens',
-      '@react-google-maps/api for native map rendering',
-      'Google Places API for real venue candidates',
-      'A custom fairnessEngine.js that scores venues using a weighted formula',
+      "Rank meetup venues around the burden of the longest trip, rather than relying on a geometric midpoint.",
+    category: "Ranking & product strategy",
+    status: "Prototype · estimated travel",
+    role: "Problem framing, fairness formula & prototype build",
+    timeframe: "Jan – Feb 2026",
+    stack: ["React & Vite", "Google Places API", "Custom fairness scoring"],
+    flow: [
+      "Group locations",
+      "Venue candidates + estimated travel",
+      "Ranked meetup options",
     ],
-    demo: 'https://google-maps-meet-mode.vercel.app/',
-    github: 'https://github.com/Pranavd0828/Google-Maps-Meet-Mode',
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The product question",
         body: [
-          'Maps has spent its product life optimizing one-to-one directions, but a rising share of Maps sessions start from a group plan being negotiated over a separate chat app. The coordination moment, which is the hardest part of getting three friends to meet, lives outside the product that should own it.',
-          'Places data is now cheap and fast enough that a real-time, multi-user venue ranker can run inside the map surface without a dedicated backend. The feature is cheap to prototype and cheap to ship, which was not true a few product cycles earlier.',
+          "For a group choosing where to meet, a geometric midpoint does not answer whether the trip is reasonable for everyone. I explored ranking real venues with a penalty for long and uneven commutes.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'Classical "meet in the middle" tools fail on two dimensions at once. They support only two users, and they return a geometric centroid that routinely lands in an ocean, on a freeway, or on a residential block with no venues. The user is still the one doing the real work.',
-          'For a maps product, this is a coordination tax that keeps users inside chat apps when they should be inside the map. Moving that decision into the map surface increases the value of each session and raises the probability of a downstream navigation.',
+          "Users add locations; the prototype searches for nearby venue candidates and ranks them with a weighted commute score. A simulation fallback allows the interaction to remain demonstrable when the Places service is unavailable.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "The important limitation",
         body: [
-          'The bet is that fairness, not the midpoint, is what users actually want. A meetup feels successful when nobody believes they traveled too far. It does not feel successful just because everyone traveled the same amount.',
-          'The scoring formula makes this explicit. The score for each venue equals (MaxCommute times 0.7) plus (Variance times 0.3). Seventy percent of the score protects the person with the longest trip. Thirty percent keeps travel times close to each other. A lower score is better.',
+          "Travel times are simulated using distance, an assumed urban speed, and a random multiplier. They are not live routes, traffic estimates, or validated commute predictions.",
+          "The original score combines maximum commute and variance. A production score should normalize those quantities before weighting them because time and variance use different units. The weights also need sensitivity testing and user feedback.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "How I would improve the decision",
         body: [
-          'Party Mode supports any number of users, not only two. Each user drops a pin on the map. The engine computes the centroid of those pins, then uses the Google Places API to fetch real venues within a four-kilometer radius of that centroid. This step solves the "meet in the ocean" failure mode because the candidate list is always a real business on land.',
-          'Travel times are estimated using the Haversine formula combined with a small random multiplier between 0.9 and 1.3 on a thirty kilometers per hour urban base speed. This keeps API cost at zero while still producing travel time vectors that rank venues sensibly.',
-          'The prototype ships real cost assurance: a cap of one hundred searches per day, a graceful fallback to simulation mode if the API takes longer than five seconds, and a hard-coded kill switch to prevent accidental spend after the trial window.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I used a simulated travel time model rather than the Distance Matrix API. The decision was about cost, not accuracy. A production version would use Distance Matrix for the top three candidates only, and keep the simulation for the long tail.',
-          'I did not build account state. All preferences are passed in as ephemeral pins. For a prototype this is the right choice, because forcing a login would have killed the core insight the prototype is trying to validate.',
-          'The scoring formula is not shown to users in this version. The code makes it visible to a PM reviewer, but the surfaced output is just the ranked list. A future version should show why each venue was picked, because that is the difference between a list and a conversation.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'The value of this feature is measured in downstream navigations per group session, not in clicks. A group plan that concludes inside Maps produces several routes, one per person, rather than the single route a solo session produces.',
-          'The fairness engine is a defensible product surface. The weighting can be adjusted for local norms, such as weighting variance higher in regions where equal treatment matters more culturally, and that localization work is difficult for a competitor to match without significant PM investment.',
+          "Evaluate candidate coverage beyond a centroid search radius, especially around water, transit barriers, and uneven travel modes. Use real route estimates for shortlisted candidates and explain who travels farther.",
+          "The next useful comparison is group acceptance and time to agreement against simpler baselines. This prototype does not establish a measured improvement in either metric.",
         ],
       },
     ],
     outcomes: [
-      'Party Mode shipping end-to-end: any number of users, real venue candidates, and a transparent fairness formula.',
-      'Zero "meet in the ocean" results after the land-snapping step, because every candidate is a real business fetched from Places.',
-      'API cost per query held at zero during testing through simulated travel times, with a clear path to paid Distance Matrix calls for the top candidates in production.',
+      "A group venue-ranking interaction with an explicit fairness objective.",
+      "A simulated travel model that makes ranking tradeoffs explorable.",
+      "Clear next steps for route accuracy, score normalization, and candidate coverage.",
     ],
+    accent: "blue",
+    takeaway:
+      "A ranking formula is a product hypothesis that needs normalization and validation.",
+    demo: "https://google-maps-meet-mode.vercel.app/",
+    github: "https://github.com/Pranavd0828/Google-Maps-Meet-Mode",
   },
   {
-    slug: 'rescue-offers',
-    title: 'Rescue Radar: Food Delivery Post-Cancellation Offers',
+    slug: "rescue-offers",
+    title: "Rescue Radar",
     tagline:
-      'A map-first food delivery surface that turns last-minute canceled orders into a live, time-pressured rescue at fifty to seventy percent off, reframing waste prevention as delight.',
-    category: 'Marketplace / Sustainability',
-    role: 'Product Manager and builder: framing, marketplace design, prototype build.',
-    timeframe: 'January 2026',
-    stack: [
-      'React with Vite',
-      'Tailwind CSS',
-      'React Leaflet for the Rescue Radar map',
-      'Framer Motion for the feed and timer animations',
-      'React Context for ephemeral cart, offer, and timer state',
+      "A time-sensitive marketplace concept for rediscovering canceled food orders nearby.",
+    category: "Marketplace design",
+    status: "Interaction prototype",
+    role: "Marketplace framing, offer lifecycle & build",
+    timeframe: "January 2026",
+    stack: ["React & Vite", "React Leaflet", "React Context"],
+    flow: [
+      "Nearby rescue offer",
+      "Review + temporary hold",
+      "Simulated checkout",
     ],
-    demo: 'https://pranavd0828.github.io/Food-Delivery---Post-Cancellation-Rescue-Offers/',
-    github: 'https://github.com/Pranavd0828/Food-Delivery---Post-Cancellation-Rescue-Offers',
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The product question",
         body: [
-          'Food delivery platforms have spent a decade optimizing the forward path from order to doorstep, and almost no time on the failure path. A canceled order is already cooked, already paid for by the restaurant, and already sitting in a rider bag. The operational conditions for a salvage product have never been more favorable.',
-          'A sustainability-minded user cohort is now commercially meaningful. Some users will choose a discounted rescue over a full-price fresh order, not despite the waste story but because of it. That shift makes rescue a viable product rather than a marketing line.',
+          "Could a canceled, prepared order become a useful nearby offer? The prototype explores discovery, urgency, and framing rather than a real delivery operation.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'Every canceled order today is a triple loss. The restaurant eats the food cost, the platform eats the refund, and the rider is idle. No surface exists to turn that loss into a second sale.',
-          'The user-side problem is discovery under a sharp constraint. A rescued dish has a window of roughly three to five minutes and a radius of about five hundred meters. Any interface that relies on search or browse will miss it. Discovery has to come to the user in real time.',
+          "A discovery feed, map, ninety-second hold timer, and simulated checkout share offer state. Cached copy supports the demonstration without live language-model calls.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "Tradeoffs and boundaries",
         body: [
-          'The first bet is that a rescue surface should not live inside the normal delivery flow. A separate, map-first, time-pressured surface makes the short window and close radius feel like the fun of the product rather than its friction.',
-          'The second bet is that framing matters as much as pricing. A discounted dish must read as "a neighbor just freed up this order" and not as "someone rejected this food." The leaderboard framing around Waste Warriors and CO2 saved turns a salvage economy into a status game, which is what actually produces returning users.',
+          "There is no delivery backend, payment processing, or live inventory. Discounts, activity, and environmental figures belong to the demonstration scenario and are not measured marketplace outcomes.",
+          "Before launch, food handling, order eligibility, customer trust, rider rerouting, refunds, and unit economics would need validation. A countdown alone does not establish that a resale window is operationally safe or usable.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "Next evaluation",
         body: [
-          'A feed-first discovery surface, closer in feel to a short-form video feed than to a restaurant grid. A live Rescue Radar map shows nearby rescue offers appearing in real time. A ninety-second hold timer runs once a user secures a deal, which creates the urgency the product depends on without pushing the window so short that the user cannot act.',
-          'The Pulse ticker makes the marketplace legible as a live system, showing rescues happening right now against food waste prevented over the last hour. A gamified checkout ranks users on cumulative CO2 saved, which turns retention into a leaderboard rather than a discount coupon.',
-          'Global state lives in a RescueContext, so offers, cart, and hold timers stay in sync across the feed, the map, and the checkout without routing complexity.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I did not integrate a real delivery backend. The point of the prototype was to validate the surface and the framing, not the operations. A real integration would require a rider re-route planner, which is a separate product.',
-          'I chose the gamified Waste Warriors frame over a pure discount frame. A pure discount would likely convert faster in the short term, but it would train users to treat rescue as a price event rather than a habit, which undercuts the reason the feature exists.',
-          'The prototype uses a cached library of offer copy rather than an LLM-in-the-loop. A live LLM would be slower and more expensive on the notification path, and for a salvage product the notification has to land inside a narrow window.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'Rescue Radar converts a refund line item into a revenue line item. Even a modest rescue rate recovers margin that would otherwise be zero, and it protects the restaurant relationship that cancellations damage the most.',
-          'The sustainability framing is not a marketing layer. The CO2 leaderboard is a retention mechanic that is difficult for a competitor to copy, because copying it requires rebuilding the upstream waste-prevention story rather than just adding a badge.',
-          'The right launch region for this feature is a dense metro with a high cancellation rate and a sustainability-aware user base. A prototype like this is what lets a growth team see the surface clearly before committing to a launch geography.',
+          "Compare clear savings-led messaging with the sustainability framing. Measure comprehension, offer acceptance, expired holds, and whether customers understand the condition of the order. Retention and waste reduction remain hypotheses.",
         ],
       },
     ],
     outcomes: [
-      'A full end-to-end prototype shipping in a single session: feed, map, hold timer, gamified checkout, and a global state layer that keeps them in sync.',
-      'The ninety-second hold timer validated as a usable window: long enough for a user to read the offer card and decide, short enough to preserve the urgency the product depends on.',
-      'A framing decision documented in the product: Waste Warriors and CO2 saved, rather than a pure discount framing, because the goal is a returning habit rather than a one-time price event.',
+      "A connected offer lifecycle across feed, map, timer, and simulated checkout.",
+      "A concrete surface for testing urgency and trust.",
+      "Operational and measurement questions separated from the interaction prototype.",
     ],
+    accent: "amber",
+    takeaway:
+      "Marketplace interaction design only works when operational constraints are explicit.",
+    demo: "https://pranavd0828.github.io/Food-Delivery---Post-Cancellation-Rescue-Offers/",
+    github:
+      "https://github.com/Pranavd0828/Food-Delivery---Post-Cancellation-Rescue-Offers",
   },
   {
-    slug: 'linkedin-messaging-formatting',
-    title: 'LinkedIn Messaging: Formatting Option',
+    slug: "linkedin-messaging-formatting",
+    title: "LinkedIn Messaging: Formatting",
     tagline:
-      'A pixel-accurate LinkedIn Messaging recreation that adds rich-text formatting directly inside the native compose surface, closing a gap that no professional messaging product should still have.',
-    category: 'Professional Network / UI Extension',
-    role: 'Product Manager and builder: problem identification, interface recreation, formatting logic.',
-    timeframe: 'November 2025 to January 2026',
-    stack: ['HTML, CSS, JavaScript', 'Vite for dev tooling', 'Native contenteditable APIs for rich-text formatting'],
-    demo: 'https://pranavd0828.github.io/LinkedIn-Messaging-with-Formatting-Option/',
-    github: 'https://github.com/Pranavd0828/LinkedIn-Messaging-with-Formatting-Option',
+      "Explore lightweight rich-text composition inside a familiar professional messaging interface.",
+    category: "Interaction craft",
+    status: "Interaction prototype",
+    role: "Problem framing, interface recreation & formatting logic",
+    timeframe: "Nov 2025 – Jan 2026",
+    stack: ["HTML, CSS & JavaScript", "Vite", "Native contenteditable"],
+    flow: [
+      "Compose a message",
+      "Add structure + emphasis",
+      "Review formatted text",
+    ],
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The product question",
         body: [
-          'LinkedIn is the only serious professional messaging surface at scale, and it still ships messages as plain text. Every adjacent surface, including Slack, Teams, and even LinkedIn Posts, supports rich text. The gap has become visible enough that users routinely compose their messages in a separate document and paste the result into LinkedIn, which is a reliable signal that the product is ready to be fixed.',
-          'The contenteditable web APIs are mature enough now to ship rich text without a third-party editor framework, which keeps the performance budget of a chat list intact.',
+          "Professional messages often include several asks, a short introduction, or a number worth emphasizing. I explored how a formatting surface could add structure without crowding the default compose experience.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'Professional messages often need structure. A founder intro benefits from a bolded name. A recruiter pitch benefits from a list of asks. An investor update benefits from emphasis on the number that matters. Plain text forces users to write messages that are worse than the ones they are capable of writing.',
-          'For LinkedIn as a business, this is a quality-of-conversation problem. The platform monetizes the strength of its network, and lower-quality messages produce lower response rates, which compresses the value of InMail and Premium over time.',
+          "A LinkedIn-style messaging recreation with a working rich-text composer using native contenteditable APIs. The prototype is a separate application and does not modify LinkedIn or send messages through it.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "The tradeoff",
         body: [
-          'The first bet is that the formatting surface must be invisible until a user invokes it, and must not add a single pixel of vertical space to the default compose state. Professional users will abandon any feature that makes the default view heavier.',
-          'The second bet is that formatting is a quality-of-conversation lever, not a styling lever. The reason to ship it is to let users write better messages, not to give them more toys.',
+          "Native editing APIs keep the build small, but a production editor needs deliberate handling of selection, undo, pasted content, keyboard shortcuts, and accessibility. Messages do not persist after reload in this prototype.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "Next evaluation",
         body: [
-          'A visual recreation of LinkedIn Messaging that is close enough to the live product to let formatting behavior be tested in real context, rather than in an isolated editor. The compose area uses the browser\u2019s native contenteditable APIs, which keeps the implementation light and the rendering predictable.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I did not build a persistence backend. Every message resets on reload. The prototype is about the compose moment, not the history surface.',
-          'I chose contenteditable over a rich-text editor framework such as Lexical or ProseMirror. Those frameworks would be the right choices at LinkedIn scale, but adopting one here would have tripled the prototype surface area without teaching anything new about the product question.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'The commercial core of LinkedIn Premium is InMail response rate. A feature that helps users write clearer, more structured messages is a direct lever on that metric, not a cosmetic one.',
-          'The engineering cost of shipping formatting is small. The product cost is larger, because formatting introduces tone decisions that ripple outward. How should bold render in the notification preview? How should a list survive in the email fallback? What happens when someone pastes formatted text from a Google Doc? The prototype is what makes those questions concrete, which is the real value of building one before scoping the real thing.',
+          "Test whether recipients understand multi-part asks more accurately, then inspect how formatted content survives notifications and plain-text fallbacks. Improved reply rates are a hypothesis, not a measured result.",
         ],
       },
     ],
     outcomes: [
-      'A pixel-accurate recreation of LinkedIn Messaging that allows formatting behavior to be tested inside the real visual context of the product, rather than in an abstract editor.',
-      'A working rich-text compose surface using native contenteditable, with no heavy editor framework in the way.',
-      'A concrete list of downstream product questions that a production version would need to answer: notification rendering, email fallback, and paste behavior from other rich-text surfaces.',
+      "A working formatting interaction in a familiar compose context.",
+      "A lightweight implementation for exploring the core interaction.",
+      "Production questions made concrete: paste, undo, accessibility, and rendering fallbacks.",
     ],
+    accent: "blue",
+    takeaway:
+      "Small interface changes have consequences across the whole message lifecycle.",
+    demo: "https://pranavd0828.github.io/LinkedIn-Messaging-with-Formatting-Option/",
+    github:
+      "https://github.com/Pranavd0828/LinkedIn-Messaging-with-Formatting-Option",
   },
   {
-    slug: 'kindle-crew',
-    title: 'Read with your Crew in Kindle',
+    slug: "kindle-crew",
+    title: "Read with Your Crew",
     tagline:
-      'A social reading prototype that turns solitary reading into a shared habit through a daily progress ring, momentum streaks, time-validated pages, and crew nudges.',
-    category: 'Consumer Habits / Social Reading',
-    role: 'Product Manager and builder: habit loop design, state modeling, prototype build.',
-    timeframe: 'December 2025 to January 2026',
-    stack: [
-      'React 18 with Vite',
-      'React Context for state management',
-      'localStorage for persistence without account creation',
+      "Explore a daily reading ritual through progress, shared momentum, and gentle accountability.",
+    category: "Consumer product design",
+    status: "Interaction prototype",
+    role: "Habit design, state modeling & build",
+    timeframe: "Dec 2025 – Jan 2026",
+    stack: ["React & Vite", "React Context", "localStorage"],
+    flow: [
+      "Set a daily intention",
+      "Read + track progress",
+      "Share momentum with a crew",
     ],
-    demo: 'https://pranavd0828.github.io/Read-with-your-Crew-in-Kindle/',
-    github: 'https://github.com/Pranavd0828/Read-with-your-Crew-in-Kindle',
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The product question",
         body: [
-          'Reading is losing share of leisure time to short-form video, and the reason is not that books are worse. The reason is that books are alone. Every other habit product that has scaled in the last decade, from fitness to language to cycling, has used social accountability as its unlock. Reading has not.',
-          'The audience is ready. Book clubs and reading groups migrated to chat apps years ago and have not come back to a native product. The wedge for a social reading feature is already open.',
+          "Could a lightweight social layer help readers return to a book? I explored daily progress and crew nudges without making a missed day feel like losing all progress.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'Kindle tracks pages read, but the feedback loop ends at the book cover. There is no daily ritual, no group, no visible momentum. A user who wants to finish a book this month has to build that scaffolding themselves outside the app.',
-          'For the business, the consequence is a lower time-spent-per-user number, which compresses the value of Kindle Unlimited and of the device hardware it supports.',
+          "A daily progress ring, momentum indicator, time-based page validation, and a crew dashboard. Local storage preserves progress without account creation. This is a standalone concept, not an Amazon or Kindle integration.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "The tradeoff",
         body: [
-          'The first bet is that the right habit primitive for reading is a daily progress ring that turns gold on completion, not a streak counter. Streaks punish a missed day too hard for a slow medium. Rings reset cleanly each day and forgive a miss without ending a run.',
-          'The second bet is that time-validated pages are what make the metric trustworthy. Without a minimum engagement time per page, users will game the page count. With it, the metric becomes something a user is willing to share with a crew, which is the unlock for the social layer.',
+          "Time on a page is a proxy for engagement, not proof of reading or comprehension. A production experience should account for reading speed, assistive technology, and the possibility that social comparison creates pressure.",
         ],
       },
       {
-        heading: 'What I Built',
+        heading: "Next evaluation",
         body: [
-          'A daily progress ring on the reader home screen. A momentum bar that turns gold and pulses when the daily target is hit. Time validation that requires a minimum engagement per page before the page counts toward the ring.',
-          'A crew dashboard that shows a shared group streak and a nudge function with a sixty-second cooldown. The cooldown exists to prevent nudge spam, which is the specific failure mode that kills most social reading products.',
-          'All state persists in localStorage, which means the whole loop can be tested without account creation. That is a deliberate decision, because the prototype is about validating the habit mechanic rather than the sign-up flow.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I did not integrate a real reader engine. The habit loop is testable on top of a placeholder book, which is the right scope for proving that the mechanic works.',
-          'I did not build a social graph. Crews are built manually in the prototype. A production version would import from an existing contact graph, but the prototype is focused on the daily loop, not the acquisition step.',
-          'The ring versus streak decision was the most important design call. I kept both measurable, but made the ring the primary surface and the streak the crew-level secondary. A streak-first product would have been easier to build and worse to use.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'This feature raises daily active use of the reader, which is the upstream metric that makes a subscription reading service and its device refresh cycle work. The return is in the habit formation, not in the social surface itself.',
-          'The crew layer also produces a low-cost acquisition loop. A reader nudging a friend is a highly targeted pull into the product, and it does not depend on a paid channel.',
+          "Compare return-to-reading behavior and self-reported motivation with and without crew visibility. Inspect nudge fatigue and opt-out behavior. The prototype does not establish a retention lift.",
         ],
       },
     ],
     outcomes: [
-      'A full end-to-end prototype shipping the core habit loop: ring, momentum, time-validated pages, crew dashboard, and nudge cooldown.',
-      'Zero-account persistence through localStorage, which keeps the first-use friction effectively at zero and lets the loop be tested with a friend within a minute.',
-      'A deliberate design choice documented in the prototype: the ring as the forgiving primary surface, and the streak as the crew-level secondary, rather than a streak-first design that would punish a missed reading day too hard.',
+      "A connected daily-progress and crew interaction.",
+      "Local persistence supports repeated exploration without login.",
+      "A clear distinction between activity proxies and meaningful reading outcomes.",
     ],
+    accent: "amber",
+    takeaway:
+      "Designing a habit includes deciding what the progress metric cannot tell you.",
+    demo: "https://pranavd0828.github.io/Read-with-your-Crew-in-Kindle/",
+    github: "https://github.com/Pranavd0828/Read-with-your-Crew-in-Kindle",
   },
   {
-    slug: 'flappy-eagle',
-    title: 'Just One Flap',
+    slug: "flappy-eagle",
+    title: "Just One Flap",
     tagline:
-      'A canvas-based hyper-casual game prototype packaged for native iOS and Android distribution, exploring how far a vanilla JavaScript build can go without a game engine.',
-    category: 'Game Prototype / Mobile Distribution',
-    role: 'Product Manager and builder: game mechanic, build tooling, mobile packaging.',
-    timeframe: 'February 2026',
-    stack: [
-      'HTML5 Canvas for rendering',
-      'Vanilla JavaScript ES modules',
-      'Vite for dev tooling and production bundling',
-      'Capacitor for iOS and Android app packaging',
-    ],
-    demo: 'https://pranavd0828.github.io/flappy-eagle/',
-    github: 'https://github.com/Pranavd0828/flappy-eagle',
+      "A small canvas game exploring how physics tuning changes the feel of an interaction.",
+    category: "Play & prototyping",
+    status: "Playable prototype",
+    role: "Physics tuning, game prototype & mobile packaging",
+    timeframe: "February 2026",
+    stack: ["JavaScript", "Canvas", "Vite", "Capacitor"],
+    flow: ["Tap", "Physics + collision feedback", "Retry"],
     sections: [
       {
-        heading: 'Why Now',
+        heading: "The question",
         body: [
-          'Hyper-casual games have converged on the same set of engines and the same light, forgiving physics model, because those choices maximize early retention. That convergence has flattened the category. The current generation of mobile browsers and packaging tools makes it realistic again to ship a canvas-only game from a small codebase to native app stores, which reopens a design space that game engines had effectively closed.',
+          "How much of an interaction’s feel comes from the underlying engine, and how much comes from the tuning? A small game provides a direct way to explore that question.",
         ],
       },
       {
-        heading: 'The Problem',
+        heading: "What I built",
         body: [
-          'For a product manager, the question underneath a hyper-casual prototype is how much of the "feel" of a game depends on the engine and how much depends on the physics tuning on top of it. If the answer is mostly the tuning, then the category is still open to small teams. If the answer is mostly the engine, then the category is closed.',
+          "A playable canvas game using JavaScript modules and Vite. Capacitor packaging provides a path to iOS and Android builds from the web codebase; packaging is not a claim of app-store release.",
         ],
       },
       {
-        heading: 'Product Bet',
+        heading: "The scope",
         body: [
-          'The bet is that a sixty-second prototype can convey a specific game feel within the first few interactions, using only a canvas, vanilla JavaScript, and a tuned physics loop. If the first few interactions do not communicate the intent, no downstream polish will recover it.',
-        ],
-      },
-      {
-        heading: 'What I Built',
-        body: [
-          'A canvas game running on vanilla JavaScript ES modules, with Vite handling dev and production builds. Capacitor wraps the web build for iOS and Android, which keeps the web codebase as the single source of truth while still producing real native app builds.',
-          'The packaging choice is the product decision. It says the prototype is not a browser toy. It is a mobile-first game that happens to be written on the web stack, and the intended distribution is the app store.',
-        ],
-      },
-      {
-        heading: 'Tradeoffs',
-        body: [
-          'I did not ship sound design in this version. Sound is half the feel of a physics game, but it is also the fastest path to feature creep. Holding it back keeps the physics tuning as the variable under test.',
-          'I did not build a persistent leaderboard. The prototype is focused on the core micro-interaction, not on the retention mechanic that would sit on top of it.',
-        ],
-      },
-      {
-        heading: 'Business Read',
-        body: [
-          'The useful takeaway for non-game products is that feel is a designable product lever, not a property of the engine. Ride-hailing pickup animations, delivery ETA updates, and chat send feedback all leave feel on the table because no one on the product side owns it explicitly. A game prototype is a clean place to practice owning it.',
+          "The prototype concentrates on input, gravity, collision, and retry. Persistent leaderboards and sound design are outside this version.",
+          "The next evaluation would compare input responsiveness and early-session behavior across devices and physics settings. No retention or performance benchmark is claimed.",
         ],
       },
     ],
     outcomes: [
-      'A playable canvas-only game built on vanilla JavaScript and bundled with Vite, with no heavy engine dependency.',
-      'Capacitor packaging in place for iOS and Android, which keeps one web codebase as the source of truth while producing real app-store builds.',
-      'A small, legible codebase that is cheap to iterate on, which matters more for a feel-first prototype than any specific performance headline would.',
+      "A playable canvas game without a dedicated game engine.",
+      "Mobile packaging alongside the web build.",
+      "A compact environment for practicing interaction tuning.",
     ],
+    accent: "mint",
+    takeaway:
+      "Product craft includes the timing and feedback of the smallest interaction.",
+    demo: "https://pranavd0828.github.io/flappy-eagle/",
+    github: "https://github.com/Pranavd0828/flappy-eagle",
   },
 ];

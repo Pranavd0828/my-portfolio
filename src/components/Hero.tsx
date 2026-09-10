@@ -1,105 +1,92 @@
-'use client';
-
-import { useRef } from 'react';
-import { useScroll, useTransform, motion, useReducedMotion } from 'framer-motion';
-import { useLoading } from './LoadingContext';
+import Link from 'next/link'
 
 export default function Hero() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const { isLoaded } = useLoading();
-    const prefersReducedMotion = useReducedMotion();
-
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start start", "end start"],
-    });
-
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
-    return (
-        <section
-            id="hero"
-            ref={containerRef}
-            className="relative w-full min-h-[100dvh] flex flex-col items-center justify-center overflow-hidden px-6"
+  return (
+    <section id="hero" className="hero shell">
+      <p className="hero-identity">
+        <strong>Pranav Deo</strong> <span>Staff Product Manager at Rakuten</span>
+      </p>
+      <div className="hero-grid">
+        <div>
+          <h1>
+            Ads. AI. Marketplaces.
+            <span className="hero-headline-secondary">Built around people.</span>
+          </h1>
+          <p className="body-copy hero-intro">
+            I connect advertiser goals, consumer needs, and the technical
+            systems that turn product decisions into real outcomes.
+          </p>
+          <Link className="hero-proof" href="/work/rakuten-programmatic-loyalty">
+            <strong>$500M+</strong>
+            <span>Annual revenue reached by Programmatic Loyalty, the platform I launched at Rakuten.</span>
+            <span aria-hidden="true">↗</span>
+          </Link>
+          <div className="hero-actions">
+            <Link href="/#production" className="button button-primary">
+              Explore my work <span aria-hidden="true">↗</span>
+            </Link>
+            <Link href="/#prototypes" className="button">
+              8 consumer prototypes <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
+          <div className="hero-meta">
+            <span>Sunnyvale, California</span>
+            <a
+              href="/Pranav-Deo-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Résumé (PDF) ↗
+            </a>
+          </div>
+        </div>
+        <aside
+          className="product-perspective"
+          aria-label="How I approach product work"
         >
-            <motion.div
-                style={{ y, opacity }}
-                className="text-center z-10 flex flex-col items-center"
-            >
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-mono text-xs md:text-base uppercase tracking-[0.3em] text-white/50 mb-8"
-                >
-                    {/* Mobile: stacked on three lines */}
-                    <span className="flex flex-col items-center gap-1.5 md:hidden">
-                        <span className="text-white">Pranav Deo</span>
-                        <span>Staff Product Manager</span>
-                    </span>
-                    {/* Desktop: single inline line */}
-                    <span className="hidden md:inline">
-                        <span className="text-white">Pranav Deo</span> <span className="mx-2 opacity-30">&bull;</span> Staff Product Manager
-                    </span>
-                </motion.div>
-
-                <motion.h1
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
-                    transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                    className="font-serif text-4xl leading-tight md:text-8xl lg:text-9xl tracking-tight text-white md:leading-none max-w-5xl"
-                    style={{ textShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
-                >
-                    Ads Platform <br className="hidden md:block" />
-                    <span className="text-white/30">&amp;</span> GenAI
-                </motion.h1>
-
-                {/* Primary CTA */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                    transition={{ duration: 1, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="mt-10 md:mt-12"
-                >
-                    <a
-                        href="#prototypes"
-                        className="font-mono text-[10px] uppercase tracking-widest text-white/90 hover:text-white transition-colors border border-white/25 hover:border-white/60 px-6 py-3 rounded-sm bg-white/5 hover:bg-white/10 inline-flex items-center gap-2"
-                    >
-                        View Prototypes
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </a>
-                </motion.div>
-            </motion.div>
-
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={isLoaded ? { opacity: 1 } : { opacity: 0 }}
-                transition={{ duration: 1, delay: 1 }}
-                style={{ opacity }}
-                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
-            >
-                <span className="text-xs uppercase tracking-widest text-muted">Scroll to explore</span>
-                <div className="w-[1px] h-12 bg-muted/50 overflow-hidden relative">
-                    <motion.div
-                        className="w-full h-full bg-accent origin-top"
-                        animate={
-                            prefersReducedMotion
-                                ? undefined
-                                : {
-                                      scaleY: [0, 1, 0],
-                                      translateY: ['-100%', '0%', '100%'],
-                                  }
-                        }
-                        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                    />
-                </div>
-            </motion.div>
-
-            {/* Subtle radial gradient to separate text from background */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(11,12,16,0.8)_100%)] pointer-events-none" />
-        </section>
-    );
+          <h2 className="perspective-heading">My role is to connect these decisions.</h2>
+          <p className="perspective-intro">I bring three questions to the work:</p>
+          <ol>
+            <li>
+              <span>01 / People</span>
+              <p>What makes this worth using?</p>
+              <small>Relevance, trust, and control.</small>
+            </li>
+            <li>
+              <span>02 / Marketplace</span>
+              <p>What makes the economics work?</p>
+              <small>Advertiser return, incentives, and growth.</small>
+            </li>
+            <li>
+              <span>03 / Systems</span>
+              <p>What makes it work at scale?</p>
+              <small>Decisioning, measurement, and infrastructure.</small>
+            </li>
+          </ol>
+        </aside>
+      </div>
+      <div className="proof-strip" aria-label="Selected professional outcomes">
+        <div className="proof-item">
+          <strong>Technical depth</strong>
+          <p>
+            Product ownership across recommendations, AI workflows, and ads infrastructure.
+          </p>
+        </div>
+        <div className="proof-item">
+          <strong>32% lift</strong>
+          <p>
+            New-buyer acquisition through Personalized Rewards, validated with
+            randomized experiments.
+          </p>
+        </div>
+        <div className="proof-item">
+          <strong>30% fewer</strong>
+          <p>
+            Creative revision cycles through multi-agent GenAI orchestration at
+            Rakuten.
+          </p>
+        </div>
+      </div>
+    </section>
+  )
 }

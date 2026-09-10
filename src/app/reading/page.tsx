@@ -1,16 +1,14 @@
-import type { Metadata } from 'next';
-import ReadingList from '@/components/ReadingList';
-
+import ReadingList from "@/components/ReadingList";
+import type { Metadata } from "next";
 export const metadata: Metadata = {
-    title: 'Reading List',
-    description:
-        'Books completed, currently being read, and queued. A living shelf for the ideas shaping the work.',
+  title: "Reading",
+  description: "A reading shelf of science fiction, psychology, and mysteries.",
+  alternates: { canonical: "/reading" },
 };
-
 export default function ReadingPage() {
-    return (
-        <main className="flex min-h-screen flex-col items-center justify-start overflow-hidden pt-24">
-            <ReadingList />
-        </main>
-    );
+  return (
+    <main>
+      <ReadingList />
+    </main>
+  );
 }

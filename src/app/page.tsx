@@ -1,37 +1,20 @@
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
-import Journey from "@/components/Journey";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
+import ConsumerWork from "@/components/ConsumerWork";
+import Journey from "@/components/Journey";
 import AboutMe from "@/components/AboutMe";
-import ReadingList from "@/components/ReadingList";
 import ConnectSection from "@/components/ConnectSection";
-import RevealFocus from "@/components/RevealFocus";
-import BackToTop from "@/components/BackToTop";
-
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
+    <main>
       <Hero />
-      <RevealFocus>
-        <Journey />
-      </RevealFocus>
-      <RevealFocus>
-        <Projects />
-      </RevealFocus>
-      <RevealFocus>
-        <Education />
-      </RevealFocus>
-      <RevealFocus>
-        <AboutMe />
-      </RevealFocus>
-      <RevealFocus>
-        <ReadingList />
-      </RevealFocus>
-      <RevealFocus>
-        <ConnectSection />
-      </RevealFocus>
-      
-      <BackToTop />
+      <Projects />
+      <ConsumerWork />
+      <Journey />
+      <AboutMe />
+      <ConnectSection />
     </main>
   );
 }

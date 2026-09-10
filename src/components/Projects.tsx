@@ -1,98 +1,91 @@
-'use client';
-
-import Link from 'next/link';
-import { motion, useReducedMotion } from 'framer-motion';
-
-import { caseStudies } from '../content/caseStudies';
+import Link from 'next/link'
+import { caseStudies, type CaseStudy } from '@/content/caseStudies'
+import StoryFlow from './StoryFlow'
+export function WorkCard({
+  story,
+  index,
+}: {
+  story: CaseStudy
+  index: number
+}) {
+  return (
+    <article className={`work-card tone-${story.accent}`}>
+      <div className="work-card-visual">
+        <div className="card-topline">
+          <span className="eyebrow">0{index + 1} / Selected work</span>
+          <span className="status">{story.status}</span>
+        </div>
+        <StoryFlow steps={story.flow} accent={story.accent} />
+      </div>
+      <div className="work-card-copy">
+        <p className="eyebrow">{story.category}</p>
+        <h3>
+          <Link href={`/work/${story.slug}`}>{story.title}</Link>
+        </h3>
+        <p className="body-copy">{story.tagline}</p>
+        <p className="card-takeaway">{story.takeaway}</p>
+        <Link href={`/work/${story.slug}`} className="text-link">
+          Read the story <span aria-hidden="true">↗</span>
+          <span className="sr-only">: {story.title}</span>
+        </Link>
+      </div>
+    </article>
+  )
+}
 export default function Projects() {
-    const prefersReducedMotion = useReducedMotion();
-    const glowAnimate = prefersReducedMotion
-        ? undefined
-        : {
-              scale: [1, 1.1, 1],
-              background: [
-                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
-                  'radial-gradient(circle, rgba(150,150,150,0.5) 0%, rgba(0,0,0,0) 80%)',
-                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
-              ],
-          };
-
-    return (
-        <section id="prototypes" className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
-            {/* Unified Cinematic Background to match Journey.tsx */}
-            <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
-                <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
-                <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-20"
-                    animate={glowAnimate}
-                    transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                />
-            </div>
-
-            <div className="relative z-10 max-w-6xl w-full mx-auto">
-                <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
-                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-6xl md:leading-tight text-white mb-6">Prototypes, not pitches.</h2>
-                    <p className="font-sans text-sm md:text-base text-white/50 leading-relaxed">
-                        A PM who builds. Each of these is a real prototype: framed, shipped, and pressure-tested against current GenAI models to find the seam where a feature stops being a demo and starts being a product.
-                    </p>
-                    <Link
-                        href="/work"
-                        className="mt-8 inline-flex items-center text-[10px] font-mono uppercase tracking-widest text-white/60 hover:text-white transition-colors"
-                    >
-                        Read full case studies
-                        <svg className="w-3 h-3 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                        </svg>
-                    </Link>
-                </div>
-
-                <div className="relative z-10 grid grid-cols-1 md:grid-cols-2">
-                    {caseStudies.slice(0, 8).map((cs) => (
-                        <div
-                            key={cs.title}
-                            className="flex flex-col p-8 md:p-12 border-[0.5px] border-white/10"
-                        >
-                            <div className="relative z-10 flex flex-col h-full justify-between opacity-70 hover:opacity-100 transition-opacity duration-500">
-                                <div>
-                                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/30">{cs.category}</span>
-                                    <h3 className="font-serif text-2xl text-white mt-6 mb-6">{cs.title}</h3>
-                                    <p className="font-serif text-xs md:text-sm text-white/50 leading-relaxed mb-12">
-                                        {cs.tagline}
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-wrap items-center gap-x-8 gap-y-3 mt-4 pt-8 border-t-[0.5px] border-white/10">
-                                    {cs.slug && (
-                                        <Link href={`/work/${cs.slug}`} className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/80 hover:text-white transition-colors duration-400">
-                                            <span>Case Study</span>
-                                            <svg className="w-3 h-3 ml-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </Link>
-                                    )}
-                                    {cs.github && (
-                                        <a href={cs.github} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors duration-400">
-                                            <span>View Code</span>
-                                            <svg className="w-3 h-3 ml-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                            </svg>
-                                        </a>
-                                    )}
-
-                                    {cs.demo && (
-                                        <a href={cs.demo} target="_blank" rel="noopener noreferrer" className="flex items-center text-[10px] font-mono uppercase tracking-widest text-white/60 hover:text-white transition-colors duration-400">
-                                            <span>Try Yourself</span>
-                                            <svg className="w-3 h-3 ml-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                            </svg>
-                                        </a>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section id="production" className="section-space shell selected-work">
+      <div className="section-top">
+        <div>
+          <p className="eyebrow">01 / Building at scale</p>
+          <h2 className="section-heading">
+            Advertiser goals.
+            <br />
+            Customer value. Shared systems.
+          </h2>
+        </div>
+        <p className="body-copy">
+          At Rakuten, I connect campaign economics and customer incentives with
+          recommendations, experimentation, and AI. These two stories show the
+          product ownership and technical decisions behind the outcomes.
+        </p>
+      </div>
+      <div className="featured-list">
+        {caseStudies
+          .filter((s) => s.status === 'Professional work')
+          .map((story, index) => (
+            <WorkCard key={story.slug} story={story} index={index} />
+          ))}
+      </div>
+      <div className="expertise-grid">
+        <article>
+          <p className="eyebrow">Ads & marketplace economics</p>
+          <h3>Align the incentives.</h3>
+          <p>
+            From revenue-per-click and cost-per-click modeling at Media.net to
+            ROAS-driven recommendations at Rakuten: connect advertiser returns,
+            budget pacing, and customer rewards.
+          </p>
+        </article>
+        <article>
+          <p className="eyebrow">Measurement & growth</p>
+          <h3>Separate signal from noise.</h3>
+          <p>
+            Randomized experiments with CUPED, cohort targeting, and propensity
+            models. My acquisition work spans a 32% new-buyer lift and $16M in
+            incremental GMV across separate initiatives.
+          </p>
+        </article>
+        <article>
+          <p className="eyebrow">AI & infrastructure</p>
+          <h3>Make the experience dependable.</h3>
+          <p>
+            Define orchestration, evaluation, APIs, and data requirements with
+            engineering and data science. Balance workflow quality,
+            recommendation speed, and operating cost.
+          </p>
+        </article>
+      </div>
+    </section>
+  )
 }

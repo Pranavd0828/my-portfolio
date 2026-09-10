@@ -1,22 +1,55 @@
+import Link from "next/link";
 export default function AboutMe() {
-    return (
-        <section id="about" className="w-full max-w-4xl mx-auto py-16 md:py-32 px-6">
-            <h2 className="font-serif text-3xl leading-tight md:text-5xl md:leading-tight text-white mb-12 text-center">About</h2>
-
-            <div className="flex flex-col gap-8 font-serif text-white/60 md:text-lg leading-relaxed text-left">
-                <p>
-                    Seven years of product work across three domains: programmatic advertising, B2B workflow automation, and AI-powered platform systems. The through-line across all three is a preference for platform thinking over feature thinking, and a habit of building the thing rather than just writing the spec.
-                </p>
-                <p>
-                    The career started on the data side at Media.net in Mumbai, analyzing yield and monetization gaps across programmatic, video, and display inventory. That foundation led to a graduate degree in Statistics at the University of Maryland, which shifted the work from reporting on systems to designing them.
-                </p>
-                <p>
-                    At LeanData in Santa Clara, that meant shipping a routing and entity intelligence engine for B2B revenue operations: a problem at the intersection of fragmented real-world data and business-critical workflow. At Rakuten in San Mateo, it has meant leading platform strategy for a unified campaign system and, more recently, defining the roadmap for a LangChain-based agentic AI tool that automates review and pre-launch workflows at scale, cutting rejection rates by 30% and launch delays by 30%.
-                </p>
-                <p>
-                    The prototypes on this site are built alongside the day job. Each one starts from a real product gap, gets framed from a PM lens, and gets built far enough to pressure-test the core assumption against a current GenAI model. That practice is what keeps the product intuition honest.
-                </p>
-            </div>
-        </section>
-    );
+  return (
+    <section id="about" className="section-space shell about-grid">
+      <div>
+        <p className="eyebrow">04 / Perspective</p>
+        <h2 className="section-heading mt-4">
+          A quantitative foundation.
+          <br />A builder’s curiosity.
+        </h2>
+        <div className="body-copy space-y-5 mt-6">
+          <p>
+            I started on the data side at Media.net in Mumbai. A master’s in
+            Statistics at the University of Maryland deepened how I think about
+            uncertainty, experiments, and the difference between a signal and a
+            useful decision.
+          </p>
+          <p>
+            Since then, I’ve worked on revenue workflows at LeanData and
+            advertising, recommendation, AI, and infrastructure platforms at Rakuten. I like
+            problems where the customer experience depends on getting the
+            underlying system right.
+          </p>
+          <p>
+            I also build independent prototypes to make product questions
+            concrete. Some explore a live AI pipeline; others deliberately
+            simulate the model so I can focus on the interaction. Each story
+            makes that distinction clear.
+          </p>
+        </div>
+        <Link href="/reading" className="text-link mt-5">
+          Away from the roadmap: my reading shelf ↗
+        </Link>
+      </div>
+      <aside className="education-panel">
+        <p className="eyebrow">Education</p>
+        <div>
+          <h3>MS, Statistics</h3>
+          <p>University of Maryland, College Park</p>
+          <span>2019 – 2020 · Honors · 3.83 / 4.00</span>
+        </div>
+        <div>
+          <h3>BE, Computer Science</h3>
+          <p>University of Mumbai</p>
+          <span>2013 – 2017 · 3.93 / 4.00</span>
+        </div>
+        <p className="education-note">
+          Statistics informs the experiments.
+          <br />
+          Computer science informs the systems.
+        </p>
+      </aside>
+    </section>
+  );
 }

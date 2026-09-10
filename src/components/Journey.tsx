@@ -1,157 +1,111 @@
-'use client';
-
-import { motion, useReducedMotion } from 'framer-motion';
-
-const caseStudies = [
-    {
-        company: 'Rakuten',
-        timeframe: 'May 2021 - Present',
-        roles: [
-            {
-                id: '01',
-                title: 'Ads Recommendation & Optimization',
-                role: 'Staff Product Manager',
-                year: 'Jun 2026 - Present',
-                description: [
-                    'Lead the end-to-end roadmap for recommendation and optimization systems across programmatic surfaces, connecting ranking logic, pacing signals, and marketplace outcomes.',
-                    'Own the B2B platform track for advertiser workflows, translating sales, operations, and partner needs into scalable self-serve systems.'
-                ],
-            },
-            {
-                id: '02',
-                title: 'Unified Campaign Command Center',
-                role: 'Senior Product Manager',
-                year: 'Jul 2022 - Jun 2026',
-                description: 'Architected the backend logic to centralize advertiser inputs, reducing booking time by 25%. Built AI agents via LangChain for brand safety compliance.',
-            },
-            {
-                id: '03',
-                title: 'Premium Ad Formats & Inventory',
-                role: 'Product Manager',
-                year: 'May 2021 - Jul 2022',
-                description: 'Optimized rendering logic for high-impact display placements, validating a 32% engagement lift. Leveraged journey signals to drive a 19% CPM increase.',
-            }
-        ]
-    },
-    {
-        company: 'LeanData',
-        timeframe: 'August 2020 - May 2021',
-        roles: [
-            {
-                id: '04',
-                title: 'Revenue Operations Engine',
-                role: 'Product Manager',
-                year: 'Aug 2020 - May 2021',
-                description: 'Spearheaded an entity routing engine optimizing B2B onboarding workflows to map fragmented hierarchical structures into unified revenue account models.',
-            }
-        ]
-    },
-    {
-        company: 'Media.net',
-        timeframe: 'August 2017 - July 2019',
-        roles: [
-            {
-                id: '05',
-                title: 'Display/Video Yield Strategy',
-                role: 'Product Analyst',
-                year: 'Aug 2017 - Jul 2019',
-                description: 'Analyzed brand campaign workflows across video and display, translating complex AdTech specifications (VAST/VPAID) into scalable engineering requirements.',
-            }
-        ]
-    }
+const experience = [
+  {
+    company: "Rakuten",
+    location: "San Mateo, CA",
+    period: "May 2021 – Present",
+    roles: [
+      {
+        title: "Staff Product Manager",
+        focus: "AI platforms & ads infrastructure",
+        period: "Jun 2025 – Present",
+        description:
+          "Product architecture for multi-agent GenAI workflows, shared recommendation and ranking systems, and cloud infrastructure. Partnering with engineering and data science on the contracts and metrics that make platforms reusable.",
+        result:
+          "20% faster recommendation response · 30% fewer creative revision cycles",
+      },
+      {
+        title: "Senior Product Manager",
+        focus: "Recommendations & optimization",
+        period: "Feb 2022 – Jun 2025",
+        description:
+          "Launched Programmatic Loyalty and defined personalization, cohort targeting, and online/offline decisioning across Kafka, Redis, and Snowflake.",
+        result:
+          "Platform scaled to $500M+ annual revenue · Contributed to 20% conversion lift",
+      },
+      {
+        title: "Product Manager",
+        focus: "Ads performance & experimentation",
+        period: "May 2021 – Feb 2022",
+        description:
+          "Launched Personalized Rewards, designed randomized experiments with CUPED, and partnered with data science on propensity modeling for merchants with sparse historical data.",
+        result: "32% lift in new-buyer acquisition · $16M incremental GMV",
+      },
+    ],
+  },
+  {
+    company: "LeanData",
+    location: "Santa Clara, CA",
+    period: "Aug 2020 – May 2021",
+    roles: [
+      {
+        title: "Product Manager",
+        focus: "Workflow automation & decisioning",
+        period: "Aug 2020 – May 2021",
+        description:
+          "Shipped no-code rules and workflow orchestration. Built real-time lead routing and led the integration of predictive scoring into production CRM workflows.",
+        result:
+          "40% fewer configuration escalations · 21% higher conversion through predictive scoring",
+      },
+    ],
+  },
+  {
+    company: "Media.net",
+    location: "Mumbai, India",
+    period: "Aug 2017 – Jul 2019",
+    roles: [
+      {
+        title: "Product Analyst",
+        focus: "ML optimization & platform analytics",
+        period: "Aug 2017 – Jul 2019",
+        description:
+          "Built Python regression models to connect campaign performance with traffic economics and translate analysis into bidding and traffic decisions.",
+        result: "Contributed to a 20% increase in ad revenue",
+      },
+    ],
+  },
 ];
-
 export default function Journey() {
-    const prefersReducedMotion = useReducedMotion();
-    const glowAnimate = prefersReducedMotion
-        ? undefined
-        : {
-              scale: [1, 1.1, 1],
-              background: [
-                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
-                  'radial-gradient(circle, rgba(150,150,150,0.5) 0%, rgba(0,0,0,0) 80%)',
-                  'radial-gradient(circle, rgba(100,100,100,0.8) 0%, rgba(0,0,0,0) 80%)',
-              ],
-          };
-
-    return (
-        <section id="journey" className="relative w-full min-h-screen py-16 md:py-32 px-6 flex flex-col justify-center">
-
-            {/* Unified Cinematic Background - Replacing the jarring image swaps */}
-            <div className="absolute inset-0 z-0 select-none overflow-hidden pointer-events-none">
-                <div className="absolute inset-0 bg-background/95 backdrop-blur-[10px] z-10" />
-                <motion.div
-                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[100px] opacity-20"
-                    animate={glowAnimate}
-                    transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                />
+  return (
+    <section id="journey" className="section-space shell">
+      <div className="section-top">
+        <div>
+          <p className="eyebrow">03 / The experience behind the decisions</p>
+          <h2 className="section-heading">
+            From ad economics
+            <br />
+            to product leadership.
+          </h2>
+        </div>
+        <p className="body-copy">
+          Media.net grounded me in advertising economics. LeanData brought
+          workflow product ownership. At Rakuten, that scope grew across
+          acquisition, marketplace optimization, AI, and infrastructure.
+        </p>
+      </div>
+      <div className="journey-list">
+        {experience.map((company) => (
+          <div className="company-row" key={company.company}>
+            <div className="company-name">
+              <h3>{company.company}</h3>
+              <p>{company.location}</p>
+              <p>{company.period}</p>
             </div>
-
-            <div className="relative z-10 max-w-6xl w-full mx-auto">
-                <div className="flex flex-col items-center text-center mb-16 max-w-4xl mx-auto">
-                    <h2 className="font-serif text-3xl leading-tight md:text-5xl lg:text-7xl md:leading-none text-white mb-6">Professional Journey</h2>
-                    <p className="font-sans text-sm md:text-base text-white/50 leading-relaxed">
-                        A curated timeline of platform-defining product launches focusing on data scalability and algorithmic intelligence.
-                    </p>
-                </div>
-
-                <div className="flex flex-col border-t border-white/10">
-                    {caseStudies.map((companyBlock, idx) => (
-                        <div key={idx} className="flex flex-col py-16 md:py-24 border-b border-white/5 relative group">
-                            {/* Company Header */}
-                            <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-12 gap-2 md:gap-0">
-                                <h3 className="font-serif text-4xl text-white">{companyBlock.company}</h3>
-                                <span className="font-mono text-xs md:text-sm text-white/55 tracking-[0.22em] uppercase">{companyBlock.timeframe}</span>
-                            </div>
-
-                            {/* Roles inside Company */}
-                            <div className="flex flex-col gap-10 md:gap-12 pl-7 md:pl-16 relative">
-                                {/* Vertical connection line for multiple roles */}
-                                {companyBlock.roles.length > 1 && (
-                                    <div className="absolute left-[11px] md:left-[15px] top-8 bottom-8 w-[1px] bg-white/10" />
-                                )}
-
-                                {companyBlock.roles.map((role) => (
-                                    <div key={role.id} className="flex flex-col md:flex-row justify-between group/role relative">
-                                        {companyBlock.roles.length > 1 && (
-                                            <div className="absolute left-[-20px] md:left-[-52px] top-[10px] md:top-[12px] w-[7px] h-[7px] rounded-full bg-white/20 group-hover/role:bg-accent transition-colors" />
-                                        )}
-
-                                        <div className="flex-1 md:pr-12">
-                                            <div className="flex items-center gap-4 mb-2">
-                                                <span className="text-xs font-mono text-muted/60">{role.id}</span>
-                                                <h4 className="font-sans text-xl md:text-2xl font-medium tracking-tight text-accent group-hover/role:text-white transition-colors">
-                                                    {role.role}
-                                                </h4>
-                                            </div>
-                                            <span className="block font-mono text-[10px] md:text-xs text-white/30 mb-3 uppercase tracking-widest">{role.year}</span>
-                                            <div className="font-serif text-lg md:text-xl text-white/40 group-hover/role:text-white/70 transition-colors">
-                                                {role.title}
-                                            </div>
-                                        </div>
-
-                                        <div className="flex-1 md:pl-8 mt-4 md:mt-0 flex flex-col md:items-start md:text-left">
-                                            {Array.isArray(role.description) ? (
-                                                <ul className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors space-y-4">
-                                                    {role.description.map((point) => (
-                                                        <li key={point}>
-                                                            {point}
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            ) : (
-                                                <p className="font-serif text-white/50 text-sm md:text-base max-w-lg group-hover/role:text-white/90 transition-colors">
-                                                    {role.description}
-                                                </p>
-                                            )}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
-                </div>
+            <div className="company-roles">
+              {company.roles.map((role) => (
+                <article key={role.title} className="role">
+                  <div className="role-heading">
+                    <h4>{role.title}</h4>
+                    <span>{role.period}</span>
+                  </div>
+                  <p className="role-focus">{role.focus}</p>
+                  <p className="body-copy">{role.description}</p>
+                  <p className="role-result">{role.result}</p>
+                </article>
+              ))}
             </div>
-        </section>
-    );
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }

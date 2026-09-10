@@ -1,228 +1,327 @@
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
-import type { Metadata } from 'next';
-import { caseStudies } from '@/content/caseStudies';
-
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+import { caseStudies } from "@/content/caseStudies";
+import StoryFlow from "@/components/StoryFlow";
+import StoryNavigation from "@/components/StoryNavigation";
 type Params = { slug: string };
-
+const sectionId = (heading: string) =>
+  heading.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 export function generateStaticParams() {
-  return caseStudies.map((cs) => ({ slug: cs.slug }));
+  return caseStudies.map((s) => ({ slug: s.slug }));
 }
-
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const cs = caseStudies.find((c) => c.slug === slug);
-  if (!cs) return {};
+  const s = caseStudies.find((s) => s.slug === slug);
+  if (!s) return {};
   return {
-    title: `${cs.title} · Pranav Deo`,
-    description: cs.tagline,
+    title: s.title,
+    description: s.tagline,
+    alternates: { canonical: `/work/${slug}` },
+    openGraph: {
+      title: s.title,
+      description: s.tagline,
+      url: `/work/${slug}`,
+      type: "article",
+    },
+    twitter: { title: s.title, description: s.tagline },
   };
 }
-
-export default async function CaseStudyPage({ params }: { params: Promise<Params> }) {
+export default async function CaseStudyPage({
+  params,
+}: {
+  params: Promise<Params>;
+}) {
   const { slug } = await params;
-  const idx = caseStudies.findIndex((c) => c.slug === slug);
-  if (idx === -1) notFound();
-
-  const cs = caseStudies[idx];
-  const prev = idx > 0 ? caseStudies[idx - 1] : null;
-  const next = idx < caseStudies.length - 1 ? caseStudies[idx + 1] : null;
-
+  const index = caseStudies.findIndex((s) => s.slug === slug);
+  if (index < 0) notFound();
+  const s = caseStudies[index];
+  const next = caseStudies[(index + 1) % caseStudies.length];
+  const storyNavigation = [
+    ...s.sections.map((sec) => ({
+      id: sectionId(sec.heading),
+      label: sec.heading,
+    })),
+    ...(s.decision ? [{ id: "decision", label: "The decision" }] : []),
+    ...(s.systemMap ? [{ id: "system", label: "System view" }] : []),
+    ...(s.leadership ? [{ id: "leadership", label: "How I led" }] : []),
+    ...(s.productArtifacts
+      ? [{ id: "artifacts", label: "Product artifacts" }]
+      : []),
+    {
+      id: "outcomes",
+      label:
+        s.status === "Professional work"
+          ? "Outcomes"
+          : "What this prototype demonstrates",
+    },
+    { id: "implementation", label: "Technical context" },
+  ];
   return (
-    <main className="relative w-full min-h-screen px-6 py-24 md:py-32">
-      <article className="max-w-3xl mx-auto">
-        <Link
-          href="/work"
-          className="text-[10px] font-mono uppercase tracking-widest text-white/40 hover:text-white transition-colors"
-        >
-          ← All case studies
-        </Link>
-
-        <header className="mt-12 mb-10 border-b border-white/10 pb-12">
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6">
-            {cs.category}
-          </p>
-          <h1 className="font-serif text-4xl md:text-6xl text-white leading-tight mb-6">
-            {cs.title}
-          </h1>
-          <p className="font-serif text-base md:text-lg text-white/60 leading-relaxed">
-            {cs.tagline}
-          </p>
-
-          <dl className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 text-sm">
-            <div>
-              <dt className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-2">
-                Role
-              </dt>
-              <dd className="font-serif text-white/70 leading-relaxed">{cs.role}</dd>
-            </div>
-            <div>
-              <dt className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-2">
-                Timeframe
-              </dt>
-              <dd className="font-serif text-white/70 leading-relaxed">{cs.timeframe}</dd>
-            </div>
-            <div>
-              <dt className="text-[10px] font-mono uppercase tracking-widest text-white/40 mb-2">
-                Stack
-              </dt>
-              <dd className="font-serif text-white/70 leading-relaxed">
-                <ul className="space-y-1">
-                  {cs.stack.map((s) => (
-                    <li key={s}>{s}</li>
-                  ))}
-                </ul>
-              </dd>
-            </div>
-          </dl>
-        </header>
-
-        {/* Prominent prototype links: visible before the reader starts the case study */}
-        {(cs.demo || cs.github || cs.artifacts?.length) && (
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
-            {cs.demo && (
+    <main className={`shell story-page tone-${s.accent}`}>
+      <Link href="/work" className="text-link">
+        ← All work
+      </Link>
+      <header className="story-header">
+        <div>
+          <div className="story-kicker">
+            <span className="status">{s.status}</span>
+            <span className="eyebrow">{s.category}</span>
+          </div>
+          <h1>{s.title}</h1>
+          <p className="body-copy story-deck">{s.tagline}</p>
+          <div className="hero-actions">
+            {s.demo && (
               <a
-                href={cs.demo}
+                href={s.demo}
+                className="button button-primary"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-between px-6 py-5 border border-white/20 hover:border-white/50 bg-white/[0.03] hover:bg-white/[0.06] transition-all group"
               >
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-white/40 mb-1">Live prototype</p>
-                  <p className="font-serif text-white/80 group-hover:text-white transition-colors text-sm truncate max-w-xs">
-                    {cs.demo.replace('https://', '')}
-                  </p>
-                </div>
-                <svg className="w-4 h-4 text-white/30 group-hover:text-white transition-colors flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                Explore prototype ↗
               </a>
             )}
-            {cs.artifacts?.map((artifact) => (
+            {s.artifacts?.map((a) => (
               <a
-                key={artifact.url}
-                href={artifact.url}
+                href={a.url}
+                key={a.url}
+                className="button"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between px-6 py-5 border border-white/10 hover:border-white/30 bg-white/[0.02] hover:bg-white/[0.04] transition-all group sm:w-56"
               >
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mb-1">Artifact</p>
-                  <p className="font-serif text-white/50 group-hover:text-white/80 transition-colors text-sm">
-                    {artifact.label}
-                  </p>
-                </div>
-                <svg className="w-4 h-4 text-white/20 group-hover:text-white/60 transition-colors flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                {a.label} ↗
               </a>
             ))}
-            {cs.github && (
+            {s.github && (
               <a
-                href={cs.github}
+                href={s.github}
+                className="text-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between px-6 py-5 border border-white/10 hover:border-white/30 bg-white/[0.02] hover:bg-white/[0.04] transition-all group sm:w-48"
               >
-                <div>
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-white/30 mb-1">Source</p>
-                  <p className="font-serif text-white/50 group-hover:text-white/80 transition-colors text-sm">GitHub</p>
-                </div>
-                <svg className="w-4 h-4 text-white/20 group-hover:text-white/60 transition-colors flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
+                Source code ↗
               </a>
             )}
           </div>
-        )}
-
-        <div className="space-y-16">
-          {cs.sections.map((section) => (
-            <section key={section.heading}>
-              <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6">
-                {section.heading}
-              </h2>
-              <div className="space-y-5">
-                {section.body.map((p, i) => (
-                  <p
-                    key={i}
-                    className="font-serif text-base md:text-lg text-white/75 leading-relaxed"
+          {!s.demo && (
+            <a
+              href="/Pranav-Deo-Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
+            >
+              View résumé (PDF) ↗
+            </a>
+          )}
+        </div>
+        <aside className="story-context">
+          <p className="eyebrow">My role</p>
+          <p>{s.role}</p>
+          <p className="eyebrow mt-5">Timeframe</p>
+          <p>{s.timeframe}</p>
+        </aside>
+      </header>
+      {s.status !== "Professional work" && (
+        <p className="prototype-note">
+          Independent concept; not affiliated with or endorsed by the product’s
+          owner.{" "}
+          {s.status === "Simulated AI prototype"
+            ? "AI outputs use demonstration data; no live account connection or inference."
+            : "Implementation boundaries are described below."}
+        </p>
+      )}
+      <div className="story-overview">
+        <StoryFlow steps={s.flow} accent={s.accent} />
+        <div className="story-summary">
+          <p className="eyebrow">The takeaway</p>
+          <p>{s.takeaway}</p>
+          {s.metrics && (
+            <dl className="story-metrics">
+              {s.metrics.map((m) => (
+                <div key={m.label}>
+                  <dt>{m.label}</dt>
+                  <dd>{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+      </div>
+      <div className="story-body">
+        <StoryNavigation items={storyNavigation} />
+        <article>
+          {s.evidenceNote && (
+            <p className="case-evidence-note">{s.evidenceNote}</p>
+          )}
+          {s.sections.map((sec) => (
+            <section
+              id={sectionId(sec.heading)}
+              key={sec.heading}
+              className="story-section"
+            >
+              <h2>{sec.heading}</h2>
+              {sec.body.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </section>
+          ))}
+          {s.decision && (
+            <section id="decision" className="story-section decision-section">
+              <p className="eyebrow">A decisive product moment</p>
+              <h2>{s.decision.question}</h2>
+              <p className="decision-tension">{s.decision.tension}</p>
+              <div className="decision-options" aria-label="Options considered">
+                {s.decision.options.map((option) => (
+                  <article
+                    key={option.label}
+                    className={option.selected ? "is-selected" : undefined}
                   >
-                    {p}
-                  </p>
+                    <div className="decision-option-heading">
+                      <h3>{option.label}</h3>
+                      {option.selected && <span>Chosen</span>}
+                    </div>
+                    <p>{option.detail}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="decision-resolution">
+                <div>
+                  <p className="eyebrow">Why</p>
+                  <p>{s.decision.rationale}</p>
+                </div>
+                <div>
+                  <p className="eyebrow">What changed</p>
+                  <p>{s.decision.impact}</p>
+                </div>
+              </div>
+            </section>
+          )}
+          {s.systemMap && (
+            <section id="system" className="story-section system-section">
+              <p className="eyebrow">System view</p>
+              <h2>{s.systemMap.title}</h2>
+              <p>{s.systemMap.description}</p>
+              <ol
+                className={`system-map${s.systemMap.mode === "scope" ? " is-scope" : ""}`}
+                aria-label={s.systemMap.title}
+              >
+                {s.systemMap.steps.map((step, stepIndex) => (
+                  <li key={step.label}>
+                    <span className="system-step-number">
+                      {String(stepIndex + 1).padStart(2, "0")}
+                    </span>
+                    <strong>{step.label}</strong>
+                    <span>{step.detail}</span>
+                  </li>
+                ))}
+              </ol>
+              {s.systemMap.feedback && (
+                <p className="system-feedback">
+                  <span aria-hidden="true">↺</span> {s.systemMap.feedback}
+                </p>
+              )}
+              {s.systemMap.foundation && (
+                <div className="system-foundation">
+                  <span>Foundation</span>
+                  <p>{s.systemMap.foundation}</p>
+                </div>
+              )}
+            </section>
+          )}
+          {s.leadership && (
+            <section id="leadership" className="story-section leadership-section">
+              <p className="eyebrow">Leadership scope</p>
+              <h2>How I made the work move</h2>
+              <p>
+                My role was to create shared decisions across the people building,
+                evaluating, operating, and using the product.
+              </p>
+              <dl className="leadership-grid">
+                {s.leadership.map((item, itemIndex) => (
+                  <div key={item.team}>
+                    <dt>
+                      <span>{String(itemIndex + 1).padStart(2, "0")}</span>
+                      {item.team}
+                    </dt>
+                    <dd>{item.alignment}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+          {s.productArtifacts && (
+            <section id="artifacts" className="story-section artifacts-section">
+              <p className="eyebrow">Selected product artifacts</p>
+              <h2>The structure behind the decisions</h2>
+              <p>
+                Sanitized reconstructions show how I framed scope, contracts, and
+                measurement without exposing internal systems or customer data.
+              </p>
+              <div className="artifact-grid">
+                {s.productArtifacts.map((artifact) => (
+                  <article key={artifact.title} className="artifact-card">
+                    <header>
+                      <h3>{artifact.title}</h3>
+                      <p>{artifact.purpose}</p>
+                    </header>
+                    <dl>
+                      {artifact.rows.map((row) => (
+                        <div key={row.label}>
+                          <dt>{row.label}</dt>
+                          <dd>{row.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </article>
                 ))}
               </div>
             </section>
-          ))}
-
-          <section className="border-t border-white/10 pt-12">
-            <h2 className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40 mb-6">
-              Outcomes
+          )}
+          <section id="outcomes" className="story-section outcomes">
+            <p className="eyebrow">
+              {s.status === "Professional work"
+                ? "Professional outcomes"
+                : "Prototype outcomes"}
+            </p>
+            <h2>
+              {s.status === "Professional work"
+                ? "What changed"
+                : "What this prototype demonstrates"}
             </h2>
-            <ul className="space-y-3">
-              {cs.outcomes.map((o) => (
-                <li
-                  key={o}
-                  className="font-serif text-base md:text-lg text-white/75 leading-relaxed pl-6 relative"
-                >
-                  <span className="absolute left-0 top-[0.6em] w-2 h-px bg-white/40" />
-                  {o}
-                </li>
+            <ul>
+              {s.outcomes.map((o) => (
+                <li key={o}>{o}</li>
               ))}
             </ul>
           </section>
-
-          {/* Next / Prev navigation */}
-          <section className="border-t border-white/10 pt-12">
-            <div className="flex justify-between gap-6">
-              {prev ? (
-                <Link
-                  href={`/work/${prev.slug}`}
-                  className="group flex flex-col gap-1 max-w-[45%]"
-                >
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors">
-                    ← Previous
-                  </span>
-                  <span className="font-serif text-white/60 group-hover:text-white transition-colors leading-snug">
-                    {prev.title}
-                  </span>
-                </Link>
-              ) : (
-                <div />
-              )}
-              {next ? (
-                <Link
-                  href={`/work/${next.slug}`}
-                  className="group flex flex-col gap-1 text-right max-w-[45%] ml-auto"
-                >
-                  <span className="font-mono text-[10px] uppercase tracking-widest text-white/30 group-hover:text-white/60 transition-colors">
-                    Next →
-                  </span>
-                  <span className="font-serif text-white/60 group-hover:text-white transition-colors leading-snug">
-                    {next.title}
-                  </span>
-                </Link>
-              ) : (
-                <div />
-              )}
-            </div>
+          <section id="implementation" className="story-section">
+            <details className="technical-details">
+              <summary>
+                Technical context <span aria-hidden="true">+</span>
+              </summary>
+              <ul>
+                {s.stack.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </details>
           </section>
-
-          {/* Final CTA */}
-          <section className="border-t border-white/5 pt-12 text-center">
-            <Link
-              href="/#connect"
-              className="font-mono text-[10px] uppercase tracking-widest text-white/40 hover:text-white transition-colors"
-            >
-              Get in touch →
+          <div className="story-next">
+            <p className="eyebrow">Up next</p>
+            <Link href={`/work/${next.slug}`}>{next.title} ↗</Link>
+          </div>
+          <div className="collection-link">
+            <p>Let’s talk about the product decisions behind the work.</p>
+            <Link href="/#connect" className="button button-primary">
+              Get in touch ↗
             </Link>
-          </section>
-        </div>
-      </article>
+          </div>
+        </article>
+      </div>
     </main>
   );
 }
