@@ -67,6 +67,11 @@ try {
     )
     await page.emulateMedia({ reducedMotion: 'reduce' })
     await video.scrollIntoViewIfNeeded()
+    // Media-query changes and intersection callbacks arrive asynchronously.
+    await page.waitForFunction(() =>
+      matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      document.querySelector('video[src="/videos/regional-voice.mp4"]').paused
+    )
     assert.equal(await video.evaluate((el) => el.paused), true)
     await frame
       .getByRole('button', { name: 'Play preview', exact: true })
