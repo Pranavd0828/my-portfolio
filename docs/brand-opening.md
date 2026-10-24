@@ -6,7 +6,7 @@ The opening uses example merchants listed on Rakuten. It does not claim that eve
 
 ## Visual direction
 
-The October 23 revision removes the white cards and colored marks. A continuous field of monochrome logos magnifies from 0.68 to 1.6 scale with a restrained rotation, then dissolves into the portfolio. Foreground copy and dismissal controls remain stationary. The clipped decorative layer cannot create page overflow. Phone layouts use four columns, six rows and 24 marks. The story has an opaque background with soft edges on both phone and desktop. Identity and navigation controls have the same protection at every viewport size. Smaller marks and a two-degree opening rotation keep the composition restrained.
+The October 23 revision removes the white cards and colored marks. A continuous field of monochrome logos magnifies from 0.68 to 1.6 scale with a restrained rotation, then dissolves into the portfolio. Foreground copy and dismissal controls remain stationary. The clipped decorative layer cannot create page overflow. Phone layouts use four columns, six rows and 24 marks. Each text block has its own compact opaque backdrop with soft edges. The surrounding story area stays transparent, with only a light radial shade, allowing brands to remain visible between and beside the text. Identity and navigation controls have the same protection at every viewport size. Smaller marks and a two-degree opening rotation keep the composition restrained.
 
 ## Behavior
 

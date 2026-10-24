@@ -29,14 +29,13 @@ for (const engine of ['chromium', 'webkit']) {
       assert.ok(images.length >= 8)
       assert.ok(images.every(item => item.loaded), JSON.stringify(images))
       assert.equal(await dialog.locator('img:visible').evaluateAll(items => items.every(el => { const image = el.getBoundingClientRect(); const card = el.parentElement.getBoundingClientRect(); return image.top >= card.top && image.bottom <= card.bottom + 1 && image.left >= card.left && image.right <= card.right + 1 })), true, 'Every logo preserves its bounds within the moving field')
-      if (width <= 700) {
-        const protection = await dialog.locator('h2').evaluate(el => {
-          const story = el.parentElement
-          return { background: getComputedStyle(story).backgroundColor, guard: getComputedStyle(story, '::before').backgroundImage }
-        })
-        assert.equal(protection.background, 'rgb(8, 8, 8)', 'Phone text has an opaque backdrop throughout the animation')
-        assert.ok(protection.guard.includes('32px'), 'The opaque backdrop extends beyond the decision labels')
-      }
+      const protection = await dialog.locator('h2').evaluate(el => {
+        const story = el.parentElement
+        return { background: getComputedStyle(story).backgroundColor, blocks: [...story.children].map(block => ({ background: getComputedStyle(block).backgroundColor, shadow: getComputedStyle(block).boxShadow })) }
+      })
+      assert.equal(protection.background, 'rgba(0, 0, 0, 0)', 'The full story area remains transparent')
+      assert.equal(protection.blocks.length, 4)
+      assert.ok(protection.blocks.every(block => block.background === 'rgb(8, 8, 8)' && block.shadow !== 'none'), 'Each text block has its own protected soft backdrop')
       const skip = page.getByRole('button', { name: 'Skip intro' })
       const box = await skip.boundingBox()
       assert.ok(box.x >= 0 && box.x + box.width <= width + 1 && box.y >= 0 && box.y + box.height <= height)

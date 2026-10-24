@@ -42,12 +42,13 @@
 .brandName { position: absolute; inset: 0; display: grid; place-items: center; padding: 8px; color: var(--foreground); font-size: var(--text-card); line-height: var(--leading-label); text-align: center; font-weight: 600; }
 .brand img:not([hidden]) + .brandName { visibility: hidden; }
 .story { position: relative; z-index: 1; text-align: center; }
-/* This opaque center protects readable contrast throughout the magnification. */
-.story::before { content: ''; position: absolute; z-index: -1; inset: -50px -20px; background: linear-gradient(to bottom, #08080800, #080808 32px, #080808 calc(100% - 32px), #08080800); }
-.eyebrow { margin: 0 0 18px; font-size: var(--text-caption); line-height: var(--leading-label); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
-.story h2 { margin: 0; font-size: clamp(2rem, 5.1vw, 4.5rem); line-height: var(--leading-display); font-weight: 500; letter-spacing: -.055em; }
+/* Separate soft backdrops protect the text without covering the whole scene. */
+.story::before { content: ''; position: absolute; z-index: -1; inset: -32px -20px; background: radial-gradient(ellipse, #08080880 25%, #08080800 74%); }
+.story > * { position: relative; width: fit-content; max-width: 100%; margin-inline: auto; background: var(--background); box-shadow: 0 0 18px 12px var(--background); }
+.eyebrow { margin: 0 auto 18px; font-size: var(--text-caption); line-height: var(--leading-label); text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.story h2 { margin: 0 auto; font-size: clamp(2rem, 5.1vw, 4.5rem); line-height: var(--leading-display); font-weight: 500; letter-spacing: -.055em; }
 .story h2 > span { color: var(--muted); }
-.description { margin: 24px 0 0; font-size: var(--text-subheading); line-height: var(--leading-body); color: #d0d0d0; }
+.description { margin: 24px auto 0; font-size: var(--text-subheading); line-height: var(--leading-body); color: #d0d0d0; }
 .phoneBreak { display: none; }
 .decisions { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 30px; font-size: var(--text-small); line-height: var(--leading-label); color: var(--muted); }
 .decisions span:nth-of-type(2) { color: var(--foreground); border: 1px solid var(--line); padding: 8px 14px; border-radius: 24px; background: var(--surface); }
@@ -74,9 +75,7 @@
   .skip { gap: 8px; padding-inline: 12px; }
   .brandField { inset: 3% -14%; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); gap: 3vh 5vw; }
   .brand:nth-child(n + 25) { display: none; }
-  /* Keep every line and decision label inside an opaque band on phones. */
-  .story { background: var(--background); }
-  .story::before { inset: -56px -20px; background: linear-gradient(to bottom, #08080800, #080808 32px, #080808 calc(100% - 32px), #08080800); }
+  .story > * { box-shadow: 0 0 12px 8px var(--background); }
   .story h2 { font-size: clamp(2rem, 7.8vw, 3.2rem); letter-spacing: -.045em; }
   .description { font-size: var(--text-body); margin-top: 18px; }
   .phoneBreak { display: block; }
