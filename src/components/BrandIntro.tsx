@@ -115,7 +115,6 @@ export default function BrandIntro() {
         </div>
       </div>
       <div className={styles.bottomline}>
-        <p>Example merchants listed on Rakuten.<br />Logos do not imply personal client relationships or endorsement.</p>
         <button type="button" className={styles.enter} onClick={() => dismiss.current()}>Explore my work <span aria-hidden="true">↗</span></button>
       </div>
       <div className={styles.progress} aria-hidden="true"><span /></div>

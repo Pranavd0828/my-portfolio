@@ -52,7 +52,7 @@
 .decisions { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 30px; font-size: var(--text-small); line-height: var(--leading-label); color: var(--muted); }
 .decisions span:nth-of-type(2) { color: var(--foreground); border: 1px solid var(--line); padding: 8px 14px; border-radius: 24px; background: var(--surface); }
 .decisions i { width: 38px; height: 1px; background: var(--line); }
-.bottomline p { max-width: 520px; margin: 0; font-size: var(--text-caption); line-height: var(--leading-label); color: var(--muted); }
+.bottomline { justify-content: flex-end; }
 .enter { border-color: #777; background: var(--surface); }
 .progress { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--line); overflow: hidden; }
 .progress span { display: block; width: 100%; height: 100%; background: var(--muted); transform-origin: left; animation: progress 3600ms linear both; }
@@ -84,7 +84,6 @@
   .decisions i { width: 12px; }
   .decisions span:nth-of-type(2) { padding: 7px 9px; }
   .bottomline { align-items: stretch; flex-direction: column-reverse; gap: 16px; }
-  .bottomline p { text-align: center; }
 }
 @media (max-width: 420px) {
   .decisions { gap: 6px; }
