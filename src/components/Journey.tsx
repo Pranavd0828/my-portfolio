@@ -121,7 +121,7 @@ export default function Journey() {
           </details>
         ))}
       </div>
-      <section className={styles.education} aria-labelledby="education-title">
+      <section id="education" className={styles.education} aria-labelledby="education-title">
         <h3 id="education-title" className={styles.kicker}>Education</h3>
         <dl>
           <div>

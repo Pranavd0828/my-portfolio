@@ -113,6 +113,9 @@ export default function Navigation() {
           <Link prefetch={false} href="/#journey">
             Experience
           </Link>
+          <Link prefetch={false} href="/#education">
+            Education
+          </Link>
           <a
             className="desktop-resume"
             href="/Pranav-Deo-Resume.pdf"
