@@ -38,6 +38,8 @@
 .brand:nth-child(3n + 1) { translate: 0 -12%; }
 .brand:nth-child(3n + 2) { translate: 0 12%; }
 .brand img { width: 58%; height: 54%; object-fit: contain; position: absolute; inset: 23% 21%; min-width: 0; min-height: 0; filter: grayscale(1) brightness(0) invert(1); }
+/* Filled brand badges need their internal light and dark artwork preserved. */
+.brand img[data-detailed] { filter: grayscale(1); }
 .brand img[hidden] { display: none; }
 .brandName { position: absolute; inset: 0; display: grid; place-items: center; padding: 8px; color: var(--foreground); font-size: var(--text-card); line-height: var(--leading-label); text-align: center; font-weight: 600; }
 .brand img:not([hidden]) + .brandName { visibility: hidden; }

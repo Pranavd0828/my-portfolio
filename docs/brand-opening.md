@@ -2,7 +2,7 @@
 
 Verified October 23, 2026.
 
-The opening uses example merchants listed on Rakuten. It does not claim that every merchant was a personal client, part of Programmatic Loyalty, or an endorser of Pranav. The original logo assets are rendered as monochrome silhouettes with preserved proportions, matching the portfolio palette.
+The opening uses example merchants listed on Rakuten. It does not claim that every merchant was a personal client, part of Programmatic Loyalty, or an endorser of Pranav. The original logo assets retain their proportions in the monochrome palette. Transparent marks use a silhouette treatment. LEGO, Expedia, IKEA, and Best Buy retain their internal artwork through grayscale rendering; flattening these filled badges into silhouettes destroys their identifying details.
 
 ## Visual direction
 

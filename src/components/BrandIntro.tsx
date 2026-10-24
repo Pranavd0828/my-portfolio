@@ -14,6 +14,7 @@ const merchants = [
   ['ikea', 'IKEA'], ['best-buy', 'Best Buy'],
   ['converse', 'Converse'], ['crocs', 'Crocs'], ['asics', 'ASICS'], ['ugg', 'UGG'],
 ]
+const detailedMarks = new Set(['lego', 'expedia', 'ikea', 'best-buy'])
 const seenKey = 'pranav-portfolio-intro-v2'
 const duration = 3600
 
@@ -101,7 +102,7 @@ export default function BrandIntro() {
             <div className={styles.brand} key={slug} style={{ '--arrival': `${index % 6 * 65}ms` } as CSSProperties}>
               {/* Logos identify example Rakuten merchants, not personal clients. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={`/brands/${slug}.png`} alt="" width="100" height="100" loading="lazy" decoding="async" onError={(event) => { event.currentTarget.hidden = true }} />
+              <img data-detailed={detailedMarks.has(slug) || undefined} src={`/brands/${slug}.png`} alt="" width="100" height="100" loading="lazy" decoding="async" onError={(event) => { event.currentTarget.hidden = true }} />
               <span className={styles.brandName}>{name}</span>
             </div>
           ))}

@@ -25,9 +25,30 @@ for (const engine of ['chromium', 'webkit']) {
       for (const name of ['Skip intro', 'Explore my work']) {
         assert.equal(await page.getByRole('button', { name, exact: name === 'Explore my work' }).evaluate(el => getComputedStyle(el.parentElement).backgroundColor), 'rgb(8, 8, 8)', 'Navigation controls have an opaque surrounding backdrop')
       }
+      const detailed = await dialog.locator('img[data-detailed]').evaluateAll(items => items.map(el => ({ src: el.getAttribute('src'), filter: getComputedStyle(el).filter })))
+      assert.deepEqual(detailed.map(item => item.src).sort(), ['/brands/best-buy.png', '/brands/expedia.png', '/brands/ikea.png', '/brands/lego.png'])
+      assert.ok(detailed.every(item => item.filter === 'grayscale(1)'), 'Filled badges retain their internal artwork instead of becoming solid silhouettes')
       const images = await dialog.locator('img:visible').evaluateAll(items => items.map(el => ({ loaded: el.complete && el.naturalWidth > 0, src: el.src })))
       assert.ok(images.length >= 8)
       assert.ok(images.every(item => item.loaded), JSON.stringify(images))
+      if (width === 320) {
+        const artwork = await dialog.locator('img[data-detailed]').evaluateAll(items => items.map(img => {
+          const canvas = document.createElement('canvas')
+          canvas.width = canvas.height = 256
+          const ctx = canvas.getContext('2d')
+          ctx.filter = getComputedStyle(img).filter
+          ctx.drawImage(img, 0, 0, 256, 256)
+          const pixels = ctx.getImageData(0, 0, 256, 256).data
+          let min = 255, max = 0
+          for (let i = 0; i < pixels.length; i += 4) {
+            if (pixels[i + 3] < 250) continue
+            min = Math.min(min, pixels[i])
+            max = Math.max(max, pixels[i])
+          }
+          return { src: img.getAttribute('src'), contrast: max - min }
+        }))
+        assert.ok(artwork.every(item => item.contrast > 30), `Internal badge artwork must retain visible tonal detail: ${JSON.stringify(artwork)}`)
+      }
       assert.equal(await dialog.locator('img:visible').evaluateAll(items => items.every(el => { const image = el.getBoundingClientRect(); const card = el.parentElement.getBoundingClientRect(); return image.top >= card.top && image.bottom <= card.bottom + 1 && image.left >= card.left && image.right <= card.right + 1 })), true, 'Every logo preserves its bounds within the moving field')
       const protection = await dialog.locator('h2').evaluate(el => {
         const story = el.parentElement
