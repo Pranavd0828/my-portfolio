@@ -1,90 +1,110 @@
 import Link from 'next/link'
-import { caseStudies, type CaseStudy } from '@/content/caseStudies'
-import StoryFlow from './StoryFlow'
-export function WorkCard({
-  story,
-  index,
-}: {
-  story: CaseStudy
-  index: number
-}) {
-  return (
-    <article className={`work-card tone-${story.accent}`}>
-      <div className="work-card-visual">
-        <div className="card-topline">
-          <span className="eyebrow">0{index + 1} / Selected work</span>
-          <span className="status">{story.status}</span>
-        </div>
-        <StoryFlow steps={story.flow} accent={story.accent} />
-      </div>
-      <div className="work-card-copy">
-        <p className="eyebrow">{story.category}</p>
-        <h3>
-          <Link href={`/work/${story.slug}`}>{story.title}</Link>
-        </h3>
-        <p className="body-copy">{story.tagline}</p>
-        <p className="card-takeaway">{story.takeaway}</p>
-        <Link href={`/work/${story.slug}`} className="text-link">
-          Read the story <span aria-hidden="true">↗</span>
-          <span className="sr-only">: {story.title}</span>
-        </Link>
-      </div>
-    </article>
-  )
-}
+import styles from './PortfolioHome.module.css'
+
+const selectedWork = [
+  {
+    slug: 'rakuten-programmatic-loyalty',
+    category: 'Advertising & marketplaces',
+    role: 'Senior Product Manager',
+    title: 'Programmatic Loyalty: from advertiser goals to customer rewards.',
+    description:
+      'I took Programmatic Loyalty from idea to launch, connecting advertiser budgets and return targets with commission recommendations, campaign pacing, and customer rewards.',
+    ownership:
+      'Problem discovery, MVP definition, advertiser workflow, cross-functional alignment, and phased delivery.',
+    metric: '$500M+',
+    label: 'Annual product revenue',
+    detail: 'Programmatic Loyalty, the product I launched',
+    topics: [
+      'Advertiser experience',
+      'Recommendations',
+      'Marketplace economics',
+    ],
+  },
+  {
+    slug: 'rakuten-ai-platform',
+    category: 'AI & platform leadership',
+    role: 'Staff Product Manager',
+    title: 'Making shared decisions useful. Making AI workflows reviewable.',
+    description:
+      'My current scope brings together shared recommendation systems, multi-agent creative workflows, and cloud and data infrastructure. Each initiative has its own product requirements and success measures.',
+    ownership:
+      'Product architecture, workflow definition, evaluation, platform contracts, and infrastructure priorities.',
+    metric: 'Three disciplines',
+    label: 'Shared decisioning, creative workflows, infrastructure',
+    detail: 'Separate initiatives with distinct product requirements',
+    topics: ['AI workflows', 'Shared decisioning', 'Infrastructure'],
+  },
+]
+
 export default function Projects() {
   return (
-    <section id="production" className="section-space shell selected-work">
-      <div className="section-top">
+    <section
+      id="production"
+      className={`${styles.section} shell`}
+      aria-labelledby="work-title"
+    >
+      <div className={styles.sectionHeader}>
         <div>
-          <p className="eyebrow">01 / Building at scale</p>
-          <h2 className="section-heading">
-            Advertiser goals.
+          <p className={styles.kicker}>Selected professional work</p>
+          <h2 id="work-title" className={styles.heading}>
+            From a commercial problem
             <br />
-            Customer value. Shared systems.
+            to a product people can use.
           </h2>
         </div>
-        <p className="body-copy">
-          At Rakuten, I connect campaign economics and customer incentives with
-          recommendations, experimentation, and AI. These two stories show the
-          product ownership and technical decisions behind the outcomes.
+        <p className={styles.copy}>
+          Two views into my work at Rakuten: a product I launched and the
+          platform scope I lead today.
         </p>
       </div>
-      <div className="featured-list">
-        {caseStudies
-          .filter((s) => s.status === 'Professional work')
-          .map((story, index) => (
-            <WorkCard key={story.slug} story={story} index={index} />
-          ))}
-      </div>
-      <div className="expertise-grid">
-        <article>
-          <p className="eyebrow">Ads & marketplace economics</p>
-          <h3>Align the incentives.</h3>
-          <p>
-            From revenue-per-click and cost-per-click modeling at Media.net to
-            ROAS-driven recommendations at Rakuten: connect advertiser returns,
-            budget pacing, and customer rewards.
-          </p>
-        </article>
-        <article>
-          <p className="eyebrow">Measurement & growth</p>
-          <h3>Separate signal from noise.</h3>
-          <p>
-            Randomized experiments with CUPED, cohort targeting, and propensity
-            models. My acquisition work spans a 32% new-buyer lift and $16M in
-            incremental GMV across separate initiatives.
-          </p>
-        </article>
-        <article>
-          <p className="eyebrow">AI & infrastructure</p>
-          <h3>Make the experience dependable.</h3>
-          <p>
-            Define orchestration, evaluation, APIs, and data requirements with
-            engineering and data science. Balance workflow quality,
-            recommendation speed, and operating cost.
-          </p>
-        </article>
+      <div className={styles.workList}>
+        {selectedWork.map((work, index) => (
+          <article className={styles.work} key={work.slug}>
+            <div className={styles.workNumber} aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </div>
+            <div className={styles.workCopy}>
+              <p className={styles.kicker}>{work.category}</p>
+              <h3>
+                <Link prefetch={false} href={`/work/${work.slug}`}>
+                  {work.title}
+                </Link>
+              </h3>
+              <p className={styles.copy}>{work.description}</p>
+              <p className={styles.ownership}>
+                <span>My ownership</span>
+                {work.ownership}
+              </p>
+              <div className={styles.workBottom}>
+                <Link
+                  prefetch={false}
+                  className={styles.quietLink}
+                  href={`/work/${work.slug}`}
+                >
+                  Read the case study
+                  <span className="sr-only">: {work.title}</span>
+                </Link>
+                <span className={styles.smallLabel}>{work.role}</span>
+              </div>
+            </div>
+            <div
+              className={styles.workEvidence}
+              role="group"
+              aria-label={`Outcome for ${work.title}`}
+            >
+              <div>
+                <strong>{work.metric}</strong>
+                <p>{work.label}</p>
+                <small>{work.detail}</small>
+              </div>
+              <ul>
+                {work.topics.map((topic) => (
+                  <li key={topic}>{topic}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )

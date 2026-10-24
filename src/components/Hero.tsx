@@ -1,91 +1,46 @@
 import Link from 'next/link'
+import { profile } from '@/content/profile'
+import styles from './PortfolioHome.module.css'
+import hero from './Introduction.module.css'
 
 export default function Hero() {
   return (
-    <section id="hero" className="hero shell">
-      <p className="hero-identity">
-        <strong>Pranav Deo</strong> <span>Staff Product Manager at Rakuten</span>
-      </p>
-      <div className="hero-grid">
-        <div>
-          <h1>
-            Ads. AI. Marketplaces.
-            <span className="hero-headline-secondary">Built around people.</span>
-          </h1>
-          <p className="body-copy hero-intro">
-            I connect advertiser goals, consumer needs, and the technical
-            systems that turn product decisions into real outcomes.
-          </p>
-          <Link className="hero-proof" href="/work/rakuten-programmatic-loyalty">
-            <strong>$500M+</strong>
-            <span>Annual revenue reached by Programmatic Loyalty, the platform I launched at Rakuten.</span>
-            <span aria-hidden="true">↗</span>
-          </Link>
-          <div className="hero-actions">
-            <Link href="/#production" className="button button-primary">
-              Explore my work <span aria-hidden="true">↗</span>
-            </Link>
-            <Link href="/#prototypes" className="button">
-              8 consumer prototypes <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-          <div className="hero-meta">
-            <span>Sunnyvale, California</span>
-            <a
-              href="/Pranav-Deo-Resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Résumé (PDF) ↗
-            </a>
-          </div>
-        </div>
-        <aside
-          className="product-perspective"
-          aria-label="How I approach product work"
-        >
-          <h2 className="perspective-heading">My role is to connect these decisions.</h2>
-          <p className="perspective-intro">I bring three questions to the work:</p>
-          <ol>
-            <li>
-              <span>01 / People</span>
-              <p>What makes this worth using?</p>
-              <small>Relevance, trust, and control.</small>
-            </li>
-            <li>
-              <span>02 / Marketplace</span>
-              <p>What makes the economics work?</p>
-              <small>Advertiser return, incentives, and growth.</small>
-            </li>
-            <li>
-              <span>03 / Systems</span>
-              <p>What makes it work at scale?</p>
-              <small>Decisioning, measurement, and infrastructure.</small>
-            </li>
-          </ol>
-        </aside>
+    <section id="about" className={`${hero.opening} shell`} aria-labelledby="intro-title">
+      <div className={hero.identity}>
+        <p className={styles.kicker}>Product leadership / Sunnyvale, California</p>
+        <h1 id="intro-title">Pranav Deo<span>.</span></h1>
+        <p className={hero.role}>{profile.currentTitle} at {profile.employer}</p>
       </div>
-      <div className="proof-strip" aria-label="Selected professional outcomes">
-        <div className="proof-item">
-          <strong>Technical depth</strong>
-          <p>
-            Product ownership across recommendations, AI workflows, and ads infrastructure.
+      <div className={hero.story}>
+        <div>
+          <h2>I turn advertiser goals into products that work for customers.</h2>
+          <p className={styles.copy}>
+            For more than five years at Rakuten, I have worked across the full
+            product journey: understanding advertiser needs, launching
+            Programmatic Loyalty, and shaping the recommendations and systems
+            behind the experience. My work now also includes shared decisioning
+            and AI-assisted creative workflows.
           </p>
+          <div className={styles.actions}>
+            <Link prefetch={false} className="button button-primary" href="/#production">Explore my work</Link>
+            <a className={styles.quietLink} href="/Pranav-Deo-Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)<span className="sr-only">, opens in a new tab</span></a>
+          </div>
         </div>
-        <div className="proof-item">
-          <strong>32% lift</strong>
-          <p>
-            New-buyer acquisition through Personalized Rewards, validated with
-            randomized experiments.
-          </p>
+        <div className={hero.note} role="group" aria-label="What connects my work">
+          <p className={styles.kicker}>The product question</p>
+          <p className={hero.question}>A business wants growth.<br />A customer wants something worth choosing.</p>
+          <p className={styles.copy}>The product has to make both possible.</p>
+          <ol className={hero.loop}>
+            <li><span>01</span><strong>Understand the goal</strong><p>Advertiser intent and customer need</p></li>
+            <li><span>02</span><strong>Design the decision</strong><p>Recommendations, incentives, and controls</p></li>
+            <li><span>03</span><strong>Measure the outcome</strong><p>Business value and customer response</p></li>
+          </ol>
+          <Link prefetch={false} className={styles.quietLink} href="/work/rakuten-programmatic-loyalty#system">See it in a real product</Link>
         </div>
-        <div className="proof-item">
-          <strong>30% fewer</strong>
-          <p>
-            Creative revision cycles through multi-agent GenAI orchestration at
-            Rakuten.
-          </p>
-        </div>
+      </div>
+      <div className={hero.foundation}>
+        <p>Computer science trained me to understand systems.<br />Statistics trained me to question the evidence.</p>
+        <Link prefetch={false} className={styles.quietLink} href="/#journey">My background</Link>
       </div>
     </section>
   )

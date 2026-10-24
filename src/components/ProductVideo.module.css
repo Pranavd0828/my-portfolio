@@ -1,0 +1,95 @@
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: #080808;
+}
+.viewport {
+  position: relative;
+}
+.timeline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 16px;
+  background: #111;
+  border-top: 1px solid #555;
+}
+.timeline input {
+  min-width: 0;
+  min-height: 44px;
+  width: 100%;
+  accent-color: #eee;
+  cursor: pointer;
+}
+.timeline input:disabled {
+  cursor: default;
+}
+.timeline span {
+  flex-shrink: 0;
+  color: #ccc;
+  font-size: var(--text-small);
+  line-height: var(--leading-label);
+  font-variant-numeric: tabular-nums;
+}
+.frame video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+.controls {
+  position: absolute;
+  z-index: 1;
+  right: 8px;
+  bottom: 8px;
+  display: flex;
+  gap: 8px;
+}
+.control {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  border: 1px solid #999;
+  border-radius: 50%;
+  background: #080808eb;
+  color: #fff;
+}
+.control:hover {
+  background: #303030;
+}
+.control:active {
+  background: #454545;
+}
+.control:focus-visible {
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px #080808;
+}
+.control svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.failure {
+  position: absolute;
+  inset: 0;
+  padding: 20px 20px 64px;
+  background: #080808ee;
+  color: #eee;
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+  overflow: auto;
+}
+.fallback {
+  display: block;
+  padding: 12px 16px;
+  text-decoration: underline;
+  min-height: 44px;
+}

@@ -1,43 +1,25 @@
-# Content provenance and review notes
+# Public content maintenance
 
-Updated September 8, 2026. All changes remain local until reviewed.
+Updated October 23, 2026. The private claim ledger and original evidence are outside this repository.
 
-## Positioning revision
+Role chronology lives in `src/content/profile.ts`. Staff PM begins June 2026. Senior PM runs July 2022 to June 2026. The initial Rakuten PM role runs May 2021 to July 2022. Project periods must not be inferred from title dates.
 
-The homepage now connects advertising, marketplace economics, technical platform ownership, and consumer product judgment. The Staff PM role is prominent. All eight independent projects appear on the homepage. Infrastructure latency stays in its own case study and is not presented as ad-serving latency or a consumer response metric. The regional voice project is described as dialect detection, transliteration, and synthesis, not translation or voice cloning.
+The owner confirmed $182M in product revenue during the five-month Programmatic Loyalty pilot, followed by more than $500M in annual product revenue. These have different time bases. No reporting year, growth rate, or gross/net revenue definition is inferred. Revenue describes the product, not personal incremental contribution.
 
-The visual palette uses neutral black and gray throughout. Section navigation, every case-study anchor, all 16 routes, linked local assets, résumé integrity, metadata, and missing-page behavior have been checked. Browser layout checks covered desktop and phone sizes; external demo, source, artifact, and profile links all returned HTTP 200. External availability checks do not establish that a remote AI backend is configured.
+The owner corrected the former $16M incremental GMV claim to a 16% improvement in Net GMV over 12 months. Personalized Rewards acquisition and sparse-data merchant modeling remain separate initiatives. The comparison basis, Net GMV accounting definition, and experiment assignment details remain unspecified.
 
-## Professional facts
+The 20% improvement concerned forecast estimates after training improvements to a NeuralProphet forecasting model, not recommendation response time. The web narrative describes the work qualitatively until the forecast evaluation metric is established. Product partnership is distinguished from data-science implementation. Personalized cash-back decisioning concerns which offer to show and where in the customer journey, not an established 25% speed measure.
 
-Both user-supplied résumé versions (PranavDeoResume_08262026.pdf and PranavDeoResume_08262029_wc.pdf) support the career dates and professional outcomes. The AI Platforms version is copied unchanged to public/Pranav-Deo-Resume.pdf. The website does not publish the phone number in its HTML; it is present in the supplied PDF.
+The owner clarified a 30% reduction in manual interventions in the creative workflow, not revision rounds. The reported 30% infrastructure cost reduction spans Redis, PostgreSQL, and Kafka optimization work; it is not assigned to Redis sharding alone. Periods, normalized denominators, and cost scope are not inferred.
 
-- Staff PM: June 2025–present; Senior PM: February 2022–June 2025; PM: May 2021–February 2022.
-- Programmatic Loyalty: platform annual revenue scaled to $500M+; not described as incremental revenue or individual revenue generation.
-- Personalization: contributed to a 20% conversion lift.
-- Infrastructure: p95 4s to 300ms; cost down 30%. Separate from recommendation response time, down 20%.
-- GenAI: creative revision cycles down 30%. This replaces earlier website wording about rejection rates and launch delays, which the supplied résumés do not support.
-- Personalized Rewards: 32% new-buyer acquisition lift, not the older website's engagement-lift wording.
-- Propensity modeling: $16M incremental GMV.
-- LeanData: configuration-related escalations down 40%; predictive scoring conversion up 21%.
-- Media.net: contributed to 20% ad revenue increase.
+The owner recalled a 300ms SLA for near-real-time infrastructure but not the exact measured request path for the earlier 4-second to 300-millisecond p95 claim. An SLA is not proof of achieved percentile latency or full page-load time. The website does not publish either as a measured customer loading result.
 
-The professional stories expand the explanation of the responsibilities and architecture named in the résumés. They do not add interviews, experiment samples, measurement windows, team sizes, internal screenshots, or undocumented decisions. Those details were not supplied. Figures from separate initiatives are kept separate.
+The owner will supply a replacement resume PDF. The existing download remains unchanged and contains historical wording that does not yet reflect these corrections. Do not mark resume reconciliation or release acceptance complete until the replacement is reviewed.
 
-The September 9 case-study expansion also uses the user-supplied interview preparation folder as a factual source. Interview frameworks, hypothetical answers, and company-specific product exercises are excluded from professional claims. The Programmatic Loyalty decision, architecture, MVP scope, and cross-functional operating model are supported by `Walmart - Interview Questions Prep` and `Panel Round Prep - Technical Partnership`. The Staff platform material remains bounded to the two supplied résumés because the interview folder does not document a separate end-to-end Staff-level project narrative.
+Illustrative interactions and retrospective evaluation frameworks are labeled beside the content. They do not reproduce production logic or internal artifacts. Customer eligibility is not evidence of the randomization unit used in a historical experiment.
 
-The decision cards, system views, leadership maps, and product-artifact cards are sanitized reconstructions. They organize supplied facts into a reviewable portfolio format; they are not screenshots of Rakuten tools or copies of confidential documents. The Programmatic Loyalty case states the documented choice to keep settled-sales-based optimization offline and the live serving path deterministic at launch. The Staff platform case states the owner's September 9 clarification that the Redis alternative was to precompute more decisions offline and store fewer values in Redis; the chosen sharded architecture and its measured results remain supported by the supplied résumés.
+Independent projects are not products shipped by their namesake brands. Maps and Rescue Radar use recordings and availability notices because their hosted map services currently fail. Reachability does not certify backend availability or complete functionality.
 
-## Prototype facts
+The canonical host is `https://www.pranavdeo.info`. Redirect configuration for the other existing host belongs to the deployment review.
 
-Preserved project identities, routes, source repositories, demo URLs, and implementation boundaries from the existing src/content/caseStudies.ts. Revised sweeping claims to make product hypotheses and proposed evaluations explicit. No new user research, model scores, conversion results, or app-store releases are claimed.
-
-The maps scoring discussion identifies the dimensional mismatch of combining maximum commute and variance without normalization. It does not change the external prototype implementation. Flow diagrams are simplified product flows, not screenshots or proprietary architecture artifacts.
-
-## Review before publication
-
-- The supplied PDF points to pranavdeo.info; the existing website uses www.deopranav.com. Keep the existing canonical host until the owner chooses a domain strategy. The PDF is deliberately unmodified.
-- Production metrics have no supplied measurement windows, experiment sample sizes, or release dates. Do not invent these.
-- Contact delivery tests use a mocked fetch implementation; no real message has been sent.
-- External demos are separate applications. Portfolio tests do not establish that their model providers, keys, or backend services are currently available.
-- The existing social image is retained; a new social image was not requested separately.
+Keep raw career documents, evidence excerpts, private operational details, and test artifacts out of this repository and all public assets.

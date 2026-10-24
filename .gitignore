@@ -12,9 +12,12 @@
 
 # testing
 /coverage
+/.local-preview/
 
 # next.js
 /.next/
+/.next-mobile-review/
+/.next-*/
 /out/
 
 # production

@@ -1,7 +1,8 @@
+import { profile } from '@/content/profile';
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/content/caseStudies";
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://www.deopranav.com";
+  const base = profile.siteUrl;
   return [
     "",
     "/work",

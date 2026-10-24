@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { caseStudies } from "@/content/caseStudies";
+import ProductVideo from "@/components/ProductVideo";
+import DecisionLab from "@/components/DecisionLab";
 import StoryFlow from "@/components/StoryFlow";
 import StoryNavigation from "@/components/StoryNavigation";
 type Params = { slug: string };
@@ -27,8 +29,9 @@ export async function generateMetadata({
       description: s.tagline,
       url: `/work/${slug}`,
       type: "article",
+      images: [{url: "/social-preview.png", width: 1200, height: 630, alt: "Pranav Deo, Staff Product Manager at Rakuten"}],
     },
-    twitter: { title: s.title, description: s.tagline },
+    twitter: { card: "summary_large_image", title: s.title, description: s.tagline, images: ["/social-preview.png"] },
   };
 }
 export default async function CaseStudyPage({
@@ -52,6 +55,7 @@ export default async function CaseStudyPage({
     ...(s.productArtifacts
       ? [{ id: "artifacts", label: "Product artifacts" }]
       : []),
+    ...(s.illustration ? [{id: "explore-model", label: "Explore the model"}] : []),
     {
       id: "outcomes",
       label:
@@ -63,8 +67,8 @@ export default async function CaseStudyPage({
   ];
   return (
     <main className={`shell story-page tone-${s.accent}`}>
-      <Link href="/work" className="text-link">
-        ← All work
+      <Link prefetch={false} href="/work" className="text-link">
+        All work
       </Link>
       <header className="story-header">
         <div>
@@ -75,14 +79,14 @@ export default async function CaseStudyPage({
           <h1>{s.title}</h1>
           <p className="body-copy story-deck">{s.tagline}</p>
           <div className="hero-actions">
-            {s.demo && (
+            {s.demo && !s.demoNotice && (
               <a
                 href={s.demo}
                 className="button button-primary"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Explore prototype ↗
+                {s.demoLabel || "Explore prototype"}
               </a>
             )}
             {s.artifacts?.map((a) => (
@@ -93,7 +97,7 @@ export default async function CaseStudyPage({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {a.label} ↗
+                {a.label}
               </a>
             ))}
             {s.github && (
@@ -103,7 +107,7 @@ export default async function CaseStudyPage({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Source code ↗
+                Source code
               </a>
             )}
           </div>
@@ -114,17 +118,22 @@ export default async function CaseStudyPage({
               rel="noopener noreferrer"
               className="text-link"
             >
-              View résumé (PDF) ↗
+              View résumé (PDF)
             </a>
           )}
         </div>
-        <aside className="story-context">
-          <p className="eyebrow">My role</p>
+        <div className="story-context">
+          <p className="eyebrow">{s.roleLabel || 'My role'}</p>
           <p>{s.role}</p>
-          <p className="eyebrow mt-5">Timeframe</p>
+          <p className="eyebrow mt-5">{s.timeframeLabel || 'Timeframe'}</p>
           <p>{s.timeframe}</p>
-        </aside>
+        </div>
       </header>
+      {s.demoNotice && (
+        <section id="demo-availability" className="prototype-note" aria-label="Demo availability">
+          <p>{s.demoNotice}</p>
+        </section>
+      )}
       {s.status !== "Professional work" && (
         <p className="prototype-note">
           Independent concept; not affiliated with or endorsed by the product’s
@@ -134,6 +143,10 @@ export default async function CaseStudyPage({
             : "Implementation boundaries are described below."}
         </p>
       )}
+      {s.video && <figure className="case-video">
+        <ProductVideo src={`/videos/${s.video.name}.mp4`} poster={`/previews/${s.video.name}-poster.jpg`} title={s.title + ' recorded walkthrough'} soundToggle={s.video.sound} seekable />
+        <figcaption>{s.video.description}</figcaption>
+      </figure>}
       <div className="story-overview">
         <StoryFlow steps={s.flow} accent={s.accent} />
         <div className="story-summary">
@@ -171,7 +184,7 @@ export default async function CaseStudyPage({
           ))}
           {s.decision && (
             <section id="decision" className="story-section decision-section">
-              <p className="eyebrow">A decisive product moment</p>
+              <p className="eyebrow">A product tradeoff</p>
               <h2>{s.decision.question}</h2>
               <p className="decision-tension">{s.decision.tension}</p>
               <div className="decision-options" aria-label="Options considered">
@@ -258,8 +271,8 @@ export default async function CaseStudyPage({
               <p className="eyebrow">Selected product artifacts</p>
               <h2>The structure behind the decisions</h2>
               <p>
-                Sanitized reconstructions show how I framed scope, contracts, and
-                measurement without exposing internal systems or customer data.
+                Sanitized reconstructions explain scope and contracts. Retrospective
+                frameworks are labeled separately from historical work.
               </p>
               <div className="artifact-grid">
                 {s.productArtifacts.map((artifact) => (
@@ -281,6 +294,7 @@ export default async function CaseStudyPage({
               </div>
             </section>
           )}
+          {s.illustration && <DecisionLab mode={s.illustration} />}
           <section id="outcomes" className="story-section outcomes">
             <p className="eyebrow">
               {s.status === "Professional work"
@@ -292,6 +306,7 @@ export default async function CaseStudyPage({
                 ? "What changed"
                 : "What this prototype demonstrates"}
             </h2>
+            {s.outcomeNote && <p>{s.outcomeNote}</p>}
             <ul>
               {s.outcomes.map((o) => (
                 <li key={o}>{o}</li>
@@ -312,12 +327,12 @@ export default async function CaseStudyPage({
           </section>
           <div className="story-next">
             <p className="eyebrow">Up next</p>
-            <Link href={`/work/${next.slug}`}>{next.title} ↗</Link>
+            <Link prefetch={false} href={`/work/${next.slug}`}>{next.title}</Link>
           </div>
           <div className="collection-link">
-            <p>Let’s talk about the product decisions behind the work.</p>
-            <Link href="/#connect" className="button button-primary">
-              Get in touch ↗
+            <p>Let us talk about the product decisions behind the work.</p>
+            <Link prefetch={false} href="/#connect" className="button button-primary">
+              Get in touch
             </Link>
           </div>
         </article>

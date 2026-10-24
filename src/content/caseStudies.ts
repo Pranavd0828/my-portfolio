@@ -1,3 +1,5 @@
+import { profile } from './profile.ts';
+
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -6,19 +8,27 @@ export type CaseStudy = {
   status: string;
   role: string;
   timeframe: string;
+  timeframeLabel?: string;
+  roleLabel?: string;
   stack: string[];
   flow: string[];
   sections: { heading: string; body: string[] }[];
+  outcomeNote?: string;
+  illustration?: "campaign" | "creative";
   outcomes: string[];
   takeaway: string;
   accent: string;
   featured?: boolean;
   metrics?: { value: string; label: string }[];
+  video?: { name: string; description: string; sound?: boolean };
   demo?: string;
+  demoLabel?: string;
+  demoNotice?: string;
   github?: string;
   artifacts?: { label: string; url: string }[];
   decision?: {
     question: string;
+    framing?: string;
     tension: string;
     options: { label: string; detail: string; selected?: boolean }[];
     rationale: string;
@@ -52,7 +62,8 @@ export const caseStudies: CaseStudy[] = [
     category: "Ads, marketplaces & recommendations",
     status: "Professional work",
     role: "Senior Product Manager · Rakuten",
-    timeframe: "Feb 2022 – Jun 2025",
+    timeframe: profile.careerContext,
+    timeframeLabel: "Career context",
     stack: [
       "Recommendation systems",
       "Kafka",
@@ -65,24 +76,41 @@ export const caseStudies: CaseStudy[] = [
       "Commission, pacing + incentive decisions",
       "Campaign and customer outcomes",
     ],
+    illustration: "campaign",
     sections: [
       {
         heading: "The problem",
         body: [
-          "Sales and operations teams were manually configuring campaign economics across hundreds of advertisers. Spend goals, target return on ad spend, incentive allocation, and delivery pacing moved through multiple handoffs, making launches slow and the system difficult to scale.",
+          "An advertiser knows the business outcome they want. They should not have to understand every delivery lever to pursue it. At Rakuten, campaign economics had relied on manual configuration. Spend, commission rates, customer rewards, and delivery decisions needed to work together.",
+          "Programmatic Loyalty made that a product problem: let an advertiser express a spend goal and target return, review a recommendation, and activate a campaign whose delivery the platform could manage. The customer still needed a relevant offer worth choosing. More exposure alone was not the goal.",
         ],
       },
       {
         heading: "My ownership",
         body: [
-          "I took Programmatic Loyalty from idea to launch: validating the problem, aligning leadership on an MVP, defining the advertiser workflow and system requirements, and leading phased delivery with engineering, data science, design, sales, and revenue operations.",
-          "The product translated advertiser spend and target ROAS into recommended effective commission rates, pacing strategies, and customer incentive allocations. I also defined personalization for first-time buyers, new-to-merchant customers, and lapsed audiences.",
+          "I led the product from idea to launch. Advertiser conversations informed the requirements; I defined the workflow and initial wireframes, and partnered with design to develop the experience. With engineering and data science, I translated the business goal into recommendations, delivery requirements, and a practical launch scope.",
+          "An advertiser supplied monthly spend and a target return on ad spend, or ROAS. The product recommended an effective commission rate. Once the advertiser accepted and configured it through their affiliate network, the system could manage customer incentives and delivery against those goals. A target was an input to the product, not a claim of incremental return.",
+          "My responsibility was the product definition and the choices connecting the advertiser experience to the underlying systems. Engineering and data science developed the implementation. That distinction matters: the workflow, economics, and operating requirements had to be agreed together.",
+        ],
+      },
+      {
+        heading: "The commercial judgment",
+        body: [
+          "Advertiser goals and platform margin did not always point in the same direction. My work involved looking beyond margin percentage to the total economic value of the program. A recommendation needed to be useful to the advertiser and sustainable for the platform, rather than optimize one ratio in isolation.",
+          "The same discipline applied to model complexity. Starting with simpler targeting and scoring let us learn before taking on a more demanding model rollout. The product question was what would improve the decision enough to justify the additional implementation and operating cost.",
+        ],
+      },
+      {
+        heading: "Making forecasts useful to advertisers",
+        body: [
+          "The advertiser journey began with recommendations and forecasts. I partnered with data science on improving the estimates through better training of our NeuralProphet forecasting model. My role was to connect the forecasting work to the recommendation experience and advertiser expectations; the modeling team owned training and implementation.",
+          "The product question was whether the estimates gave advertisers a more useful basis for planning. Forecast quality and the speed of a live recommendation are separate measures.",
         ],
       },
     ],
     decision: {
       question:
-        "Should fresh intent signals directly change live campaign decisions at launch?",
+        "How much should a live campaign react to fresh signals?",
       tension:
         "More responsive optimization could help an underdelivering campaign recover faster. It could also blur the boundary between trusted pacing guidance and request-time behavior, making spend changes harder to explain and debug.",
       options: [
@@ -99,14 +127,14 @@ export const caseStudies: CaseStudy[] = [
         },
       ],
       rationale:
-        "I treated budget discipline and ROAS predictability as the product promise that could not move. We kept heavy settled-sales-based optimization offline and made the online layer fast, explainable, and conservative.",
+        "Engineering challenged my initial preference for more intraday responsiveness. I adjusted scope: keep the online decision simple, refresh precomputed guidance at a useful cadence, and use conservative behavior when state is stale or missing. The advertiser needed predictable delivery, not real-time complexity for its own sake.",
       impact:
-        "The team launched a system that could react quickly enough for campaign delivery while remaining predictable for merchants and operable for internal teams.",
+        "The product kept a clear boundary between optimization based on settled outcomes and fast enforcement during delivery. We tracked return, budget utilization, latency, and fallback behavior. This decision is not presented as the isolated cause of the revenue result.",
     },
     systemMap: {
       title: "From advertiser goal to measurable outcome",
       description:
-        "A simplified view of the product and data loop I defined with engineering and data science.",
+        "A product-level reconstruction. Immediate engagement signals and settled financial outcomes serve different purposes; they are not interchangeable evidence.",
       steps: [
         {
           label: "Advertiser intent",
@@ -148,17 +176,17 @@ export const caseStudies: CaseStudy[] = [
       {
         team: "Design",
         alignment:
-          "Turned complex campaign choices into a usable setup flow, then iterated from beta behavior and drop-offs.",
+          "Created initial advertiser-workflow wireframes and requirements; partnered with design on the developed experience.",
       },
       {
         team: "Sales & revenue operations",
         alignment:
-          "Used discovery, sandbox demos, advertiser edge cases, and role-specific dashboards to make the product useful and sellable.",
+          "Translated advertiser needs and campaign setup constraints into requirements for the product and operating workflow.",
       },
       {
         team: "Leadership",
         alignment:
-          "Built the opportunity case, agreed on the MVP boundary, and used a phased pilot plus shared success metrics to earn trust.",
+          "Framed the commercial opportunity and initial product scope, then aligned delivery around the advertiser workflow.",
       },
     ],
     productArtifacts: [
@@ -173,7 +201,7 @@ export const caseStudies: CaseStudy[] = [
           },
           {
             label: "Deferred",
-            value: "Post-launch reporting and campaign editing",
+            value: "Additional workflow depth beyond the first goal-to-activation path",
           },
           {
             label: "Reason",
@@ -183,8 +211,8 @@ export const caseStudies: CaseStudy[] = [
         ],
       },
       {
-        title: "Decision scorecard",
-        purpose: "Make speed-versus-control tradeoffs explicit.",
+        title: "A retrospective decision scorecard",
+        purpose: "An explanatory review framework, not a reproduced launch scorecard.",
         rows: [
           {
             label: "Primary outcomes",
@@ -204,34 +232,34 @@ export const caseStudies: CaseStudy[] = [
     evidenceNote:
       "Sanitized reconstruction from product requirements and interview materials. Proprietary interfaces, customer data, and implementation detail are omitted.",
     outcomes: [
-      "Programmatic Loyalty scaled to $500M+ in annual revenue.",
-      "Personalization and cohort-targeting work contributed to a 20% lift in conversion.",
+      "The five-month pilot recorded $182M in product revenue. Programmatic Loyalty later grew to more than $500M in annual product revenue.",
+      "The product translated advertiser goals into commission recommendations, pacing, and customer incentives.",
       "Online optimization used low-latency state while settled financial outcomes remained the source of truth.",
     ],
+    outcomeNote: "The pilot total and annual revenue cover different periods and should not be compared as a growth rate. Both describe product revenue, not personal incremental revenue or the result of one experiment. Reporting years are not specified here.",
     featured: true,
     accent: "mint",
     metrics: [
       {
         value: "$500M+",
-        label: "Platform annual revenue",
+        label: "Annual product revenue",
       },
-      {
-        value: "+20%",
-        label: "Conversion lift contributed to",
-      },
+
     ],
     takeaway:
       "Product leadership across marketplace economics, recommendations, and real-time data.",
   },
   {
     slug: "rakuten-ai-platform",
-    title: "Better creative workflows. Shared decisions. Infrastructure that keeps up.",
+    title: "Shared decisions. Reviewable AI. Reliable product foundations.",
     tagline:
       "At Rakuten, I lead product work across shared decisioning, multi-agent creative workflows, and the infrastructure that supports them.",
     category: "AI platforms & infrastructure",
     status: "Professional work",
-    role: "Staff Product Manager · Rakuten",
-    timeframe: "Jun 2025 – Present",
+    role: `${profile.currentTitle} · ${profile.employer}`,
+    roleLabel: "Current role",
+    timeframe: profile.currentRolePeriod,
+    timeframeLabel: "Current role period",
     stack: [
       "LangChain",
       "Memory & retrieval",
@@ -245,18 +273,47 @@ export const caseStudies: CaseStudy[] = [
       "Recommendation, ranking + pacing",
       "Common APIs + integration contracts",
     ],
+    illustration: "creative",
     sections: [
       {
         heading: "The problem",
-        body: [
-          "Recommendation, ranking, and budget-pacing logic had grown across separate systems. Creative generation and review were also fragmented. As platform scale increased, product teams needed shared decisions, clear contracts, and infrastructure that could keep up.",
-        ],
+        body: ["A successful product creates repeated decisions: what to recommend, how to pace a budget, which creative to revise, and how quickly the system must respond. These are different problems. My platform work at Rakuten brings product requirements to each, rather than treating every problem as a reason to add AI."],
       },
       {
         heading: "My ownership",
+        body: ["I have led product requirements for a common decisioning layer, multi-agent creative workflows, and cloud infrastructure. My contribution spans platform abstractions, APIs, integration contracts, orchestration requirements, and success measures developed with engineering and data science. These initiatives span my Rakuten tenure; my June 2026 Staff promotion is not their shared start date."],
+      },
+      {
+        heading: "Shared decisioning",
         body: [
-          "As Staff Product Manager, I led product architecture across three connected initiatives: a common decisioning layer, a multi-agent creative workflow, and the cloud and data infrastructure supporting them.",
-          "I defined shared signals, evaluation metrics, APIs, integration contracts, orchestration, memory and retrieval behavior, model evaluation, access and retention controls, and technical requirements for containerized services.",
+          "Recommendation, ranking, and budget-pacing logic had grown across separate systems. I worked on bringing that logic over shared campaign and marketplace signals into a common decisioning layer, with APIs and integration contracts that consuming products could use.",
+          "The product responsibility was to define the abstraction and its success measures with engineering and data science. Sharing an interface does not mean every surface should have the same objective. A useful platform makes the shared behavior explicit while keeping the consumer product accountable for its experience.",
+          "For customers, the product decision was which personalized cash-back offer to show and where in the journey to present it. My platform work connected those decisions to shared requirements and interfaces. In reviewing the platform, I would assess recommendation quality, response time, adoption, and integration effort separately.",
+        ],
+      },
+      {
+        heading: "AI creative workflows",
+        body: [
+          "Creative generation and review were fragmented. I led product architecture for a multi-agent GenAI orchestration platform, defining agent orchestration, memory and retrieval requirements, evaluation, and data-access and retention controls. The purpose was a more useful creative workflow, not autonomy as an end in itself.",
+          "The distinction I want a reviewer to inspect is between generating a suggestion and having authority to act on it. Rules can handle explicit requirements; model-assisted interpretation introduces uncertainty. The example below illustrates how I would make that boundary reviewable. It is a synthetic product explanation, not a claim about the exact production approval policy.",
+          "The reported operational outcome was a 30% reduction in manual interventions in the creative workflow. This measures human involvement in the process, not model accuracy, cost savings, or the number of revision rounds. The example below makes the product questions concrete without reproducing internal assets.",
+        ],
+      },
+      {
+        heading: "Infrastructure as a product investment",
+        body: [
+          "As platform scale increased, I owned technical product requirements for containerized services across AWS and GCP and drove the migration toward a sharded Redis architecture with the platform and ad infrastructure teams. The product question was which online capabilities the investment needed to preserve.",
+          "The remembered alternative was to precompute more decisions offline and store fewer values in Redis. That could reduce online state, but it would also change what remained available to live decisions. Engineering owned architecture and implementation; my contribution was the requirements, prioritization, and product tradeoff.",
+          "The infrastructure work combined Redis for near-real-time access with PostgreSQL and Kafka pipeline optimizations. The reported result was a 30% reduction in infrastructure costs across that work. My responsibility was to prioritize a responsive customer experience alongside reliability and operating cost; engineering owned the implementation.",
+        ],
+      },
+      {
+        heading: "Experimentation and incentives",
+        body: [
+          "Earlier at Rakuten, I launched Personalized Rewards for new and lapsed customer cohorts. I designed randomized experiments using CUPED, a pre-period adjustment intended to reduce estimator variance during high-variance seasonal periods. The reported result was a 32% lift in new-buyer acquisition.",
+          "That is a reported acquisition result, not a percentage-point claim. The public account does not provide the randomization unit, sample size, interval, or experiment window, so it should not be read as a complete statistical report.",
+          "A separate initiative used similar-store proxy signals for propensity modeling where merchants had sparse history, partnering with data science. The reported outcome was a 16% improvement in Net GMV over 12 months. Net GMV is distinct from product revenue and new-buyer acquisition; these results are not combined into one claimed experiment.",
+          "A retrospective review would examine assignment quality, incentive cost, cohort differences, and persistence of the effect before expanding a program. These are the questions I would ask, not additional historical results.",
         ],
       },
     ],
@@ -279,12 +336,12 @@ export const caseStudies: CaseStudy[] = [
         },
       ],
       rationale:
-        "I drove the sharded architecture because the product still needed low-latency online decisions. The system constraint had to change without removing the live product capability it supported.",
+        "I supported scaling the state layer to preserve online product requirements. The remembered alternative was greater precomputation with fewer stored values. This summary describes the product rationale; it does not claim that I implemented the sharding design.",
       impact:
-        "The migration improved p95 latency from 4 seconds to 300 milliseconds and reduced infrastructure costs by 30%.",
+        "The broader infrastructure work reported 30% lower infrastructure costs. That result spans Redis, PostgreSQL, and Kafka optimizations and is not attributed to sharding alone. An exact latency improvement is omitted because the measured request path is not established.",
     },
     systemMap: {
-      title: "How the Staff PM scope fits together",
+      title: "Three distinct product responsibilities",
       description:
         "A portfolio-level view of three separate initiatives, rather than a single runtime request path.",
       mode: "scope",
@@ -306,7 +363,7 @@ export const caseStudies: CaseStudy[] = [
         },
       ],
       foundation:
-        "Outcome lens · recommendation response time · product decision velocity · creative revision cycles · p95 latency · infrastructure cost",
+        "Each initiative has a separate outcome: useful shared decisions, better creative workflows, or dependable online capabilities.",
       feedback:
         "Each initiative had its own success measures; the results are kept separate below.",
     },
@@ -371,24 +428,14 @@ export const caseStudies: CaseStudy[] = [
       },
     ],
     evidenceNote:
-      "Sanitized reconstruction from role materials. The metrics below come from separate Staff PM initiatives and are not presented as one experiment.",
+      "Sanitized reconstruction from role materials. These initiatives span my work at Rakuten. The current-role date describes my Staff promotion, not the start of every project. Results are reported for separate initiatives, not one experiment.",
     outcomes: [
-      "p95 infrastructure latency improved from 4s to 300ms; infrastructure costs fell 30%.",
-      "Multi-agent GenAI orchestration reduced creative revision cycles by 30%.",
-      "Shared decisioning reduced recommendation response time by 20% and increased product decision velocity by 25%.",
+      "Shared recommendation, ranking, and pacing logic was brought into a common decisioning layer with defined interfaces.",
+      "Creative workflow work combined orchestration with memory, retrieval, evaluation, and data controls.",
+      "Infrastructure work addressed the online capability behind those product requirements.",
     ],
     featured: true,
     accent: "blue",
-    metrics: [
-      {
-        value: "−20%",
-        label: "Recommendation response time",
-      },
-      {
-        value: "−30%",
-        label: "Creative revision cycles",
-      },
-    ],
     takeaway:
       "Connecting AI orchestration, shared platform contracts, and operational performance.",
   },
@@ -532,6 +579,8 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "whatsapp-regional-voice",
+    demoLabel: "Explore the interface",
+    video: { name: "regional-voice", sound: true, description: "Recorded concept: Rahul asks where the recipient has reached, using the message Bhai, kaha pohcha? A playback control demonstrates regional voice delivery over a navigation-style interface." },
     title: "WhatsApp Regional Voice",
     tagline:
       "Explore regional-dialect playback through a messaging prototype and a Gemini-to-ElevenLabs voice pipeline.",
@@ -587,6 +636,7 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: "maps-meet-mode",
+    video: { name: "meet-halfway", description: "Recorded walkthrough: two starting locations, venue categories, and a recommended meeting point. Travel values are prototype estimates." },
     title: "Google Maps: Meet Halfway",
     tagline:
       "Rank meetup venues around the burden of the longest trip, rather than relying on a geometric midpoint.",
@@ -637,10 +687,12 @@ export const caseStudies: CaseStudy[] = [
     takeaway:
       "A ranking formula is a product hypothesis that needs normalization and validation.",
     demo: "https://google-maps-meet-mode.vercel.app/",
+    demoNotice: "The hosted demo currently shows a Google Maps loading error. The case study and source code remain available. The map service needs repair before the full experience can be demonstrated.",
     github: "https://github.com/Pranavd0828/Google-Maps-Meet-Mode",
   },
   {
     slug: "rescue-offers",
+    video: { name: "rescue-radar", description: "Recorded walkthrough of nearby rescue offers, food categories, and a short reservation flow. Prices and availability are simulated." },
     title: "Rescue Radar",
     tagline:
       "A time-sensitive marketplace concept for rediscovering canceled food orders nearby.",
@@ -690,6 +742,7 @@ export const caseStudies: CaseStudy[] = [
     takeaway:
       "Marketplace interaction design only works when operational constraints are explicit.",
     demo: "https://pranavd0828.github.io/Food-Delivery---Post-Cancellation-Rescue-Offers/",
+    demoNotice: "Watch the recorded walkthrough below. The hosted prototype currently shows a map-provider error on offer pages. Its feed and sample hold timer work, but inventory, reservations, and checkout are simulated.",
     github:
       "https://github.com/Pranavd0828/Food-Delivery---Post-Cancellation-Rescue-Offers",
   },

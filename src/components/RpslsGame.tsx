@@ -142,7 +142,7 @@ export default function RpslsGame() {
   }
   return (
     <main className="shell section-space duel">
-      <Link href="/playground" className="text-link">
+      <Link prefetch={false} href="/playground" className="text-link">
         ← Playground
       </Link>
       <p className="eyebrow mt-6">A small experiment in decisions</p>
@@ -197,7 +197,7 @@ export default function RpslsGame() {
           className="button button-primary"
           onClick={() => setRound(null)}
         >
-          Play another round ↗
+          Play another round
         </button>
       )}
       <details className="technical-details mt-10">

@@ -9,21 +9,51 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npm run lint
-      - run: npm test
-      - run: npm run build
-      - run: npm run typecheck
-      - name: Check production routes
+      - run: npm run check
+      - run: npx playwright install --with-deps chromium webkit firefox
+      - name: Check production routes and browser interactions
         run: |
-          npm run start -- --hostname 127.0.0.1 --port 3000 &
+          PORTFOLIO_PREVIEW_PORT=3020 npm run preview > /tmp/portfolio-preview.log 2>&1 &
           SERVER_PID=$!
           trap 'kill "$SERVER_PID"' EXIT
-          for attempt in $(seq 1 30); do
-            curl --fail --silent http://127.0.0.1:3000/ > /dev/null && break
+          for attempt in $(seq 1 120); do
+            test -f .local-preview/current.json && break
+            kill -0 "$SERVER_PID" || { cat /tmp/portfolio-preview.log; exit 1; }
             sleep 1
           done
+          test -f .local-preview/current.json || { cat /tmp/portfolio-preview.log; exit 1; }
           npm run test:smoke
+          npm run test:intro
+          npm run test:foldable
+          PORTFOLIO_BROWSERS=chromium,webkit,firefox npm run test:browser
+          npm run test:mobile
+          PORTFOLIO_BROWSERS=webkit npm run test:mobile
+          npm run test:responsive
+          npm run test:visitor
+          PORTFOLIO_BROWSERS=webkit npm run test:visitor
+          npm run test:accessibility
+          npm run test:release
+          npm run test:states
+          npm run test:resize
+          npm run test:keyboard
+          npm run test:loading
+          npm run test:design
+          npm run test:targets
+          npm run test:control-states
+          npm run test:control-recovery
+      - name: Check optional production script failures
+        run: |
+          VERCEL_ENV=production PORTFOLIO_PREVIEW_PORT=3021 npm run preview > /tmp/portfolio-production-preview.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill "$SERVER_PID"' EXIT
+          for attempt in $(seq 1 120); do
+            grep -q 'Preview ready: http://127.0.0.1:3021' /tmp/portfolio-production-preview.log && break
+            kill -0 "$SERVER_PID" || { cat /tmp/portfolio-production-preview.log; exit 1; }
+            sleep 1
+          done
+          grep -q 'Preview ready: http://127.0.0.1:3021' /tmp/portfolio-production-preview.log || { cat /tmp/portfolio-production-preview.log; exit 1; }
+          PORTFOLIO_TEST_URL=http://127.0.0.1:3021 npm run test:optional-scripts
       - run: npm audit --omit=dev --audit-level=high

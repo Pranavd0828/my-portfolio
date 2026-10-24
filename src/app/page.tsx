@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Hero from "@/components/Hero";
+import ProductApproach from "@/components/ProductApproach";
 import Projects from "@/components/Projects";
 import ConsumerWork from "@/components/ConsumerWork";
 import Journey from "@/components/Journey";
@@ -11,6 +12,7 @@ export default function Home() {
     <main>
       <Hero />
       <Projects />
+      <ProductApproach />
       <ConsumerWork />
       <Journey />
       <AboutMe />

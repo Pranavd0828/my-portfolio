@@ -35,16 +35,16 @@ export default function ConnectSection() {
     <section id="connect" className="contact-section">
       <div className="shell section-space contact-grid">
         <div>
-          <p className="eyebrow">05 / What comes next</p>
+          <p className="eyebrow">Get in touch</p>
           <h2 className="section-heading mt-4">
-            Let’s build
+            A conversation is a good
             <br />
-            something that matters.
+            place to start.
           </h2>
           <p className="body-copy mt-6">
-            I’m interested in product leadership where ads, marketplaces, AI,
-            and consumer experiences meet—and where technical depth and
-            product judgment need to work together.
+            I am interested in product leadership roles that bring customer
+            understanding and technical depth together. If that is what your
+            team needs, I would enjoy comparing notes.
           </p>
           <p className="contact-location">
             Based in Sunnyvale, CA.
@@ -55,7 +55,7 @@ export default function ConnectSection() {
             href="mailto:deopranav2808.work@gmail.com"
             className="contact-email"
           >
-            deopranav2808.work@gmail.com <span aria-hidden="true">↗</span>
+            deopranav2808.work@gmail.com
           </a>
           <div className="contact-links">
             <a
@@ -64,7 +64,7 @@ export default function ConnectSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              LinkedIn ↗
+              LinkedIn
             </a>
             <a
               href="/Pranav-Deo-Resume.pdf"
@@ -72,7 +72,7 @@ export default function ConnectSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Résumé (PDF) ↗
+              Résumé (PDF)
             </a>
           </div>
         </div>
@@ -89,6 +89,7 @@ export default function ConnectSection() {
                 id="contact-name"
                 name="name"
                 autoComplete="name"
+                aria-describedby="contact-status"
                 required
                 maxLength={100}
                 disabled={status === "submitting"}
@@ -101,6 +102,10 @@ export default function ConnectSection() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                inputMode="email"
+                autoCapitalize="none"
+                spellCheck={false}
+                aria-describedby="contact-status"
                 required
                 maxLength={254}
                 disabled={status === "submitting"}
@@ -118,7 +123,7 @@ export default function ConnectSection() {
               required
               maxLength={5000}
               disabled={status === "submitting"}
-              aria-describedby="contact-privacy"
+              aria-describedby="contact-privacy contact-status"
             />
           </div>
           <div hidden aria-hidden="true">
@@ -141,20 +146,21 @@ export default function ConnectSection() {
               disabled={status === "submitting"}
             >
               {status === "submitting" ? "Sending…" : "Send message"}{" "}
-              <span aria-hidden="true">↗</span>
+
             </button>
           </div>
           <div
+            id="contact-status"
             className="form-status"
             role="status"
             aria-live="polite"
             aria-atomic="true"
           >
-            {status === "success" && "Thanks — your message has been sent."}
+            {status === "success" && "Thank you. Your message has been sent."}
             {status === "invalid" && "Please enter your name, a valid email address, and a message."}
             {status === "error" && (
               <>
-                I couldn’t confirm delivery. Your message is still here. Please
+                I could not confirm delivery. Your message is still here. Please
                 try again or{" "}
                 <a
                   href="mailto:deopranav2808.work@gmail.com"

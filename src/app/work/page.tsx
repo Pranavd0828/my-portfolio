@@ -47,13 +47,13 @@ export default function WorkIndex() {
                 <span className="status">{s.status}</span>
                 <p className="eyebrow mt-6">{s.category}</p>
                 <h3>
-                  <Link href={`/work/${s.slug}`}>{s.title}</Link>
+                  <Link prefetch={false} href={`/work/${s.slug}`}>{s.title}</Link>
                 </h3>
                 <p className="body-copy">{s.tagline}</p>
                 <div className="index-card-bottom">
                   <span>{s.timeframe}</span>
-                  <Link href={`/work/${s.slug}`} className="text-link">
-                    Read story ↗<span className="sr-only">: {s.title}</span>
+                  <Link prefetch={false} href={`/work/${s.slug}`} className="text-link">
+                    Read story<span className="sr-only">: {s.title}</span>
                   </Link>
                 </div>
               </article>
@@ -63,8 +63,8 @@ export default function WorkIndex() {
       ))}
       <div className="collection-link">
         <p>Interested in how this experience could translate to your team?</p>
-        <Link href="/#connect" className="button">
-          Get in touch ↗
+        <Link prefetch={false} href="/#connect" className="button">
+          Get in touch
         </Link>
       </div>
     </main>

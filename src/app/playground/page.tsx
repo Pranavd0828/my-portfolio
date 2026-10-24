@@ -15,21 +15,21 @@ export default function Playground() {
         pleasure of figuring out how an interaction feels.
       </p>
       <div className="play-grid">
-        <Link href="/escape" className="play-card">
+        <Link prefetch={false} href="/escape" className="play-card">
           <span className="eyebrow">01 / Physics</span>
-          <h2>Escape Protocol ↗</h2>
+          <h2>Escape Protocol</h2>
           <p>A runner built around gravity, timing, and a quick retry.</p>
         </Link>
-        <Link href="/rpsls" className="play-card">
+        <Link prefetch={false} href="/rpsls" className="play-card">
           <span className="eyebrow">02 / Decisions</span>
-          <h2>Rock, Paper, Scissors… ↗</h2>
+          <h2>Rock, Paper, Scissors…</h2>
           <p>
             Five moves. One choice. An experiment in anticipation and reveal.
           </p>
         </Link>
       </div>
-      <Link href="/work/flappy-eagle" className="text-link mt-8">
-        Also in the collection: Just One Flap ↗
+      <Link prefetch={false} href="/work/flappy-eagle" className="text-link mt-8">
+        Also in the collection: Just One Flap
       </Link>
     </main>
   );

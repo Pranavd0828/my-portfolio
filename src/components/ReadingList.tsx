@@ -231,7 +231,10 @@ export default function ReadingList() {
                 <summary>
                   <span className="book-title">{book.title}</span>
                   <span className="book-author">{book.author}</span>
-                  <span className="book-cover-label">View cover +</span>
+                  <span className="book-cover-label">
+                    <span className="book-cover-open">View cover <span aria-hidden="true">+</span></span>
+                    <span className="book-cover-close">Hide cover <span aria-hidden="true">−</span></span>
+                  </span>
                 </summary>
                 <Image
                   src={book.coverUrl}
