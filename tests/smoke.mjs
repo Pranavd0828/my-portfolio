@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict'
+import { get } from 'node:http'
 import { readFile } from 'node:fs/promises'
 import { caseStudies } from '../src/content/caseStudies.ts'
 const base = process.env.PORTFOLIO_TEST_URL ?? 'http://127.0.0.1:3020'
@@ -7,6 +8,25 @@ assert.match(
   /^http:\/\/(127\.0\.0\.1|localhost):\d+$/,
   'Smoke tests only target a local server.'
 )
+// Use HTTP directly because Fetch controls the Host header itself.
+function requestHost(host, path) {
+  return new Promise((resolve, reject) => {
+    get(base + path, { headers: { host } }, (response) => {
+      response.resume()
+      resolve({ status: response.statusCode, location: response.headers.location })
+    }).on('error', reject)
+  })
+}
+// Canonical redirects preserve deep links and queries without affecting previews.
+for (const host of ['deopranav.com', 'www.deopranav.com', 'pranavdeo.info']) {
+  for (const path of ['/', '/work/rakuten-programmatic-loyalty?source=review']) {
+    const response = await requestHost(host, path)
+    assert.equal(response.status, 308, `${host}: permanent redirect`)
+    assert.equal(new URL(response.location).href, 'https://www.pranavdeo.info' + path)
+  }
+}
+const canonical = await requestHost('www.pranavdeo.info', '/')
+assert.equal(canonical.status, 200, 'Canonical host has no redirect loop')
 const routes = [
   '/',
   '/work',

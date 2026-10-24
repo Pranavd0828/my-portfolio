@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { chromium, webkit } from 'playwright'
 import { mkdir, writeFile } from 'node:fs/promises'
 import { caseStudies } from '../src/content/caseStudies.ts'
-const base = process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:3040'
+const base = process.env.PORTFOLIO_TEST_URL || 'http://127.0.0.1:3020'
 assert.match(base, /^http:\/\/(127\.0\.0\.1|localhost):\d+$/)
 const output = process.env.PORTFOLIO_BROWSER_OUTPUT || '/tmp/portfolio-foldable'
 await mkdir(output, { recursive: true })

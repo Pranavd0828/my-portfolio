@@ -2,6 +2,14 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   distDir: process.env.PORTFOLIO_DIST_DIR || '.next',
   poweredByHeader: false,
+  async redirects() {
+    return ['deopranav.com', 'www.deopranav.com', 'pranavdeo.info'].map((host) => ({
+      source: '/:path*',
+      has: [{ type: 'host' as const, value: host.replaceAll('.', '\\.') }],
+      destination: 'https://www.pranavdeo.info/:path*',
+      permanent: true,
+    }))
+  },
   async headers() {
     return [
       {
